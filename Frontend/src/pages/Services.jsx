@@ -73,6 +73,7 @@ const services = [
       "Plateformes e-commerce",
       "Systèmes de gestion de contenu (CMS)",
       "Intégrations API et services tiers",],
+    image : "/assets/le-portage-salarial-developpeur-web-1.jpg",
   },
   {
     id: "mobile",
@@ -85,6 +86,7 @@ const services = [
       "UI/UX Mobile optimisé",
       "Intégration API",
       "Mode hors-ligne (Offline Mode)",],
+    image : "/assets/Mobile_App.jpg",
   },
   {
     id: "desktop",
@@ -96,6 +98,7 @@ const services = [
       "Haute performance",
       "Sécurité avancée",
       "Legacy update & migration",],
+    image : "/assets/Desktop.jpg",
   },
   {
     id: "ia",
@@ -107,6 +110,7 @@ const services = [
       "Computer Vision",
       "Predictive Analytics",
       "Generative AI (Gen AI)",],
+    image : "/assets/chatbot.jpg",
   },
 ];
 
@@ -222,7 +226,7 @@ export default function Services() {
                   : "border-white/20 text-[#e0ded2]/60 hover:border-[#2ea3dd] hover:text-[#2ea3dd]"
               }`}
           >
-            <img src={icon} alt={label} className="w-[15px] h-[15px] filter invert opacity-80" />
+            <img src={icon} alt={label} className="w-[15px] h-[15px] opacity-80" />
             {label}
           </button>
         ))}
@@ -256,16 +260,16 @@ export default function Services() {
 
         {/* Right */}
         <div className="flex-1 max-w-md w-full">
-          <div className="bg-[#171a27] rounded-xl p-6 min-h-[280px] flex items-center justify-center">
-            {current.icon ? (
+          <div className="bg-[#171a27] rounded-xl p-2 min-h-[280px] flex items-center justify-center translate-x-[-80px] translate-y-[-100px] " >
+            {current.image ? (
               
               <img
-                src="C:\Users\famille\Documents\GitHub\REVISION-EJE\Frontend\public\assets\Mobile App.jpg"
-                
-                className="rounded-lg w-full h-40 object-contain filter invert opacity-80"
+                src={current.image}
+                alt={current.title}
+                className="rounded-lg w-50 h-50 object-contain opacity-80"
               />
             ) : (
-              <div className="bg-[#e8e6df] rounded-lg w-4/5 h-52 flex items-center justify-center opacity-20">
+              <div className="bg-[#e8e6df] rounded-lg w-4/5 h-52 flex items-center justify-center opacity-80">
                 <svg
                   className="w-10 h-10 text-gray-500"
                   fill="none"
