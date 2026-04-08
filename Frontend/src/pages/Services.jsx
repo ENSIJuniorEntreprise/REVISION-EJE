@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect, useRef } from "react";
 
 const AgilityIcon = () => (
   <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
@@ -258,9 +258,10 @@ export default function Services() {
         <div className="flex-1 max-w-md w-full">
           <div className="bg-[#171a27] rounded-xl p-6 min-h-[280px] flex items-center justify-center">
             {current.icon ? (
+              
               <img
-                src={current.icon}
-                alt={current.title}
+                src="C:\Users\famille\Documents\GitHub\REVISION-EJE\Frontend\public\assets\Mobile App.jpg"
+                
                 className="rounded-lg w-full h-40 object-contain filter invert opacity-80"
               />
             ) : (
