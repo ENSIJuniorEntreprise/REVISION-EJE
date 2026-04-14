@@ -59,9 +59,9 @@ const services = [
   },
   {
     id: "ia",
-    label: "Intelligence Artificielle",
+    label: "CHATBOT & IA",
     icon: "/assets/chatbot.png",
-    title: "Intelligence Artificielle",
+    title: "CHATBOT & IA",
     desc: "Intégration de modèles d'IA générative et de machine learning pour automatiser et optimiser vos processus.",
     features: ["NLP & traitement du langage",
       "Computer Vision",
@@ -107,6 +107,570 @@ function useIntersection(threshold = 0.15) {
   }, [threshold]);
 
   return [ref, visible];
+}
+const mindsetCards = [
+  {
+    icon: "/assets/agile.png",
+    title: "Agilité",
+    desc: "Méthodologie Scrum pour une livraison rapide et maîtrisée.",
+    accent: "#2ea3dd",
+    glowColor: "rgba(46,163,221,0.22)",
+    delay: 0,
+    fromX: -28,
+    fromY: 40,
+  },
+  {
+    icon: "/assets/precision (1).png",
+    title: "Précision",
+    desc: "Alignement étroit avec vos objectifs stratégiques.",
+    accent: "#33ddff",
+    glowColor: "rgba(51,221,255,0.22)",
+    delay: 160,
+    fromX: 0,
+    fromY: 52,
+  },
+  {
+    icon: "/assets/shop.png",
+    title: "Excellence",
+    desc: "Contrôle qualité rigoureux à chaque étape du projet.",
+    accent: "#2ea3dd",
+    glowColor: "rgba(46,163,221,0.22)",
+    delay: 320,
+    fromX: 28,
+    fromY: 40,
+  },
+];
+
+function MindsetSection() {
+  const [visible, setVisible] = useState(false);
+  const [hovered, setHovered] = useState(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden px-6 sm:px-10 lg:px-16 py-20 sm:py-28"
+      style={{
+        background: "linear-gradient(135deg, #0a1628 0%, #0d2040 40%, #0a1a30 70%, #061220 100%)",
+      }}
+    >
+      <style>{`
+        @keyframes mindsetFloat {
+          0%, 100% { transform: translateY(0px) rotate(0deg); }
+          33%       { transform: translateY(-5px) rotate(0.5deg); }
+          66%       { transform: translateY(-2px) rotate(-0.3deg); }
+        }
+        @keyframes iconPulse {
+          0%, 100% { filter: brightness(1)    drop-shadow(0 0 6px rgba(46,163,221,0.3)); }
+          50%       { filter: brightness(1.15) drop-shadow(0 0 14px rgba(46,163,221,0.6)); }
+        }
+        @keyframes bgMesh {
+          0%   { transform: translate(-50%,-50%) scale(1)    rotate(0deg); }
+          50%  { transform: translate(-50%,-50%) scale(1.08) rotate(180deg); }
+          100% { transform: translate(-50%,-50%) scale(1)    rotate(360deg); }
+        }
+        @keyframes shimmer {
+          0%   { background-position: -200% center; }
+          100% { background-position:  200% center; }
+        }
+        .mindset-card-hover {
+          transition:
+            transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
+            box-shadow 0.38s ease,
+            background 0.38s ease;
+        }
+        .mindset-card-hover:hover {
+          transform: translateY(-10px) scale(1.03) !important;
+        }
+      `}</style>
+
+      {/* Fond décoratif */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[
+          { size: 520, top: "10%", left: "15%", dur: "28s", opacity: 0.06 },
+          { size: 380, top: "55%", left: "70%", dur: "36s", opacity: 0.05 },
+          { size: 260, top: "30%", left: "85%", dur: "22s", opacity: 0.07 },
+          { size: 200, top: "75%", left: "8%",  dur: "19s", opacity: 0.05 },
+        ].map(({ size, top, left, dur, opacity }, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full border border-[#2ea3dd]"
+            style={{
+              width: size, height: size,
+              top, left,
+              transform: "translate(-50%,-50%)",
+              opacity,
+              animation: `bgMesh ${dur} linear infinite`,
+              animationDelay: `${i * 4}s`,
+            }}
+          />
+        ))}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(46,163,221,0.06) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
+      {/* Header */}
+      <div
+        className="relative z-10 text-center mb-16 sm:mb-20"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0)" : "translateY(24px)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
+        <span
+          className="inline-flex items-center gap-2 border border-[#2ea3dd]/50 text-[#2ea3dd] text-xs font-bold tracking-widest px-5 py-2 rounded-full mb-6"
+          style={{ background: "rgba(46,163,221,0.08)" }}
+        >
+          <span
+            className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]"
+            style={{ animation: "iconPulse 2s ease-in-out infinite" }}
+          />
+          NOTRE APPROCHE
+        </span>
+
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#e0ded2] mb-4 leading-tight">
+          Projet{" "}
+          <span
+            style={{
+              backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #33ddff 40%, #2ea3dd 80%)",
+              backgroundSize: "200% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "shimmer 3s linear infinite",
+            }}
+          >
+            Mindset
+          </span>
+        </h2>
+        <p className="text-sm sm:text-base text-white/55 max-w-md mx-auto leading-relaxed">
+          Notre approche structurée garantit le succès de chaque projet.
+        </p>
+      </div>
+
+      {/* Cartes */}
+      <div className="relative z-10 flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 max-w-5xl mx-auto">
+        {mindsetCards.map((card, i) => {
+          const isHovered = hovered === i;
+          return (
+            <div
+              key={card.title}
+              className="mindset-card-hover relative flex flex-col items-center gap-5 cursor-pointer"
+              style={{
+                width: "clamp(200px, 28vw, 280px)",
+                padding: "32px 24px 28px",
+                borderRadius: 20,
+                background: isHovered ? "rgba(46,163,221,0.12)" : "rgba(255,255,255,0.04)",
+                border: `1px solid ${isHovered ? "rgba(46,163,221,0.55)" : "rgba(46,163,221,0.15)"}`,
+                boxShadow: isHovered
+                  ? `0 20px 50px ${card.glowColor}, 0 0 0 1px rgba(46,163,221,0.2)`
+                  : "0 4px 24px rgba(0,0,0,0.2)",
+                backdropFilter: "blur(12px)",
+                opacity: visible ? 1 : 0,
+                transform: visible
+                  ? "translateY(0) translateX(0) scale(1)"
+                  : `translateY(${card.fromY}px) translateX(${card.fromX}px) scale(0.88)`,
+                transition: `opacity 0.7s ease ${card.delay}ms, transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) ${card.delay}ms, box-shadow 0.38s ease, background 0.38s ease, border 0.38s ease`,
+              }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+            >
+              <div
+                className="absolute top-0 left-1/2 -translate-x-1/2 rounded-full pointer-events-none"
+                style={{
+                  width: "60%", height: 1,
+                  background: "linear-gradient(90deg, transparent, rgba(46,163,221,0.5), transparent)",
+                  opacity: isHovered ? 1 : 0.4,
+                  transition: "opacity 0.3s ease",
+                }}
+              />
+
+              <span
+                className="absolute top-4 right-5 text-xs font-bold tracking-widest"
+                style={{
+                  color: isHovered ? "rgba(46,163,221,0.8)" : "rgba(46,163,221,0.25)",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                0{i + 1}
+              </span>
+
+              <div
+                className="relative flex items-center justify-center rounded-full"
+                style={{
+                  width: 72, height: 72,
+                  background: isHovered ? "rgba(46,163,221,0.18)" : "rgba(46,163,221,0.08)",
+                  border: `1.5px solid ${isHovered ? "rgba(46,163,221,0.5)" : "rgba(46,163,221,0.2)"}`,
+                  boxShadow: isHovered ? `0 0 22px ${card.glowColor}` : "none",
+                  transition: "all 0.35s ease",
+                  animation: visible
+                    ? `mindsetFloat ${4.2 + i * 0.6}s ease-in-out ${card.delay + 800}ms infinite`
+                    : "none",
+                }}
+              >
+                <img
+                  src={card.icon}
+                  alt={card.title}
+                  className="w-9 h-9 object-contain"
+                  style={{
+                    animation: isHovered ? "iconPulse 1.4s ease-in-out infinite" : "none",
+                    filter: isHovered ? `drop-shadow(0 0 10px ${card.accent})` : "none",
+                    transition: "filter 0.3s ease",
+                  }}
+                />
+              </div>
+
+              <div
+                className="text-base font-extrabold tracking-wide"
+                style={{
+                  color: isHovered ? card.accent : "#e0ded2",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {card.title}
+              </div>
+
+              <div
+                className="rounded-full"
+                style={{
+                  height: 1.5,
+                  width: isHovered ? "60%" : "28%",
+                  background: `linear-gradient(90deg, transparent, ${card.accent}, transparent)`,
+                  transition: "width 0.4s ease",
+                }}
+              />
+
+              <p
+                className="text-center text-xs sm:text-sm leading-6"
+                style={{
+                  color: isHovered ? "rgba(224,222,210,0.85)" : "rgba(224,222,210,0.55)",
+                  transition: "color 0.3s ease",
+                  maxWidth: 200,
+                }}
+              >
+                {card.desc}
+              </p>
+
+              <span
+                className="mt-1 text-[10px] font-bold tracking-[0.12em] uppercase px-3 py-1 rounded-full"
+                style={{
+                  background: isHovered ? "rgba(46,163,221,0.18)" : "rgba(46,163,221,0.07)",
+                  color: isHovered ? card.accent : "rgba(46,163,221,0.45)",
+                  border: `1px solid ${isHovered ? "rgba(46,163,221,0.4)" : "rgba(46,163,221,0.12)"}`,
+                  transition: "all 0.3s ease",
+                }}
+              >
+                {card.title}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Ligne décorative bas */}
+      <div
+        className="relative z-10 mt-16 mx-auto flex items-center gap-4 max-w-xs"
+        style={{
+          opacity: visible ? 1 : 0,
+          transition: "opacity 0.8s ease 0.7s",
+        }}
+      >
+        <div className="flex-1 h-px bg-gradient-to-r from-transparent to-[#2ea3dd]/40" />
+        <div className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]/60" />
+        <div className="w-2 h-2 rounded-full bg-[#2ea3dd]" style={{ animation: "iconPulse 2s ease-in-out infinite" }} />
+        <div className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]/60" />
+        <div className="flex-1 h-px bg-gradient-to-l from-transparent to-[#2ea3dd]/40" />
+      </div>
+    </section>
+  );
+}
+const subServicesList = [
+  { label: "UI/UX DESIGN",            icon: "/assets/fenetre.png" },
+  { label: "Search Engine Optimization", icon: "/assets/search-engine-optimization.png" },
+  { label: "Maintenance",              icon: "/assets/reglage.png" },
+  { label: "Analytics Dashboard",      icon: "/assets/data-analytics.png" },
+  { label: "Hosting & Domain Setup",   icon: "/assets/une-analyse.png" },
+  { label: "Staff Training",           icon: "/assets/equipe.png" },
+];
+
+function SubPrestationsSection() {
+  const [visible, setVisible]   = useState(false);
+  const [hovered, setHovered]   = useState(null);
+  const [active,  setActive]    = useState(null);
+  const sectionRef              = useRef(null);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden border-t border-[#2ea3dd]/10 px-6 sm:px-10 lg:px-16 py-20 sm:py-28"
+      style={{ background: "#1f212d" }}
+    >
+      <style>{`
+        /* Entrée : chaque carte tombe depuis le haut avec rotation */
+        @keyframes dropIn {
+          0%   { opacity: 0; transform: translateY(-60px) rotateX(40deg) scale(0.85); }
+          60%  { opacity: 1; transform: translateY(6px)   rotateX(-4deg) scale(1.02); }
+          80%  { transform: translateY(-3px) rotateX(2deg) scale(0.99); }
+          100% { opacity: 1; transform: translateY(0)     rotateX(0deg)  scale(1);    }
+        }
+
+        /* Shimmer sur le texte au hover */
+        @keyframes textShimmer {
+          0%   { background-position: -200% center; }
+          100% { background-position:  200% center; }
+        }
+
+        /* Scan line qui traverse la carte */
+        @keyframes scanLine {
+          0%   { top: -2px;    opacity: 0.7; }
+          100% { top: calc(100% + 2px); opacity: 0;   }
+        }
+
+        /* Rotation douce de l'icône au hover */
+        @keyframes iconSpin {
+          0%   { transform: rotate(0deg)   scale(1);    }
+          40%  { transform: rotate(20deg)  scale(1.15); }
+          70%  { transform: rotate(-8deg)  scale(1.05); }
+          100% { transform: rotate(0deg)   scale(1);    }
+        }
+
+        /* Glow pulsant sur la bordure au hover */
+        @keyframes borderGlow {
+          0%,100% { box-shadow: 0 0 0px rgba(46,163,221,0);   }
+          50%      { box-shadow: 0 0 18px rgba(46,163,221,0.4); }
+        }
+
+        .sub-card {
+          transition:
+            transform  0.35s cubic-bezier(0.34, 1.56, 0.64, 1),
+            background 0.3s ease,
+            border-color 0.3s ease,
+            box-shadow 0.35s ease;
+        }
+        .sub-card:hover {
+          transform: translateY(-6px) scale(1.06) !important;
+        }
+        .sub-card.active-card {
+          transform: scale(0.96) !important;
+        }
+      `}</style>
+
+      {/* ── Grille de points décoratifs ── */}
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, rgba(46,163,221,0.12) 1px, transparent 1px)",
+          backgroundSize: "32px 32px",
+          opacity: visible ? 0.5 : 0,
+          transition: "opacity 1.2s ease 0.3s",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, rgba(31,33,45,0) 40%, #1f212d 100%)",
+        }}
+      />
+
+      {/* ── Header ── */}
+      <div
+        className="relative z-10 text-center mb-16"
+        style={{
+          opacity: visible ? 1 : 0,
+          transform: visible ? "translateY(0) scale(1)" : "translateY(-20px) scale(0.97)",
+          transition: "opacity 0.7s ease, transform 0.7s ease",
+        }}
+      >
+        <span
+          className="inline-flex items-center gap-2 text-[#2ea3dd] text-xs font-bold tracking-widest px-5 py-2 rounded-full mb-6 border border-[#2ea3dd]/30"
+          style={{ background: "rgba(46,163,221,0.07)" }}
+        >
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd] animate-pulse" />
+          ALLER PLUS LOIN
+        </span>
+
+        <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-[#e0ded2]">
+          Les{" "}
+          <span
+            style={{
+              backgroundImage: "linear-gradient(90deg, #2ea3dd, #33ddff, #2ea3dd)",
+              backgroundSize: "200% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: visible ? "textShimmer 3s linear infinite" : "none",
+            }}
+          >
+            sous-prestations
+          </span>
+        </h2>
+
+        <p className="mx-auto max-w-2xl text-sm sm:text-base leading-7 text-[#8a8880]">
+          Au-delà du développement de base, nous fournissons un écosystème complet
+          de services numériques pour assurer le succès à long terme de vos projets.
+        </p>
+      </div>
+
+      {/* ── Grille de cartes ── */}
+      <div className="relative z-10 mx-auto max-w-4xl grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-5">
+        {subServicesList.map((service, i) => {
+          const isHovered = hovered === i;
+          const isActive  = active  === i;
+
+          return (
+            <div
+              key={service.label}
+              className={`sub-card relative overflow-hidden cursor-pointer rounded-2xl px-5 py-6 flex flex-col items-center gap-3 text-center ${isActive ? "active-card" : ""}`}
+              style={{
+                background: isHovered
+                  ? "rgba(46,163,221,0.1)"
+                  : "rgba(255,255,255,0.03)",
+                border: `1px solid ${isHovered ? "rgba(46,163,221,0.5)" : "rgba(46,163,221,0.12)"}`,
+                backdropFilter: "blur(10px)",
+                /* Animation dropIn au scroll */
+                animation: visible
+                  ? `dropIn 0.65s cubic-bezier(0.22, 1, 0.36, 1) ${i * 80}ms both`
+                  : "none",
+                /* Glow pulsant quand hover */
+                boxShadow: isHovered
+                  ? "0 8px 32px rgba(46,163,221,0.2), inset 0 1px 0 rgba(46,163,221,0.15)"
+                  : "0 2px 12px rgba(0,0,0,0.15)",
+                perspective: 800,
+              }}
+              onMouseEnter={() => setHovered(i)}
+              onMouseLeave={() => setHovered(null)}
+              onMouseDown={()  => setActive(i)}
+              onMouseUp={()    => setActive(null)}
+            >
+              {/* Scan line au hover */}
+              {isHovered && (
+                <div
+                  className="absolute left-0 w-full pointer-events-none"
+                  style={{
+                    height: 1.5,
+                    background:
+                      "linear-gradient(90deg, transparent, rgba(46,163,221,0.6), transparent)",
+                    animation: "scanLine 0.9s ease-in-out infinite",
+                  }}
+                />
+              )}
+
+              {/* Reflet haut */}
+              <div
+                className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(90deg, transparent, rgba(46,163,221,0.4), transparent)",
+                  opacity: isHovered ? 1 : 0.3,
+                  transition: "opacity 0.3s ease",
+                }}
+              />
+
+              {/* Icône */}
+              {/* Icône */}
+              <div
+                className="flex items-center justify-center rounded-full"
+                style={{
+                  width: 52,
+                  height: 52,
+                  background: isHovered ? "rgba(46,163,221,0.15)" : "rgba(46,163,221,0.07)",
+                  border: `1.5px solid ${isHovered ? "rgba(46,163,221,0.45)" : "rgba(46,163,221,0.15)"}`,
+                  boxShadow: isHovered ? "0 0 18px rgba(46,163,221,0.3)" : "none",
+                  transition: "all 0.35s ease",
+                  animation: isHovered ? "iconSpin 0.5s ease forwards" : "none",
+                  }}
+                >
+                  <img
+                  src={service.icon}
+                  alt={service.label}
+                  className="w-6 h-6 object-contain"
+                  style={{
+                    filter: isHovered
+                    ? "brightness(1.2) drop-shadow(0 0 6px rgba(46,163,221,0.6))"
+                    : "brightness(0.8)",
+                    transition: "filter 0.3s ease",
+                  }}
+                  />
+              </div>
+              {/* Label */}
+              <span
+                className="text-xs sm:text-sm font-bold tracking-wide leading-snug"
+                style={{
+                  color: isHovered ? "#e0ded2" : "#8a8880",
+                  transition: "color 0.3s ease",
+                }}
+              >
+                {service.label}
+              </span>
+
+              {/* Barre indicateur bas */}
+              <div
+                className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full"
+                style={{
+                  height: 2,
+                  width: isHovered ? "70%" : "0%",
+                  background: "linear-gradient(90deg, transparent, #2ea3dd, #33ddff, transparent)",
+                  transition: "width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                }}
+              />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* ── Compteur décoratif bas ── */}
+      <div
+        className="relative z-10 mt-14 text-center"
+        style={{
+          opacity: visible ? 1 : 0,
+          transition: "opacity 0.8s ease 0.9s",
+        }}
+      >
+        <span
+          className="text-xs tracking-[0.2em] uppercase font-medium"
+          style={{ color: "rgba(46,163,221,0.35)" }}
+        >
+          {subServicesList.length} services disponibles
+        </span>
+      </div>
+    </section>
+  );
 }
 
 export default function Services() {
@@ -284,40 +848,7 @@ export default function Services() {
   
 
       {/* PROJET MINDSET */}
-      <section
-        ref={mindsetRef}
-        className={`bg-gradient-to-br from-[#00aacc] via-[#0077aa] to-[#005588] px-6 sm:px-10 lg:px-16 py-16 sm:py-20 text-center transition-all duration-700 ${
-          mindsetVisible ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <h2 className="mb-2 text-3xl sm:text-4xl font-extrabold text-[#e0ded2]">
-          Projet <span className="text-[#1f212d]">Mindset</span>
-        </h2>
-        <p className="mb-12 text-sm sm:text-base text-white/75">
-          Notre approche structurée garantit le succès de chaque collaboration.
-        </p>
-        <div className="flex flex-wrap justify-center gap-10 lg:gap-20">
-          {mindsetValues.map((v, i) => (
-            <div
-              key={v.title}
-              className={`flex flex-col items-center gap-4 transition-all duration-700 ${
-                mindsetVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
-              }`}
-              style={{ transitionDelay: `${i * 150}ms` }}
-            >
-              <img
-                  src={v.icon}
-                  alt={v.title}
-                  className="w-12 h-12 object-contain"
-              />
-              <div className="text-base font-bold text-[#e0ded2]">{v.title}</div>
-              <div className="max-w-[160px] text-center text-xs sm:text-sm leading-6 text-white/70">
-                {v.desc}
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <MindsetSection />
 
       {/* L'ESPRIT DE PROJET */}
       <section
@@ -448,38 +979,7 @@ export default function Services() {
       </section>
 
       {/* SOUS-PRESTATIONS */}
-      <section
-        ref={subRef}
-        className={`border-t border-[#2ea3dd]/10 px-6 sm:px-10 lg:px-16 py-20 text-center transition-all duration-700 ${
-          subVisible ? "opacity-100" : "opacity-0"
-        }`}
-      >
-        <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-[#2ea3dd]">
-          ALLER PLUS LOIN
-        </div>
-
-        <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-[#e0ded2]">
-          Les sous-prestations
-        </h2>
-
-        <p className="mx-auto mb-12 max-w-2xl text-sm sm:text-base leading-7 text-[#8a8880]">
-          Au-delà du développement de base, nous fournissons un écosystème complet de services numériques pour assurer le succès à long terme de vos projets.
-        </p>
-
-        <div className="mx-auto flex max-w-3xl flex-wrap justify-center gap-3.5">
-          {subServices.map((s, i) => (
-            <button
-              key={s}
-              className={`rounded-full border border-[#2ea3dd]/40 px-5 py-2.5 text-xs sm:text-sm text-[#c8c6bc] transition-all duration-500 hover:border-[#2ea3dd] hover:bg-[#2ea3dd]/10 hover:text-[#2ea3dd] ${
-                subVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-              }`}
-              style={{ transitionDelay: `${i * 70}ms` }}
-            >
-              {s}
-            </button>
-          ))}
-        </div>
-      </section>
+      <SubPrestationsSection />
 
       {/* CTA */}
       <section
