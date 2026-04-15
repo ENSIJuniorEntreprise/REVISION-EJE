@@ -7,9 +7,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        'bg-primary': 'rgb(var(--color-bg-primary) / <alpha-value>)',
-        accent: 'rgb(var(--color-accent) / <alpha-value>)',
-        'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'eje-dark': '#1F212D',
+        'eje-accent': '#2EA3DD',
+        'eje-beige': '#E0DED2',
       },
       fontFamily: {
         heading: ['Gilroy', 'Segoe UI', 'sans-serif'],
@@ -17,7 +17,17 @@ export default {
         signature: ['Photograph Signature', 'Brush Script MT', 'cursive'],
       },
       borderRadius: {
+        DEFAULT: '10px',
         md: 'var(--radius-md)',
+      },
+      keyframes: {
+        'partners-marquee': {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+      },
+      animation: {
+        'partners-marquee': 'partners-marquee 34s linear infinite',
       },
       transitionTimingFunction: {
         standard: 'var(--ease-standard)',

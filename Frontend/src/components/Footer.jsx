@@ -3,9 +3,24 @@ import { Briefcase, Globe, Mail, MapPin, MessageCircle, Newspaper, Phone } from 
 import { media } from '../assets/media'
 
 export default function Footer() {
+  const quickLinks = [
+    { label: 'Accueil', to: '/' },
+    { label: 'À propos', to: '/a-propos' },
+    { label: 'Services', to: '/services' },
+    { label: 'Actualités', to: '/actualites' },
+    { label: 'Contact', to: '/contact' },
+  ]
+
+  const socials = [
+    { label: 'Site web', icon: Globe, href: '#' },
+    { label: 'Actualités', icon: Newspaper, to: '/actualites' },
+    { label: 'Projets', icon: Briefcase, to: '/services' },
+    { label: 'Discussion', icon: MessageCircle, to: '/contact' },
+  ]
+
   return (
-    <footer className="border-t border-text-secondary/10 bg-bg-primary pb-10 pt-20">
-      <div className="container mb-16 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+    <footer className="border-t border-eje-beige/10 bg-eje-dark pb-10 pt-20">
+      <div className="container mb-16 grid grid-cols-1 gap-10 sm:grid-cols-2 xl:grid-cols-4">
         <div className="space-y-6">
           <Link to="/" className="flex items-center gap-3">
             <img
@@ -16,78 +31,108 @@ export default function Footer() {
             <span className="font-heading text-lg font-bold">ENSI Junior Entreprise</span>
           </Link>
 
-          <p className="max-w-xs text-sm leading-relaxed text-text-secondary/70">
-            L association etudiante qui connecte les entreprises avec les talents de demain. Expertise, innovation et
-            excellence technique.
+          <p className="max-w-xs text-sm leading-relaxed text-eje-beige/70">
+            EJE connecte les entreprises aux talents ENSI pour livrer des projets digitaux utiles, performants et
+            durables.
           </p>
 
-          <div className="flex items-center gap-4">
-            <a href="#" aria-label="Site web" className="flex h-10 w-10 items-center justify-center rounded-full bg-text-secondary/5 transition-all hover:bg-accent hover:text-[#0d1a23]">
-              <Globe className="h-5 w-5" />
-            </a>
-            <a href="#" aria-label="Actualites" className="flex h-10 w-10 items-center justify-center rounded-full bg-text-secondary/5 transition-all hover:bg-accent hover:text-[#0d1a23]">
-              <Newspaper className="h-5 w-5" />
-            </a>
-            <a href="#" aria-label="Projets" className="flex h-10 w-10 items-center justify-center rounded-full bg-text-secondary/5 transition-all hover:bg-accent hover:text-[#0d1a23]">
-              <Briefcase className="h-5 w-5" />
-            </a>
-            <a href="#" aria-label="Discussion" className="flex h-10 w-10 items-center justify-center rounded-full bg-text-secondary/5 transition-all hover:bg-accent hover:text-[#0d1a23]">
-              <MessageCircle className="h-5 w-5" />
-            </a>
-          </div>
+          <p className="text-sm font-semibold text-eje-accent">Fondée en 2006</p>
         </div>
 
         <div>
-          <h4 className="mb-6 font-heading font-bold text-accent">Navigation</h4>
-          <ul className="space-y-4 text-sm">
-            <li><Link to="/" className="transition-colors hover:text-accent">Accueil</Link></li>
-            <li><Link to="/a-propos" className="transition-colors hover:text-accent">A propos</Link></li>
-            <li><Link to="/services" className="transition-colors hover:text-accent">Services</Link></li>
-            <li><Link to="/actualites" className="transition-colors hover:text-accent">Actualites</Link></li>
-            <li><Link to="/contact" className="transition-colors hover:text-accent">Contact</Link></li>
+          <h4 className="mb-6 font-heading font-bold text-eje-accent">Liens rapides</h4>
+          <ul className="list-none space-y-3 p-0 text-sm">
+            {quickLinks.map((link) => (
+              <li key={link.to}>
+                <Link to={link.to} className="transition-colors hover:text-eje-accent">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+            <li>
+              <a href={media.documents.statuts} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-eje-accent">
+                Statuts
+              </a>
+            </li>
+            <li>
+              <a href={media.documents.politiqueRse} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-eje-accent">
+                Politique RSE
+              </a>
+            </li>
           </ul>
         </div>
 
         <div>
-          <h4 className="mb-6 font-heading font-bold text-accent">Contact</h4>
-          <ul className="space-y-4 text-sm">
-            <li className="flex items-center gap-3 text-text-secondary/80">
-              <Mail className="h-4 w-4 text-accent" />
+          <h4 className="mb-6 font-heading font-bold text-eje-accent">Contact</h4>
+          <ul className="list-none space-y-4 p-0 text-sm">
+            <li className="flex items-center gap-3 text-eje-beige/80">
+              <Mail className="h-4 w-4 text-eje-accent" />
               contact@ensi-je.com
             </li>
-            <li className="flex items-center gap-3 text-text-secondary/80">
-              <Phone className="h-4 w-4 text-accent" />
+            <li className="flex items-center gap-3 text-eje-beige/80">
+              <Phone className="h-4 w-4 text-eje-accent" />
               +216 XX XXX XXX
             </li>
-            <li className="flex items-center gap-3 text-text-secondary/80">
-              <MapPin className="h-4 w-4 text-accent" />
+            <li className="flex items-center gap-3 text-eje-beige/80">
+              <MapPin className="h-4 w-4 text-eje-accent" />
               ENSI, Manouba, Tunisie
             </li>
           </ul>
         </div>
 
         <div className="space-y-6">
-          <h4 className="mb-6 font-heading font-bold text-accent">Newsletter</h4>
-          <p className="text-sm text-text-secondary/70">Abonnez-vous pour recevoir nos dernieres actualites.</p>
-          <form className="flex gap-2" onSubmit={(event) => event.preventDefault()}>
+          <h4 className="mb-6 font-heading font-bold text-eje-accent">Réseaux</h4>
+          <p className="text-sm text-eje-beige/70">Suivez EJE et restez connectés à nos projets et événements.</p>
+
+          <div className="flex items-center gap-4">
+            {socials.map((social) => (
+              social.href ? (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  aria-label={social.label}
+                  className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-eje-beige/5 transition-all hover:bg-eje-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-eje-accent focus-visible:ring-offset-2 focus-visible:ring-offset-eje-dark"
+                >
+                  <social.icon className="h-5 w-5" />
+                </a>
+              ) : (
+                <Link
+                  key={social.label}
+                  to={social.to}
+                  aria-label={social.label}
+                  className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-eje-beige/5 transition-all hover:bg-eje-accent hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-eje-accent focus-visible:ring-offset-2 focus-visible:ring-offset-eje-dark"
+                >
+                  <social.icon className="h-5 w-5" />
+                </Link>
+              )
+            ))}
+          </div>
+
+          <form className="flex gap-2" onSubmit={(event) => event.preventDefault()} aria-label="Inscription à la newsletter">
+            <label htmlFor="newsletter-footer-email" className="sr-only">
+              Adresse email
+            </label>
             <input
+              id="newsletter-footer-email"
+              name="newsletterFooterEmail"
               type="email"
               placeholder="votre@email.com"
-              className="flex-1 rounded-[10px] border border-text-secondary/10 bg-text-secondary/5 px-4 py-2 text-sm focus:border-accent focus:outline-none"
+              autoComplete="email"
+              className="flex-1 rounded-[10px] border border-eje-beige/25 bg-eje-dark/80 px-4 py-2 text-sm placeholder:text-eje-beige/45 focus:border-eje-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-eje-accent focus-visible:ring-offset-2 focus-visible:ring-offset-eje-dark"
             />
             <button type="submit" className="btn btn-primary px-4 py-2 text-sm">OK</button>
           </form>
         </div>
       </div>
 
-      <div className="container flex flex-col items-center justify-between gap-4 border-t border-text-secondary/10 pt-8 text-xs text-text-secondary/50 md:flex-row">
-        <p>© {new Date().getFullYear()} ENSI Junior Entreprise. Tous droits reserves.</p>
+      <div className="container flex flex-col items-center justify-between gap-4 border-t border-eje-beige/10 pt-8 text-xs text-eje-beige/70 md:flex-row">
+        <p>© {new Date().getFullYear()} ENSI Junior Entreprise. Tous droits réservés.</p>
         <div className="flex gap-6">
           <a
             href={media.documents.statuts}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-accent"
+            className="transition-colors hover:text-eje-accent"
           >
             Statuts
           </a>
@@ -95,7 +140,7 @@ export default function Footer() {
             href={media.documents.politiqueRse}
             target="_blank"
             rel="noopener noreferrer"
-            className="transition-colors hover:text-accent"
+            className="transition-colors hover:text-eje-accent"
           >
             Politique RSE
           </a>
