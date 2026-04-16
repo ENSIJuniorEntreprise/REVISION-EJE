@@ -5,13 +5,13 @@ import { media } from '../assets/media'
 
 const links = [
   { to: '/', label: 'Accueil' },
-  { to: '/a-propos', label: 'À propos' },
+  { to: '/a-propos', label: 'A propos' },
   { to: '/services', label: 'Services' },
-  { to: '/actualites', label: 'Actualités' },
+  { to: '/actualites', label: 'Actualites' },
   { to: '/contact', label: 'Contact' },
 ]
 
-export default function Navbar() {
+export default function Navbar({ isHidden = false }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isReady, setIsReady] = useState(false)
@@ -19,7 +19,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setIsMenuOpen(false)
-  }, [location.pathname])
+  }, [location.pathname, isHidden])
 
   useEffect(() => {
     let lastScrolledState = false
@@ -53,7 +53,7 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
         isScrolled ? 'border-b border-eje-beige/10 bg-eje-dark/90 py-3 backdrop-blur-xl' : 'bg-transparent py-6'
-      } ${isReady ? 'nav-load-enter-active' : 'nav-load-enter'}`}
+      } ${isReady ? 'nav-load-enter-active' : 'nav-load-enter'} ${isHidden ? 'nav-shell-hidden' : 'nav-shell-visible'}`}
     >
       <nav className="container flex items-center justify-between" aria-label="Navigation principale">
         <Link to="/" className="group flex items-center gap-3" aria-label="ENSI Junior Entreprise">

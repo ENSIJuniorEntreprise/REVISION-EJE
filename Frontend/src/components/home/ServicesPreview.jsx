@@ -9,15 +9,15 @@ export default function ServicesPreview() {
   const reducedMotion = usePrefersReducedMotion()
 
   return (
-    <section className="bg-eje-dark py-24">
+    <section id="services" className="scroll-mt-32 bg-eje-dark py-24">
       <SectionHeading
-        eyebrow="Nos Services"
+        eyebrow="Nos services"
         title={
           <>
-            Une expertise tech <span className="text-eje-accent">complète</span> pour vos projets.
+            Des expertises digitales <span className="text-eje-accent">completes</span>
           </>
         }
-        subtitle="De l'idée au déploiement, EJE livre vite, proprement et avec des standards professionnels élevés."
+        subtitle="Du cadrage au deploiement, EJE livre des solutions web, mobile, desktop et IA avec des standards professionnels eleves."
         links={sectionLinks.services}
       />
 

@@ -5,7 +5,6 @@ import {
   MessageSquare,
   Monitor,
   Smartphone,
-  Star,
   TrendingUp,
   Users,
 } from 'lucide-react'
@@ -13,106 +12,113 @@ import {
 export const services = [
   {
     id: 'web',
-    title: 'Développement Web',
+    title: 'Developpement Web',
     icon: Globe,
-    copy: 'Plateformes web rapides, stables et prêtes à grandir.',
-    href: 'services.html#web',
+    copy: 'Plateformes web evolutives, securisees et maintenables, pensees pour des resultats mesurables.',
+    href: '/services#web',
   },
   {
     id: 'mobile',
-    title: 'Solutions Mobiles',
+    title: 'Developpement Mobile',
     icon: Smartphone,
-    copy: 'Applications iOS et Android fluides, orientées usage réel.',
-    href: 'services.html#mobile',
+    copy: 'Applications iOS et Android fluides, robustes et alignees sur vos usages metier.',
+    href: '/services#mobile',
   },
   {
     id: 'desktop',
-    title: 'Développement Desktop',
+    title: 'Developpement Desktop',
     icon: Monitor,
-    copy: 'Outils desktop robustes pour accélérer vos opérations.',
-    href: 'services.html#desktop',
+    copy: 'Outils desktop performants pour automatiser vos operations et fiabiliser vos workflows.',
+    href: '/services#desktop',
   },
   {
     id: 'chatbot',
-    title: 'Développement Chatbots',
+    title: 'Chatbots IA & FAQ intelligentes',
     icon: MessageSquare,
-    copy: 'Assistants IA et automatisations qui améliorent le support.',
-    href: 'services.html#chatbot',
+    copy: 'Assistants conversationnels qui accelerent le support et ameliorent la qualite de reponse.',
+    href: '/services#chatbot',
   },
 ]
 
 export const pillars = [
   {
-    title: 'Créativité',
-    icon: Star,
-    copy: 'Des concepts utiles, pensés pour générer un impact concret.',
+    title: "Excellence d'ingenierie",
+    icon: Award,
+    copy: "Une equipe d'ingenieurs ENSI qui combine rigueur technique, curiosite et sens du resultat.",
   },
   {
-    title: 'Fiabilité',
+    title: 'Methodologie claire',
     icon: CheckCircle2,
-    copy: 'Des livrables testés, maintenables et alignés sur vos objectifs.',
+    copy: 'Chaque mission suit un cadrage net, des jalons lisibles et un pilotage continu.',
   },
   {
-    title: 'Précision',
+    title: 'Impact mesurable',
     icon: TrendingUp,
-    copy: 'Des priorités claires pour convertir la stratégie en résultats.',
-  },
-  {
-    title: 'Collaboration',
-    icon: Users,
-    copy: 'Une équipe EJE intégrée à votre rythme et vos contraintes.',
+    copy: 'Notre objectif est simple: transformer vos priorites en livrables utiles, stables et concrets.',
   },
 ]
 
+export const milestones = [
+  { year: '2011', title: 'Cofondation de la JET' },
+  { year: '2012', title: 'Adoption des statuts associatifs' },
+  { year: '2020', title: "Prix d'excellence" },
+]
+
 export const stats = [
-  { label: 'Satisfaction client', value: '99%', icon: Star },
-  { label: 'Partenaires renommés', value: '23+', icon: Users },
-  { label: 'Croissance moyenne', value: '45%', icon: TrendingUp },
-  { label: "Prix d'excellence", value: '3+', icon: Award },
+  { label: 'Projets realises', value: '90+', icon: TrendingUp },
+  { label: 'Entreprises partenaires', value: '50+', icon: Users },
+  { label: 'Satisfaction client', value: '94%', icon: CheckCircle2 },
+  { label: 'Livraison a temps', value: '100%', icon: CheckCircle2 },
+  { label: "Annees d'experience", value: '19+', icon: Award },
+  { label: 'Consultants IT', value: '80+', icon: Users },
+]
+
+export const optionalAddOns = [
+  'Design UI/UX',
+  'Tableau de bord analytics',
+  'Referencement naturel (SEO)',
+  'Configuration hebergement & domaine',
+  'Maintenance evolutive',
+  'Formation des equipes',
 ]
 
 export const faqs = [
   {
-    q: "Qu'est-ce que l'ENSI Junior Entreprise ?",
-    a: "L'ENSI Junior Entreprise est une structure étudiante qui livre des solutions digitales pour les entreprises.",
+    q: "Qu'est-ce que ENSI Junior Entreprise?",
+    a: "ENSI Junior Entreprise est une structure etudiante qui propose des services digitaux de qualite a cout maitrise.",
   },
   {
-    q: 'Comment démarrer un projet avec EJE ?',
-    a: 'Un brief, un cadrage rapide, puis une proposition claire de planning et de budget.',
+    q: 'Comment demarrer un projet avec EJE?',
+    a: 'Partagez votre besoin et nous revenons avec un cadrage clair, un planning realiste et une execution transparente.',
   },
   {
-    q: 'Quels services propose EJE ?',
-    a: 'Développement web, mobile, desktop, chatbots IA et accompagnement produit.',
+    q: 'Quels services propose EJE?',
+    a: 'Developpement web, mobile, desktop, chatbots IA et options complementaires orientees produit.',
   },
   {
-    q: 'Comment suivre nos actualités ?',
-    a: 'Nos événements et publications sont regroupés dans la section Actualités.',
+    q: 'Qui realise les projets EJE?',
+    a: 'Les missions sont executees par des ingenieurs ENSI avec un encadrement de profils experimentes et alumni.',
   },
   {
-    q: 'Comment nous contacter rapidement ?',
-    a: 'Par formulaire via la page Contact ou directement par email.',
+    q: 'Comment contacter rapidement votre equipe?',
+    a: 'Passez par la page Contact et notre equipe vous repondra rapidement avec la suite a donner.',
   },
 ]
 
 export const sectionLinks = {
   about: [
-    { label: 'Voir notre histoire', to: '/a-propos' },
-    { label: 'Lancer un projet', to: '/contact' },
+    { label: 'Decouvrir EJE', to: '/a-propos' },
   ],
   services: [
-    { label: 'Tous nos services', to: '/services' },
-    { label: 'Parler à un expert', to: '/contact' },
+    { label: 'Voir tous nos services', to: '/services' },
   ],
   reasons: [
-    { label: 'Actualités EJE', to: '/actualites' },
     { label: 'Pourquoi EJE', to: '/a-propos' },
   ],
   partners: [
     { label: 'Devenir partenaire', to: '/contact' },
-    { label: 'Voir nos actualités', to: '/actualites' },
   ],
   faq: [
-    { label: 'Page Contact', to: '/contact' },
-    { label: 'Section Services', href: 'services.html#web' },
+    { label: 'Nous contacter', to: '/contact' },
   ],
 }

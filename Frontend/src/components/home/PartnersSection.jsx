@@ -1,215 +1,165 @@
-import { useCallback, useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import SectionHeading from './SectionHeading'
 import { sectionLinks } from './homeData'
 import { media } from '../../assets/media'
 import ImageWithFallback from '../ImageWithFallback'
 import { getRevealProps, usePrefersReducedMotion } from './motionPresets'
 
-const AUTO_SCROLL_SPEED = 46
-const SPEED_EASING = 8
+const AUTO_ADVANCE_MS = 4000
 
-const originalPartnersCount = media.partners.length
-const marqueePartners = [...media.partners, ...media.partners]
-
-const clampLoopOffset = (offset, loopWidth) => {
-  if (!loopWidth) {
-    return offset
+const getLogosPerSlide = () => {
+  if (typeof window === 'undefined') {
+    return 6
   }
 
-  let nextOffset = offset
-
-  while (nextOffset <= -loopWidth) {
-    nextOffset += loopWidth
+  if (window.innerWidth < 768) {
+    return 2
   }
 
-  while (nextOffset > 0) {
-    nextOffset -= loopWidth
+  if (window.innerWidth < 1280) {
+    return 4
   }
 
-  return nextOffset
+  return 6
 }
 
 export default function PartnersSection() {
   const reducedMotion = usePrefersReducedMotion()
-  const [isHovered, setIsHovered] = useState(false)
-  const [isDragging, setIsDragging] = useState(false)
+  const [logosPerSlide, setLogosPerSlide] = useState(getLogosPerSlide)
+  const [activeSlide, setActiveSlide] = useState(0)
 
-  const trackRef = useRef(null)
-  const loopWidthRef = useRef(0)
-  const offsetRef = useRef(0)
-  const speedRef = useRef(reducedMotion ? 0 : AUTO_SCROLL_SPEED)
-  const targetSpeedRef = useRef(reducedMotion ? 0 : AUTO_SCROLL_SPEED)
-  const dragRef = useRef({
-    active: false,
-    pointerId: null,
-    startX: 0,
-    startOffset: 0,
-  })
+  const slides = useMemo(() => {
+    const chunks = []
 
-  const syncTrackPosition = useCallback(() => {
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`
+    for (let index = 0; index < media.partners.length; index += logosPerSlide) {
+      chunks.push(media.partners.slice(index, index + logosPerSlide))
+    }
+
+    return chunks
+  }, [logosPerSlide])
+
+  useEffect(() => {
+    const handleViewportResize = () => {
+      setLogosPerSlide(getLogosPerSlide())
+    }
+
+    window.addEventListener('resize', handleViewportResize)
+
+    return () => {
+      window.removeEventListener('resize', handleViewportResize)
     }
   }, [])
 
   useEffect(() => {
-    const nextTargetSpeed = reducedMotion || isHovered || isDragging ? 0 : AUTO_SCROLL_SPEED
-    targetSpeedRef.current = nextTargetSpeed
-  }, [isDragging, isHovered, reducedMotion])
-
-  useEffect(() => {
-    const measureLoop = () => {
-      if (!trackRef.current) {
-        return
-      }
-
-      loopWidthRef.current = trackRef.current.scrollWidth / 2
-      offsetRef.current = clampLoopOffset(offsetRef.current, loopWidthRef.current)
-      syncTrackPosition()
-    }
-
-    measureLoop()
-    window.addEventListener('resize', measureLoop)
-
-    return () => window.removeEventListener('resize', measureLoop)
-  }, [syncTrackPosition])
-
-  useEffect(() => {
-    let frameId = null
-    let lastTimestamp = window.performance.now()
-
-    const tick = (timestamp) => {
-      const deltaSeconds = (timestamp - lastTimestamp) / 1000
-      lastTimestamp = timestamp
-
-      const easing = Math.min(1, deltaSeconds * SPEED_EASING)
-      speedRef.current += (targetSpeedRef.current - speedRef.current) * easing
-
-      if (Math.abs(speedRef.current) < 0.02) {
-        speedRef.current = 0
-      }
-
-      if (speedRef.current !== 0) {
-        offsetRef.current = clampLoopOffset(offsetRef.current - speedRef.current * deltaSeconds, loopWidthRef.current)
-        syncTrackPosition()
-      }
-
-      frameId = window.requestAnimationFrame(tick)
-    }
-
-    frameId = window.requestAnimationFrame(tick)
-
-    return () => {
-      if (frameId !== null) {
-        window.cancelAnimationFrame(frameId)
-      }
-    }
-  }, [syncTrackPosition])
-
-  const handlePointerDown = useCallback(
-    (event) => {
-      const canDragWithPointer = event.pointerType === 'touch' || isHovered
-
-      if (!canDragWithPointer) {
-        return
-      }
-
-      dragRef.current = {
-        active: true,
-        pointerId: event.pointerId,
-        startX: event.clientX,
-        startOffset: offsetRef.current,
-      }
-
-      speedRef.current = 0
-      targetSpeedRef.current = 0
-      setIsDragging(true)
-      event.currentTarget.setPointerCapture(event.pointerId)
-    },
-    [isHovered],
-  )
-
-  const handlePointerMove = useCallback(
-    (event) => {
-      const drag = dragRef.current
-
-      if (!drag.active || drag.pointerId !== event.pointerId) {
-        return
-      }
-
-      const deltaX = event.clientX - drag.startX
-      offsetRef.current = clampLoopOffset(drag.startOffset + deltaX, loopWidthRef.current)
-      syncTrackPosition()
-    },
-    [syncTrackPosition],
-  )
-
-  const handlePointerEnd = useCallback((event) => {
-    const drag = dragRef.current
-
-    if (!drag.active || drag.pointerId !== event.pointerId) {
+    if (activeSlide < slides.length) {
       return
     }
 
-    dragRef.current = {
-      active: false,
-      pointerId: null,
-      startX: 0,
-      startOffset: offsetRef.current,
+    setActiveSlide(0)
+  }, [activeSlide, slides.length])
+
+  useEffect(() => {
+    if (reducedMotion || slides.length <= 1) {
+      return undefined
     }
 
-    setIsDragging(false)
+    const autoAdvance = window.setInterval(() => {
+      setActiveSlide((currentSlide) => (currentSlide + 1) % slides.length)
+    }, AUTO_ADVANCE_MS)
 
-    if (event.currentTarget.hasPointerCapture(event.pointerId)) {
-      event.currentTarget.releasePointerCapture(event.pointerId)
+    return () => {
+      window.clearInterval(autoAdvance)
     }
+  }, [reducedMotion, slides.length])
+
+  const handlePreviousSlide = useCallback(() => {
+    setActiveSlide((currentSlide) => (currentSlide === 0 ? slides.length - 1 : currentSlide - 1))
+  }, [slides.length])
+
+  const handleNextSlide = useCallback(() => {
+    setActiveSlide((currentSlide) => (currentSlide + 1) % slides.length)
+  }, [slides.length])
+
+  const handleIndicatorClick = useCallback((slideIndex) => {
+    setActiveSlide(slideIndex)
   }, [])
+
+  const hasManySlides = slides.length > 1
 
   return (
     <section className="bg-eje-dark pb-24">
       <SectionHeading
-        eyebrow="Nos Partenaires"
+        eyebrow="Nos partenaires"
         title={
           <>
-            Ils font confiance à <span className="text-eje-accent">EJE</span>.
+            Ils font confiance a <span className="text-eje-accent">EJE</span>.
           </>
         }
-        subtitle="Un réseau d'organisations qui avancent avec nous sur le long terme."
+        subtitle="Un reseau d'entreprises et d'institutions qui avancent avec nous sur le long terme."
         links={sectionLinks.partners}
       />
 
       <motion.div className="container" {...getRevealProps(0.12, reducedMotion)}>
-        <div
-          className={`partners-marquee select-none ${isDragging ? 'cursor-grabbing' : isHovered ? 'cursor-grab' : ''}`}
-          role="region"
-          aria-label="Défilement des logos partenaires ENSI Junior Entreprise"
-          style={{ touchAction: 'pan-y' }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
-          onPointerDown={handlePointerDown}
-          onPointerMove={handlePointerMove}
-          onPointerUp={handlePointerEnd}
-          onPointerCancel={handlePointerEnd}
-        >
-          <div ref={trackRef} className="partners-track">
-            {marqueePartners.map((logo, index) => {
-              const isDuplicate = index >= originalPartnersCount
+        <div className="partners-carousel" role="region" aria-label="Carousel des logos partenaires ENSI Junior Entreprise">
+          {hasManySlides ? (
+            <button
+              type="button"
+              className="partners-arrow partners-arrow-left"
+              aria-label="Afficher les partenaires précédents"
+              onClick={handlePreviousSlide}
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+          ) : null}
 
-              return (
-                <div key={`${logo.src}-${index}`} className="partner-logo-card group" aria-hidden={isDuplicate ? 'true' : undefined}>
-                  <ImageWithFallback
-                    src={logo.src}
-                    alt={isDuplicate ? '' : `Logo partenaire ${logo.name}`}
-                    wrapperClassName="h-10 w-full"
-                    className="h-10 w-full object-contain opacity-80 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
-                    fallbackLabel={logo.name}
-                  />
-                </div>
-              )
-            })}
+          <div className="partners-viewport">
+            <div className="partners-slides" style={{ transform: `translateX(-${activeSlide * 100}%)` }}>
+              {slides.map((slide, slideIndex) => (
+                <ul key={`partners-slide-${slideIndex}`} className="partners-slide" aria-hidden={slideIndex !== activeSlide ? 'true' : undefined}>
+                  {slide.map((logo) => (
+                    <li key={`${logo.src}-${slideIndex}`} className="partner-logo-card-modern group">
+                      <ImageWithFallback
+                        src={logo.src}
+                        alt={`Logo partenaire ${logo.name}`}
+                        wrapperClassName="h-16 w-full md:h-[4.75rem]"
+                        className="partners-logo-image h-16 w-full object-contain md:h-[4.75rem]"
+                        fallbackLabel={logo.name}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              ))}
+            </div>
           </div>
+
+          {hasManySlides ? (
+            <button
+              type="button"
+              className="partners-arrow partners-arrow-right"
+              aria-label="Afficher les partenaires suivants"
+              onClick={handleNextSlide}
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          ) : null}
         </div>
+
+        {hasManySlides ? (
+          <div className="partners-indicators" role="tablist" aria-label="Indicateurs du carousel partenaires">
+            {slides.map((_, slideIndex) => (
+              <button
+                key={`partners-indicator-${slideIndex}`}
+                type="button"
+                className={`partners-indicator ${slideIndex === activeSlide ? 'partners-indicator-active' : ''}`}
+                aria-label={`Aller à la page ${slideIndex + 1} des logos partenaires`}
+                aria-current={slideIndex === activeSlide ? 'true' : 'false'}
+                onClick={() => handleIndicatorClick(slideIndex)}
+              />
+            ))}
+          </div>
+        ) : null}
       </motion.div>
     </section>
   )

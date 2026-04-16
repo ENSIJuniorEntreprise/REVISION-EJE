@@ -1,18 +1,30 @@
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
+import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from 'framer-motion'
 
-const MAX_TILT = 15
+const MAX_TILT = 12
+const SPRING_CONFIG = { stiffness: 210, damping: 28, mass: 0.7 }
 
-export default function TiltCard({ children, className = '', contentClassName = '', ...props }) {
+export default function TiltCard({ as = 'div', children, className = '', contentClassName = '', onMouseMove, onMouseLeave, ...props }) {
+  const prefersReducedMotion = useReducedMotion()
   const pointerX = useMotionValue(0)
   const pointerY = useMotionValue(0)
 
   const rawRotateX = useTransform(pointerY, [-0.5, 0.5], [MAX_TILT, -MAX_TILT])
   const rawRotateY = useTransform(pointerX, [-0.5, 0.5], [-MAX_TILT, MAX_TILT])
 
-  const rotateX = useSpring(rawRotateX, { stiffness: 230, damping: 22, mass: 0.6 })
-  const rotateY = useSpring(rawRotateY, { stiffness: 230, damping: 22, mass: 0.6 })
+  const rotateX = useSpring(rawRotateX, SPRING_CONFIG)
+  const rotateY = useSpring(rawRotateY, SPRING_CONFIG)
+
+  const MotionElement = motion[as] ?? motion.div
 
   const handleMouseMove = (event) => {
+    if (typeof onMouseMove === 'function') {
+      onMouseMove(event)
+    }
+
+    if (prefersReducedMotion) {
+      return
+    }
+
     const rect = event.currentTarget.getBoundingClientRect()
     const relativeX = (event.clientX - rect.left) / rect.width - 0.5
     const relativeY = (event.clientY - rect.top) / rect.height - 0.5
@@ -22,12 +34,16 @@ export default function TiltCard({ children, className = '', contentClassName = 
   }
 
   const handleMouseLeave = () => {
+    if (typeof onMouseLeave === 'function') {
+      onMouseLeave()
+    }
+
     pointerX.set(0)
     pointerY.set(0)
   }
 
   const classes = [
-    'p-8 rounded-[10px] bg-white/5 border border-eje-beige/10 cursor-pointer relative',
+    'relative cursor-pointer rounded-[10px] border border-eje-beige/10 bg-white/5 p-8 will-change-transform',
     'hover:border-eje-accent/50 hover:bg-white/10 transition-colors duration-300',
     className,
   ]
@@ -37,21 +53,25 @@ export default function TiltCard({ children, className = '', contentClassName = 
   const innerClasses = ['h-full', contentClassName].filter(Boolean).join(' ')
 
   return (
-    <motion.div
+    <MotionElement
       className={classes}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      whileTap={{ scale: 0.95 }}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: 'preserve-3d',
-      }}
+      whileTap={prefersReducedMotion ? undefined : { scale: 0.985 }}
+      style={
+        prefersReducedMotion
+          ? undefined
+          : {
+              rotateX,
+              rotateY,
+              transformPerspective: 1100,
+            }
+      }
       {...props}
     >
-      <motion.div className={innerClasses} style={{ transform: 'translateZ(40px)' }}>
+      <div className={innerClasses}>
         {children}
-      </motion.div>
-    </motion.div>
+      </div>
+    </MotionElement>
   )
 }

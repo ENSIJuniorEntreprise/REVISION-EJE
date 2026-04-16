@@ -7,22 +7,22 @@ export default function FaqSection() {
   const reducedMotion = usePrefersReducedMotion()
 
   return (
-    <section className="bg-eje-dark pb-24">
+    <section id="contact" className="scroll-mt-32 bg-eje-dark pb-24">
       <SectionHeading
-        eyebrow="FAQ et Newsletter"
+        eyebrow="FAQ et newsletter"
         title={
           <>
-            Questions fréquentes, <span className="text-eje-accent">réponses immédiates</span>.
+            Questions frequentes, <span className="text-eje-accent">reponses claires</span>.
           </>
         }
-        subtitle="Retrouvez les informations clés et recevez les actualités EJE en avant-première."
+        subtitle="Retrouvez les informations essentielles rapidement et recevez les actualites EJE en avant-premiere."
         links={sectionLinks.faq}
       />
 
       <div className="container grid grid-cols-1 gap-16 lg:grid-cols-2">
         <motion.div className="card-glass p-8" {...getRevealProps(0.08, reducedMotion)}>
-          <h3 className="mb-4 text-3xl font-bold">Recevoir les actualités EJE</h3>
-          <p className="mb-6 text-eje-beige/70">Une synthèse claire de nos projets, événements et opportunités.</p>
+          <h3 className="mb-4 text-3xl font-bold">Recevoir les actualites EJE</h3>
+          <p className="mb-6 text-eje-beige/70">Une synthese concise de nos projets, evenements et opportunites de collaboration.</p>
           <form className="flex max-w-md gap-2" onSubmit={(event) => event.preventDefault()} aria-label="Inscription à la newsletter">
             <label htmlFor="newsletter-home-email" className="sr-only">
               Adresse email
