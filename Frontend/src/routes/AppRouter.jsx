@@ -14,6 +14,7 @@ export default function AppRouter() {
           <Route path="services" element={<Services />} />
           <Route path="contact" element={<Contact />} />
           <Route path="actualites" element={<Actualites />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>

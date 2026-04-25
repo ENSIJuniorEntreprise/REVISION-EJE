@@ -1,5 +1,6 @@
 ﻿import { useState, useEffect, useRef } from "react";
 
+
 const CheckCircle = ({ size = 24, className = "" }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +31,7 @@ const services = [
       "Plateformes e-commerce",
       "Systèmes de gestion de contenu (CMS)",
       "Intégrations API et services tiers",],
-    image : "/assets/le-portage-salarial-developpeur-web-1.jpg",
+    image : "/assets/getent (1).png",
   },
   {
     id: "mobile",
@@ -43,7 +44,7 @@ const services = [
       "UI/UX Mobile optimisé",
       "Intégration API",
       "Mode hors-ligne (Offline Mode)",],
-    image : "/assets/Mobile_App.jpg",
+    image : "/assets/daam.png",
   },
   {
     id: "desktop",
@@ -55,11 +56,11 @@ const services = [
       "Haute performance",
       "Sécurité avancée",
       "Legacy update & migration",],
-    image : "/assets/Desktop.jpg",
+    image : "/assets/dashbord.png",
   },
   {
     id: "ia",
-    label: "CHATBOT & IA",
+    label: "ChatBot & IA",
     icon: "/assets/chatbot.png",
     title: "CHATBOT & IA",
     desc: "Intégration de modèles d'IA générative et de machine learning pour automatiser et optimiser vos processus.",
@@ -237,19 +238,11 @@ function MindsetSection() {
           transition: "opacity 0.7s ease, transform 0.7s ease",
         }}
       >
-        <span
-          className="inline-flex items-center gap-2 border border-[#2ea3dd]/50 text-[#2ea3dd] text-xs font-bold tracking-widest px-5 py-2 rounded-full mb-6"
-          style={{ background: "rgba(46,163,221,0.08)" }}
-        >
-          <span
-            className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]"
-            style={{ animation: "iconPulse 2s ease-in-out infinite" }}
-          />
-          NOTRE APPROCHE
-        </span>
+
+          
 
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#e0ded2] mb-4 leading-tight">
-          Projet{" "}
+          Project{" "}
           <span
             style={{
               backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #33ddff 40%, #2ea3dd 80%)",
@@ -269,7 +262,7 @@ function MindsetSection() {
       </div>
 
       {/* Cartes */}
-      <div className="relative z-10 flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-10 max-w-5xl mx-auto">
+      <div className="relative z-10 flex flex-wrap justify-center gap-6 sm:gap-8 lg:gap-20 max-w-5xl mx-auto">
         {mindsetCards.map((card, i) => {
           const isHovered = hovered === i;
           return (
@@ -278,7 +271,7 @@ function MindsetSection() {
               className="mindset-card-hover relative flex flex-col items-center gap-5 cursor-pointer"
               style={{
                 width: "clamp(200px, 28vw, 280px)",
-                padding: "32px 24px 28px",
+                padding: "50px 24px 50px",
                 borderRadius: 20,
                 background: isHovered ? "rgba(46,163,221,0.12)" : "rgba(255,255,255,0.04)",
                 border: `1px solid ${isHovered ? "rgba(46,163,221,0.55)" : "rgba(46,163,221,0.15)"}`,
@@ -517,13 +510,7 @@ function SubPrestationsSection() {
           transition: "opacity 0.7s ease, transform 0.7s ease",
         }}
       >
-        <span
-          className="inline-flex items-center gap-2 text-[#2ea3dd] text-xs font-bold tracking-widest px-5 py-2 rounded-full mb-6 border border-[#2ea3dd]/30"
-          style={{ background: "rgba(46,163,221,0.07)" }}
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd] animate-pulse" />
-          ALLER PLUS LOIN
-        </span>
+        
 
         <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-[#e0ded2]">
           Les{" "}
@@ -541,7 +528,7 @@ function SubPrestationsSection() {
           </span>
         </h2>
 
-        <p className="mx-auto max-w-2xl text-sm sm:text-base leading-7 text-[#8a8880]">
+        <p className="mx-auto max-w-2xl text-sm sm:text-base leading-7 text-[#e0ded2]">
           Au-delà du développement de base, nous fournissons un écosystème complet
           de services numériques pour assurer le succès à long terme de vos projets.
         </p>
@@ -632,7 +619,7 @@ function SubPrestationsSection() {
               <span
                 className="text-xs sm:text-sm font-bold tracking-wide leading-snug"
                 style={{
-                  color: isHovered ? "#e0ded2" : "#8a8880",
+                  color: isHovered ? "#e0ded2" : "#e0ded2",
                   transition: "color 0.3s ease",
                 }}
               >
@@ -653,25 +640,409 @@ function SubPrestationsSection() {
           );
         })}
       </div>
+    </section>
+  );
+}
+const processSteps = [
+  {
+    icon: "/assets/analysing.png",
+    title: "Analyse des Besoins",
+    delay: 0,
+    items: [
+      "Premier contact",
+      "Analyse approfondie des besoins et exigences",
+      "Proposition de la solution adaptée",
+    ],
+  },
+  {
+    icon: "/assets/talk.png",
+    title: "Conseil",
+    delay: 150,
+    items: [
+      "Préparation des spécifications du projet",
+      "Signature du contrat",
+      "Début de la collaboration",
+    ],
+  },
+  {
+    icon: "/assets/task-management.png",
+    title: "Exécution du Projet",
+    delay: 300,
+    items: [
+      "Mise en œuvre du projet",
+      "Réunions de suivi",
+      "Validation étape par étape",
+    ],
+  },
+  {
+    icon: "/assets/express-delivery.png",
+    title: "Livraison du Projet",
+    delay: 450,
+    items: [
+      "Remise du projet",
+      "Mesure de la satisfaction",
+      "Support client",
+    ],
+  },
+];
 
-      {/* ── Compteur décoratif bas ── */}
-      <div
-        className="relative z-10 mt-14 text-center"
-        style={{
-          opacity: visible ? 1 : 0,
-          transition: "opacity 0.8s ease 0.9s",
-        }}
-      >
-        <span
-          className="text-xs tracking-[0.2em] uppercase font-medium"
-          style={{ color: "rgba(46,163,221,0.35)" }}
+function ProcessSection() {
+  const [visible,    setVisible]    = useState(false);
+  const [lineHeight, setLineHeight] = useState(0);
+  const [hovered,    setHovered]    = useState(null);
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.15 }
+    );
+    if (sectionRef.current) obs.observe(sectionRef.current);
+    return () => obs.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!visible) return;
+    let start = null;
+    const duration = 1600;
+    const animate = (ts) => {
+      if (!start) start = ts;
+      const progress = Math.min((ts - start) / duration, 1);
+      setLineHeight(progress * 100);
+      if (progress < 1) requestAnimationFrame(animate);
+    };
+    const raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
+  }, [visible]);
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden border-t border-[#2ea3dd]/10 px-6 sm:px-10 lg:px-16 py-20 sm:py-28"
+      style={{
+        background:
+          "linear-gradient(135deg, #0a1628 0%, #0d2040 40%, #0a1a30 70%, #061220 100%)",
+      }}
+    >
+      <style>{`
+        @keyframes proc-fadeUp    { from{opacity:0;transform:translateY(32px);}  to{opacity:1;transform:translateY(0);} }
+        @keyframes proc-fadeLeft  { from{opacity:0;transform:translateX(-36px);} to{opacity:1;transform:translateX(0);} }
+        @keyframes proc-fadeRight { from{opacity:0;transform:translateX(36px);}  to{opacity:1;transform:translateX(0);} }
+        @keyframes proc-dotPop    { 0%{transform:scale(0) rotate(-90deg);opacity:0;} 65%{transform:scale(1.18) rotate(6deg);opacity:1;} 100%{transform:scale(1) rotate(0);opacity:1;} }
+        @keyframes proc-shimmer   { 0%{background-position:-200% center;} 100%{background-position:200% center;} }
+        @keyframes proc-scan      { 0%{top:-2px;opacity:.7;} 100%{top:calc(100% + 2px);opacity:0;} }
+        @keyframes proc-vidReveal { from{opacity:0;transform:scale(.94) translateY(18px);} to{opacity:1;transform:scale(1) translateY(0);} }
+        @keyframes proc-pulse     { 0%,100%{opacity:1;} 50%{opacity:.4;} }
+        @keyframes proc-bgMesh    { 0%{transform:translate(-50%,-50%) scale(1) rotate(0deg);} 50%{transform:translate(-50%,-50%) scale(1.08) rotate(180deg);} 100%{transform:translate(-50%,-50%) scale(1) rotate(360deg);} }
+        @keyframes iconPulseProc  { 0%,100%{filter:brightness(1) drop-shadow(0 0 6px rgba(46,163,221,.3));} 50%{filter:brightness(1.15) drop-shadow(0 0 14px rgba(46,163,221,.6));} }
+        .proc-step-card {
+          transition: transform .38s cubic-bezier(.34,1.56,.64,1), box-shadow .35s ease, background .3s ease, border-color .3s ease;
+        }
+        .proc-step-card:hover {
+          transform: translateY(-6px) scale(1.02) !important;
+        }
+      `}</style>
+
+      {/* Fond décoratif cercles mesh */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {[
+          { size: 520, top: "10%", left: "15%", dur: "28s", opacity: 0.06 },
+          { size: 380, top: "55%", left: "70%", dur: "36s", opacity: 0.05 },
+          { size: 260, top: "30%", left: "85%", dur: "22s", opacity: 0.07 },
+          { size: 200, top: "75%", left: "8%",  dur: "19s", opacity: 0.05 },
+        ].map(({ size, top, left, dur, opacity }, i) => (
+          <div
+            key={i}
+            className="absolute rounded-full border border-[#2ea3dd]"
+            style={{
+              width: size, height: size,
+              top, left,
+              transform: "translate(-50%,-50%)",
+              opacity,
+              animation: `proc-bgMesh ${dur} linear infinite`,
+              animationDelay: `${i * 4}s`,
+            }}
+          />
+        ))}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse 70% 60% at 50% 50%, rgba(46,163,221,0.06) 0%, transparent 70%)",
+          }}
+        />
+      </div>
+
+      {/* Layout 2 colonnes */}
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col lg:flex-row gap-14 lg:gap-20 items-start">
+
+        {/* GAUCHE : titre + vidéo */}
+        <div
+          className="lg:w-[560px] flex-shrink-0 flex flex-col gap-8"
+          style={{
+            opacity: visible ? 1 : 0,
+            animation: visible ? "proc-fadeLeft .85s cubic-bezier(.22,1,.36,1) .1s both" : "none",
+          }}
         >
-          {subServicesList.length} services disponibles
-        </span>
+          <div>
+            <p className="text-lg font-light italic mt-4 mb-1 tracking-wide" style={{ color: "#2ea3dd" }}>
+              Notre
+            </p>
+            <h2
+              className="text-5xl sm:text-6xl font-extrabold uppercase tracking-tight leading-none mb-5"
+              style={{ color: "#e0ded2" }}
+            >
+              PROCESSUS
+            </h2>
+            <p className="text-sm sm:text-base leading-7 text-[#e0ded2]">
+              Guidé par une{" "}
+              <span
+                style={{
+                  backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #33ddff 40%, #2ea3dd 80%)",
+                  backgroundSize: "200% auto",
+                  WebkitBackgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  backgroundClip: "text",
+                  animation: visible ? "proc-shimmer 3s linear infinite" : "none",
+                  fontWeight: 600,
+                }}
+              >
+                expérience client
+              </span>{" "}
+              exceptionnelle
+            </p>
+            <div className="mt-6 h-px w-16" style={{ background: "linear-gradient(90deg, #2ea3dd, transparent)" }} />
+          </div>
+
+          {/* Vidéo */}
+          <div
+  className="relative rounded-2xl overflow-hidden"
+  style={{
+    border: "1px solid rgba(46,163,221,0.22)",
+    boxShadow:
+      "0 0 0 1px rgba(46,163,221,0.06), 0 20px 50px rgba(0,0,0,0.45)",
+    opacity: visible ? 1 : 0,
+    animation: visible
+      ? "proc-vidReveal .95s cubic-bezier(.22,1,.36,1) .45s both"
+      : "none",
+  }}
+>
+  <video
+    className="w-full h-[300px] md:h-[400px] lg:h-[400px] object-cover"
+    autoPlay
+    muted
+    loop
+    playsInline
+    poster="/assets/video-poster.jpg"
+  >
+    <source src="/assets/Copie.mp4" type="video/mp4" />
+  </video>
+
+  <div
+    className="absolute bottom-0 left-0 right-0 h-16 pointer-events-none"
+    style={{
+      background:
+        "linear-gradient(to top, rgba(10,22,40,.7), transparent)",
+    }}
+  />
+</div>
+        </div>
+
+        {/* DROITE : Timeline */}
+        <div
+          className="flex-1 relative"
+          style={{
+            opacity: visible ? 1 : 0,
+            animation: visible ? "proc-fadeRight .85s cubic-bezier(.22,1,.36,1) .25s both" : "none",
+          }}
+        >
+          {/* Ligne verticale */}
+          <div
+            className="absolute top-7 bottom-7 w-px"
+            style={{ left: 27, background: "rgba(46,163,221,0.1)" }}
+          >
+            <div
+              className="w-full origin-top"
+              style={{
+                height: `${lineHeight}%`,
+                background: "linear-gradient(to bottom, #2ea3dd 0%, rgba(46,163,221,0.15) 100%)",
+              }}
+            />
+          </div>
+
+          <div className="flex flex-col gap-7">
+            {processSteps.map((step, i) => {
+              const isHovered = hovered === i;
+              const delay = 300 + i * 160;
+              return (
+                <div
+                  key={step.title}
+                  className="relative flex gap-5 items-start"
+                  style={{
+                    opacity: visible ? 1 : 0,
+                    animation: visible ? `proc-fadeUp .65s cubic-bezier(.22,1,.36,1) ${delay}ms both` : "none",
+                  }}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                >
+                  {/* Icône nœud */}
+                  <div className="relative flex-shrink-0 z-10">
+                    <div
+                      className="flex items-center justify-center rounded-full"
+                      style={{
+                        width: 54, height: 54,
+                        background: isHovered ? "rgba(46,163,221,0.18)" : "rgba(46,163,221,0.08)",
+                        border: `2px solid ${isHovered ? "#2ea3dd" : "rgba(46,163,221,0.3)"}`,
+                        boxShadow: isHovered ? "0 0 22px rgba(46,163,221,0.4)" : "none",
+                        transition: "all .35s ease",
+                        animation: visible ? `proc-dotPop .55s cubic-bezier(.34,1.56,.64,1) ${delay + 200}ms both` : "none",
+                      }}
+                    >
+                      <img
+                        src={step.icon}
+                        alt={step.title}
+                        className="w-6 h-6 object-contain"
+                        style={{
+                          filter: isHovered
+                            ? "brightness(1.25) drop-shadow(0 0 7px rgba(46,163,221,0.7))"
+                            : "brightness(.7)",
+                          animation: isHovered ? "iconPulseProc 1.4s ease-in-out infinite" : "none",
+                          transition: "filter .3s ease",
+                        }}
+                      />
+                    </div>
+                    <span
+                      className="absolute -top-1 -right-1 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-extrabold"
+                      style={{ background: "#2ea3dd", color: "#1f212d" }}
+                    >
+                      {i + 1}
+                    </span>
+                  </div>
+
+                  {/* Carte */}
+                  <div
+                    className="proc-step-card flex-1 rounded-2xl px-5 py-4 relative overflow-hidden cursor-pointer"
+                    style={{
+                      background: isHovered ? "rgba(46,163,221,0.1)" : "rgba(255,255,255,0.03)",
+                      border: `1px solid ${isHovered ? "rgba(46,163,221,0.45)" : "rgba(46,163,221,0.1)"}`,
+                      backdropFilter: "blur(12px)",
+                      boxShadow: isHovered
+                        ? "0 12px 36px rgba(46,163,221,0.15), inset 0 1px 0 rgba(46,163,221,0.12)"
+                        : "0 2px 12px rgba(0,0,0,0.15)",
+                    }}
+                  >
+                    {isHovered && (
+                      <div
+                        className="absolute left-0 w-full pointer-events-none"
+                        style={{
+                          height: 1.5,
+                          background: "linear-gradient(90deg, transparent, rgba(46,163,221,0.55), transparent)",
+                          animation: "proc-scan .9s ease-in-out infinite",
+                        }}
+                      />
+                    )}
+                    <div
+                      className="absolute top-0 left-0 right-0 h-px pointer-events-none"
+                      style={{
+                        background: "linear-gradient(90deg, transparent, rgba(46,163,221,0.4), transparent)",
+                        opacity: isHovered ? 1 : 0.3,
+                        transition: "opacity .3s ease",
+                      }}
+                    />
+                    <span
+                      className="absolute top-3 right-4 text-xs font-bold tracking-widest"
+                      style={{
+                        color: isHovered ? "rgba(46,163,221,0.8)" : "rgba(46,163,221,0.2)",
+                        transition: "color .3s ease",
+                      }}
+                    >
+                      0{i + 1}
+                    </span>
+                    <h3
+                      className="text-sm sm:text-base font-extrabold mb-2 tracking-wide"
+                      style={{ color: isHovered ? "#33ddff" : "#2ea3dd", transition: "color .3s ease" }}
+                    >
+                      {step.title}
+                    </h3>
+                    <div
+                      className="rounded-full mb-3"
+                      style={{
+                        height: 1.5,
+                        width: isHovered ? "55%" : "22%",
+                        background: "linear-gradient(90deg, #2ea3dd, transparent)",
+                        transition: "width .4s cubic-bezier(.34,1.56,.64,1)",
+                      }}
+                    />
+                    <ol className="flex flex-col gap-2">
+                      {step.items.map((item, j) => (
+                        <li
+                          key={j}
+                          className="flex items-start gap-2.5 text-xs sm:text-sm"
+                          style={{ color: isHovered ? "#c8c6bc" : "#e0ded2", transition: "color .3s ease" }}
+                        >
+                          <span
+                            className="flex-shrink-0 w-4 h-4 rounded-full flex items-center justify-center text-[9px] font-bold mt-0.5"
+                            style={{
+                              background: isHovered ? "rgba(46,163,221,0.2)" : "rgba(46,163,221,0.1)",
+                              color: "#2ea3dd",
+                              border: `1px solid ${isHovered ? "rgba(46,163,221,0.4)" : "rgba(46,163,221,0.2)"}`,
+                              transition: "all .3s ease",
+                            }}
+                          >
+                            {j + 1}
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ol>
+                    <div
+                      className="absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full"
+                      style={{
+                        height: 2,
+                        width: isHovered ? "65%" : "0%",
+                        background: "linear-gradient(90deg, transparent, #2ea3dd, #33ddff, transparent)",
+                        transition: "width .4s cubic-bezier(.34,1.56,.64,1)",
+                      }}
+                    />
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      {/* CTA bas */}
+      <div
+        className="relative z-10 mt-16 sm:mt-20 text-center"
+        style={{ opacity: visible ? 1 : 0, transition: "opacity .8s ease 1.3s" }}
+      >
+        <div className="flex items-center justify-center gap-4 mb-8">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#2ea3dd]/40" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]/60" />
+          <span className="w-2 h-2 rounded-full bg-[#2ea3dd]" style={{ animation: "proc-pulse 2s ease-in-out infinite" }} />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]/60" />
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#2ea3dd]/40" />
+        </div>
+        <button
+          className="rounded-xl px-9 py-3.5 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5"
+          style={{ background: "#2ea3dd", color: "#1f212d" }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#33ddff"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(46,163,221,0.35)"; }}
+          onMouseLeave={e => { e.currentTarget.style.background = "#2ea3dd"; e.currentTarget.style.boxShadow = "none"; }}
+        >
+          Démarrer un projet
+        </button>
       </div>
     </section>
   );
 }
+
+
 
 export default function Services() {
   const [hoveredCircle, setHoveredCircle] = useState(null);
@@ -725,11 +1096,19 @@ export default function Services() {
     <div className="min-h-screen bg-[#1f212d] text-white font-sans overflow-x-hidden">
       {/* HERO */}
       <section
-        ref={heroRef}
-        className={`relative overflow-hidden py-80 sm:py-50 bg-[linear-gradient(rgba(31,33,45,0.82),rgba(31,33,45,0.82)),url('/assets/20th-generation.png')] bg-cover bg-center bg-no-repeat px-6 sm:px-10 lg:px-24 py-28 sm:py-36 text-center transition-all duration-700 ${
-          heroVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
-        }`}
-      >
+  ref={heroRef}
+  className={`relative w-full overflow-hidden 
+  min-h-[calc(100vh-64px)] 
+  bg-[linear-gradient(rgba(31,33,45,0.82),rgba(31,33,45,0.82)),url('/assets/20th-generation.png')] 
+  bg-cover bg-center bg-no-repeat 
+  flex items-center justify-center 
+  px-6 sm:px-10 lg:px-24 text-center 
+  transition-all duration-700 ${
+    heroVisible
+      ? "opacity-100 translate-y-0"
+      : "opacity-0 translate-y-10"
+  }`}
+>
         {/* Cercles orbitaux */}
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
           <div className="absolute w-[600px] h-[600px] rounded-full border border-[#2ea3dd]/10 animate-spin" />
@@ -737,22 +1116,33 @@ export default function Services() {
         </div>
 
         <div className="relative z-5">
-          <span className="inline-block border-2 border-[#2ea3dd] text-[#2ea3dd] text-xs font-bold tracking-widest px-7 py-3 rounded-full mb-4">
-          ENSI JUNIOR ENTREPRISE
-        </span>
-          <h1 className="mb-8 text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-[#e0ded2]">
+          
+        
+          <span>
+             
+          <h1 className="mb-8 text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-[#e0ded2]" style={{
+              backgroundImage: "linear-gradient(90deg, #e0ded2 0%, #2ea3dd 40%, #e0ded2 80%)",
+              backgroundSize: "200% auto",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              animation: "shimmer 7s linear infinite",
+            }} >
             Nos Expertises
           </h1>
-          <p className="mx-auto max-w-2xl text-base sm:text-lg leading-7 text-[#8a8880]">
+          </span>
+          <p className="mx-auto max-w-2xl text-base sm:text-lg leading-7 text-[#e0ded2]">
             De la conception à la mise en production, nous transformons vos défis technologiques en avantages compétitifs.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-1 hover:bg-[#33ddff] hover:shadow-[0_8px_16px_rgba(46,163,221,0.35)]">
               Demander un devis
             </button>
-            <button className="rounded-lg bg-transparent border border-[#8a8880] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1f212d] hover:shadow-[0_8px_16px_#1f212d]">
-              Notre Portfolio
-            </button>
+           <a href="\assets\Documents\Project-Portfolio-1.pdf">
+  <button className="rounded-lg bg-transparent border border-[#e0ded2] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1f212d] hover:shadow-[0_8px_16px_#1f212d]">
+    Notre Portfolio
+  </button>
+</a>
           </div>
         </div>
       </section>
@@ -761,13 +1151,11 @@ export default function Services() {
        <section className="bg-[#1f212d] px-6 py-20">
       {/* Header */}
       <div className="text-center mb-12">
-        <span className="inline-block border border-[#2ea3dd] text-[#2ea3dd] text-xs font-semibold tracking-widest px-4 py-1 rounded-full mb-4">
-          NOS SERVICES
-        </span>
-        <h2 className="text-3xl font-bold text-[#e0ded2] mb-4">
+        
+        <h2 className="text-5xl font-bold text-[#e0ded2] mb-5">
           Solutions de Développement
         </h2>
-        <p className="text-[#e0ded2]/60 max-w-xl mx-auto text-sm leading-relaxed">
+        <p className="text-[#e0ded2] max-w-xl mx-auto text-sm leading-relaxed">
           Explorez notre gamme complète de services de développement
           informatique conçus pour répondre à vos besoins spécifiques.
         </p>
@@ -783,7 +1171,7 @@ export default function Services() {
               ${
                 active === id
                   ? "bg-[#2ea3dd] border-[#2ea3dd] text-white"
-                  : "border-white/20 text-[#e0ded2]/60 hover:border-[#2ea3dd] hover:text-[#2ea3dd]"
+                  : "border-white/20 text-[#e0ded2] hover:border-[#2ea3dd] hover:text-[#2ea3dd]"
               }`}
           >
             <img src={icon} alt={label} className="w-[15px] h-[15px] opacity-80" />
@@ -799,7 +1187,7 @@ export default function Services() {
           <h3 className="text-xl font-bold text-[#2ea3dd] mb-4">
             {current.title}
           </h3>
-          <p className="text-[#e0ded2]/60 font-semibold text-sm leading-relaxed mb-6">
+          <p className="text-[#e0ded2] font-bold text-sm leading-relaxed mb-6">
             {current.desc}
           </p>
           <ul className="flex flex-col gap-3">
@@ -913,9 +1301,9 @@ export default function Services() {
               {/* Tooltip inline for better responsiveness */}
               <div className={`absolute top-[-110px] left-1/2 -translate-x-1/2 w-[200px] rounded-xl border border-[#2ea3dd] bg-[#1f212d]/95 p-3 shadow-xl transition-all duration-300 pointer-events-none ${hoveredCircle === "temps" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                 <div className="mb-1 flex items-center gap-2 text-xs font-bold text-[#2ea3dd]">
-                  <span>⏱️</span> Respect des délais
+                  <span><img src="\assets\save-time.png"alt="" /></span> Respect des délais
                 </div>
-                <div className="text-[10px] leading-4 text-[#8a8880]">
+                <div className="text-[10px] leading-4 text-[#e0ded2]">
                   Planification maîtrisée et exécution efficace pour garantir une livraison ponctuelle
                 </div>
               </div>
@@ -937,9 +1325,10 @@ export default function Services() {
 
               <div className={`absolute top-[-110px] left-1/2 -translate-x-1/2 w-[200px] rounded-xl border border-[#2ea3dd] bg-[#1f212d]/95 p-3 shadow-xl transition-all duration-300 pointer-events-none ${hoveredCircle === "coûts" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                 <div className="mb-1 flex items-center gap-2 text-xs font-bold text-[#2ea3dd]">
-                  <span>💰</span> Maîtriser les coûts
+                  <span><img src="/assets/profit.png" alt="" className="w-10 h-10 object-contain" />
+                </span> Maîtriser les coûts
                 </div>
-                <div className="text-[10px] leading-4 text-[#8a8880]">
+                <div className="text-[10px] leading-4 text-[#e0ded2]">
                   Des solutions optimisées, transparence et adaptation à votre projet
                 </div>
               </div>
@@ -961,9 +1350,9 @@ export default function Services() {
 
               <div className={`absolute top-[-110px] left-1/2 -translate-x-1/2 w-[200px] rounded-xl border border-[#2ea3dd] bg-[#1f212d]/95 p-3 shadow-xl transition-all duration-300 pointer-events-none ${hoveredCircle === "qualité" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                 <div className="mb-1 flex items-center gap-2 text-xs font-bold text-[#2ea3dd]">
-                  <span>✅</span> Exigence et précision
+                  <span><img src="/assets/achievement.png" alt="" className="w-10 h-10 object-contain" /></span> Exigence et précision
                 </div>
-                <div className="text-[10px] leading-4 text-[#8a8880]">
+                <div className="text-[10px] leading-4 text-[#e0ded2]">
                   Un haut niveau de qualité assuré à chaque étape du projet
                 </div>
               </div>
@@ -980,6 +1369,10 @@ export default function Services() {
 
       {/* SOUS-PRESTATIONS */}
       <SubPrestationsSection />
+      {/* NOTRE PROCESSUS */}
+      {/* NOTRE PROCESSUS */}
+<ProcessSection />
+    
 
       {/* CTA */}
       <section
@@ -992,7 +1385,7 @@ export default function Services() {
           Prêt à lancer votre projet ?
         </h2>
 
-        <p className="mb-9 text-sm sm:text-base text-[#8a8880]">
+        <p className="mb-9 text-sm sm:text-base text-[#e0ded2]">
           Contactez nos experts dès aujourd'hui pour une analyse gratuite de vos besoins.
         </p>
 
