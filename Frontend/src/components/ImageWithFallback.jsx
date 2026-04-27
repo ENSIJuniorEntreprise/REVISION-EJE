@@ -31,7 +31,7 @@ export default function ImageWithFallback({
         <div
           className={['image-fallback', fallbackClassName].filter(Boolean).join(' ')}
           role="img"
-          aria-label={`${alt || 'Image'} indisponible`}
+          aria-label={`${alt || 'Image'} unavailable`}
         >
           {fallbackLabel}
         </div>
@@ -47,7 +47,7 @@ export default function ImageWithFallback({
         <div
           className={['image-fallback', fallbackClassName].filter(Boolean).join(' ')}
           role="img"
-          aria-label={`${alt || 'Image'} indisponible`}
+          aria-label={`${alt || 'Image'} unavailable`}
         >
           {fallbackLabel}
         </div>

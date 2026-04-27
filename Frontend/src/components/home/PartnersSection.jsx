@@ -91,23 +91,23 @@ export default function PartnersSection() {
   return (
     <section className="bg-eje-dark pb-24">
       <SectionHeading
-        eyebrow="Nos partenaires"
+        eyebrow="Our partners"
         title={
           <>
-            Ils font confiance a <span className="text-eje-accent">EJE</span>.
+            They trust <span className="text-eje-accent">EJE</span>.
           </>
         }
-        subtitle="Un reseau d'entreprises et d'institutions qui avancent avec nous sur le long terme."
+        subtitle="A network of companies and institutions building with us for the long term."
         links={sectionLinks.partners}
       />
 
       <motion.div className="container" {...getRevealProps(0.12, reducedMotion)}>
-        <div className="partners-carousel" role="region" aria-label="Carousel des logos partenaires ENSI Junior Entreprise">
+        <div className="partners-carousel" role="region" aria-label="ENSI Junior Entreprise partner logos carousel">
           {hasManySlides ? (
             <button
               type="button"
               className="partners-arrow partners-arrow-left"
-              aria-label="Afficher les partenaires précédents"
+              aria-label="Show previous partners"
               onClick={handlePreviousSlide}
             >
               <ChevronLeft className="h-5 w-5" />
@@ -122,7 +122,7 @@ export default function PartnersSection() {
                     <li key={`${logo.src}-${slideIndex}`} className="partner-logo-card-modern group">
                       <ImageWithFallback
                         src={logo.src}
-                        alt={`Logo partenaire ${logo.name}`}
+                        alt={`Partner logo ${logo.name}`}
                         wrapperClassName="h-16 w-full md:h-[4.75rem]"
                         className="partners-logo-image h-16 w-full object-contain md:h-[4.75rem]"
                         fallbackLabel={logo.name}
@@ -138,7 +138,7 @@ export default function PartnersSection() {
             <button
               type="button"
               className="partners-arrow partners-arrow-right"
-              aria-label="Afficher les partenaires suivants"
+              aria-label="Show next partners"
               onClick={handleNextSlide}
             >
               <ChevronRight className="h-5 w-5" />
@@ -147,13 +147,13 @@ export default function PartnersSection() {
         </div>
 
         {hasManySlides ? (
-          <div className="partners-indicators" role="tablist" aria-label="Indicateurs du carousel partenaires">
+          <div className="partners-indicators" role="tablist" aria-label="Partner carousel indicators">
             {slides.map((_, slideIndex) => (
               <button
                 key={`partners-indicator-${slideIndex}`}
                 type="button"
                 className={`partners-indicator ${slideIndex === activeSlide ? 'partners-indicator-active' : ''}`}
-                aria-label={`Aller à la page ${slideIndex + 1} des logos partenaires`}
+                aria-label={`Go to partner logos page ${slideIndex + 1}`}
                 aria-current={slideIndex === activeSlide ? 'true' : 'false'}
                 onClick={() => handleIndicatorClick(slideIndex)}
               />

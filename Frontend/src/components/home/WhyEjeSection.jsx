@@ -71,13 +71,13 @@ export default function WhyEjeSection() {
       <div className="milestone-background" aria-hidden="true" />
       <div className="relative z-10">
         <SectionHeading
-          eyebrow="Pourquoi EJE"
+          eyebrow="Why EJE"
           title={
             <>
-              Nos <span className="text-eje-accent">forces</span>
+              Our <span className="text-eje-accent">strengths</span>
             </>
           }
-          subtitle="Une equipe engagee, une execution maitrisee et des resultats mesurables a chaque etape."
+          subtitle="A committed team, controlled execution, and measurable results at every step."
           links={sectionLinks.reasons}
         />
 

@@ -4,10 +4,10 @@ import { ChevronRight, Menu, X } from 'lucide-react'
 import { media } from '../assets/media'
 
 const links = [
-  { to: '/', label: 'Accueil' },
-  { to: '/a-propos', label: 'A propos' },
+  { to: '/', label: 'Home' },
+  { to: '/a-propos', label: 'About' },
   { to: '/services', label: 'Services' },
-  { to: '/actualites', label: 'Actualites' },
+  { to: '/actualites', label: 'News' },
   { to: '/contact', label: 'Contact' },
 ]
 
@@ -55,7 +55,7 @@ export default function Navbar({ isHidden = false }) {
         isScrolled ? 'border-b border-eje-beige/10 bg-eje-dark/90 py-3 backdrop-blur-xl' : 'bg-transparent py-6'
       } ${isReady ? 'nav-load-enter-active' : 'nav-load-enter'} ${isHidden ? 'nav-shell-hidden' : 'nav-shell-visible'}`}
     >
-      <nav className="container flex items-center justify-between" aria-label="Navigation principale">
+      <nav className="container flex items-center justify-between" aria-label="Main navigation">
         <Link to="/" className="group flex items-center gap-3" aria-label="ENSI Junior Entreprise">
           <img
             src={media.logos.primary}
@@ -84,7 +84,7 @@ export default function Navbar({ isHidden = false }) {
 
         <div className="flex items-center gap-4">
           <Link to="/contact" className="btn btn-primary navbar-cta hidden gap-2 px-5 py-2 text-sm sm:flex">
-            Demander un devis
+            Request a quote
             <ChevronRight className="h-4 w-4" />
           </Link>
 
@@ -92,7 +92,7 @@ export default function Navbar({ isHidden = false }) {
             type="button"
             onClick={() => setIsMenuOpen((prev) => !prev)}
             className="rounded-md p-2 text-eje-beige transition-colors hover:text-eje-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-eje-accent focus-visible:ring-offset-2 focus-visible:ring-offset-eje-dark lg:hidden"
-            aria-label={isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'}
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={isMenuOpen}
           >
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -115,7 +115,7 @@ export default function Navbar({ isHidden = false }) {
           ))}
 
           <Link to="/contact" className="btn btn-primary navbar-cta mt-4 w-full justify-center">
-            Demander un devis
+            Request a quote
           </Link>
         </div>
       </div>

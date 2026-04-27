@@ -10,13 +10,13 @@ export default function ServicesSection() {
   return (
     <section className="bg-eje-dark py-24">
       <SectionHeading
-        eyebrow="Nos Services"
+        eyebrow="Our services"
         title={
           <>
-            Une expertise tech <span className="text-eje-accent">complète</span> pour vos projets.
+            Complete <span className="text-eje-accent">tech expertise</span> for your projects.
           </>
         }
-        subtitle="De l'idée au déploiement, EJE livre vite, proprement et avec des standards professionnels élevés."
+        subtitle="From idea to deployment, EJE delivers fast, cleanly, and with high professional standards."
         links={sectionLinks.services}
       />
 
@@ -33,7 +33,7 @@ export default function ServicesSection() {
             <h3 className="mb-3 text-xl font-bold">{service.title}</h3>
             <p className="mb-6 text-sm leading-relaxed text-eje-beige/70">{service.copy}</p>
             <a href={service.href} className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-eje-accent transition-opacity hover:opacity-85">
-              En savoir plus
+              Learn more
               <ChevronRight className="h-4 w-4" />
             </a>
           </motion.article>

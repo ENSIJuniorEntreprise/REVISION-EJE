@@ -12,25 +12,25 @@ export default function CtaSection() {
         <motion.div className="card-glass flex h-full flex-col items-center p-10 text-center" {...getRevealProps(0.04, reducedMotion)}>
           <div className="mb-8 flex min-h-[160px] w-full flex-col items-center justify-center">
             <h2 className="mb-4 text-4xl font-bold">
-              Pret a lancer votre prochain <span className="text-eje-accent">projet digital</span> ?
+              Ready to launch your next <span className="text-eje-accent">digital project</span>?
             </h2>
             <p className="max-w-md text-eje-beige/70">
-              Partagez votre vision: EJE construit une feuille de route claire et une execution solide.
+              Share your vision: EJE builds a clear roadmap and solid execution.
             </p>
           </div>
           <Link to="/contact" className="btn btn-primary mt-auto gap-2 px-8">
-            Demander un devis
+            Request a quote
             <ChevronRight className="h-5 w-5" />
           </Link>
         </motion.div>
 
         <motion.div className="card-glass flex h-full flex-col items-center p-10 text-center" {...getRevealProps(0.14, reducedMotion)}>
           <div className="mb-8 flex min-h-[160px] w-full flex-col items-center justify-center">
-            <h2 className="mb-4 text-4xl font-bold text-eje-beige">Actualites EJE</h2>
-            <p className="max-w-md text-eje-beige/70">Suivez nos projets, evenements et annonces pour rester connecte a la vie de la Junior.</p>
+            <h2 className="mb-4 text-4xl font-bold text-eje-beige">EJE News</h2>
+            <p className="max-w-md text-eje-beige/70">Follow our projects, events, and announcements to stay connected with Junior life.</p>
           </div>
           <Link to="/actualites" className="btn btn-outline mt-auto gap-2 px-8">
-            Voir les actualites
+            View news
             <ChevronRight className="h-5 w-5" />
           </Link>
         </motion.div>

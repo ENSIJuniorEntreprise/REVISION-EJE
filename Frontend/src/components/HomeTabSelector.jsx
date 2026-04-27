@@ -2,9 +2,9 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useLenis } from '@studio-freight/react-lenis'
 
 const tabs = [
-  { sectionId: 'about', label: 'A propos' },
+  { sectionId: 'about', label: 'About' },
   { sectionId: 'services', label: 'Services' },
-  { sectionId: 'actualites', label: 'Actualites' },
+  { sectionId: 'actualites', label: 'News' },
   { sectionId: 'contact', label: 'Contact' },
 ]
 
@@ -107,7 +107,7 @@ export default function HomeTabSelector({ visible = false }) {
   return (
     <nav
       className={`home-tab-selector hidden md:block ${visible ? 'home-tab-selector-visible' : ''}`}
-      aria-label="Navigation rapide accueil"
+      aria-label="Home quick navigation"
       aria-hidden={!visible}
     >
       <div className="home-tab-shell">

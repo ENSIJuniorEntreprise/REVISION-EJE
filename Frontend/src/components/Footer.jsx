@@ -4,18 +4,18 @@ import { media } from '../assets/media'
 
 export default function Footer() {
   const quickLinks = [
-    { label: 'Accueil', to: '/' },
-    { label: 'À propos', to: '/a-propos' },
+    { label: 'Home', to: '/' },
+    { label: 'About', to: '/a-propos' },
     { label: 'Services', to: '/services' },
-    { label: 'Actualités', to: '/actualites' },
+    { label: 'News', to: '/actualites' },
     { label: 'Contact', to: '/contact' },
   ]
 
   const socials = [
-    { label: 'Site web', icon: Globe, href: '#' },
-    { label: 'Actualités', icon: Newspaper, to: '/actualites' },
-    { label: 'Projets', icon: Briefcase, to: '/services' },
-    { label: 'Discussion', icon: MessageCircle, to: '/contact' },
+    { label: 'Website', icon: Globe, href: '#' },
+    { label: 'News', icon: Newspaper, to: '/actualites' },
+    { label: 'Projects', icon: Briefcase, to: '/services' },
+    { label: 'Chat', icon: MessageCircle, to: '/contact' },
   ]
 
   return (
@@ -32,15 +32,15 @@ export default function Footer() {
           </Link>
 
           <p className="max-w-xs text-sm leading-relaxed text-eje-beige/70">
-            EJE connecte les entreprises aux talents ENSI pour livrer des projets digitaux utiles, performants et
-            durables.
+            EJE connects companies with ENSI talent to deliver useful, high-performing, and sustainable digital
+            projects.
           </p>
 
-          <p className="text-sm font-semibold text-eje-accent">Fondée en 2006</p>
+          <p className="text-sm font-semibold text-eje-accent">Founded in 2006</p>
         </div>
 
         <div>
-          <h4 className="mb-6 font-heading font-bold text-eje-accent">Liens rapides</h4>
+          <h4 className="mb-6 font-heading font-bold text-eje-accent">Quick links</h4>
           <ul className="list-none space-y-3 p-0 text-sm">
             {quickLinks.map((link) => (
               <li key={link.to}>
@@ -51,12 +51,12 @@ export default function Footer() {
             ))}
             <li>
               <a href={media.documents.statuts} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-eje-accent">
-                Statuts
+                Bylaws
               </a>
             </li>
             <li>
               <a href={media.documents.politiqueRse} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-eje-accent">
-                Politique RSE
+                CSR policy
               </a>
             </li>
           </ul>
@@ -75,14 +75,14 @@ export default function Footer() {
             </li>
             <li className="flex items-center gap-3 text-eje-beige/80">
               <MapPin className="h-4 w-4 text-eje-accent" />
-              ENSI, Manouba, Tunisie
+              ENSI, Manouba, Tunisia
             </li>
           </ul>
         </div>
 
         <div className="space-y-6">
-          <h4 className="mb-6 font-heading font-bold text-eje-accent">Réseaux</h4>
-          <p className="text-sm text-eje-beige/70">Suivez EJE et restez connectés à nos projets et événements.</p>
+          <h4 className="mb-6 font-heading font-bold text-eje-accent">Social</h4>
+          <p className="text-sm text-eje-beige/70">Follow EJE and stay connected to our projects and events.</p>
 
           <div className="flex items-center gap-4">
             {socials.map((social) => (
@@ -108,15 +108,15 @@ export default function Footer() {
             ))}
           </div>
 
-          <form className="flex gap-2" onSubmit={(event) => event.preventDefault()} aria-label="Inscription à la newsletter">
+          <form className="flex gap-2" onSubmit={(event) => event.preventDefault()} aria-label="Newsletter signup">
             <label htmlFor="newsletter-footer-email" className="sr-only">
-              Adresse email
+              Email address
             </label>
             <input
               id="newsletter-footer-email"
               name="newsletterFooterEmail"
               type="email"
-              placeholder="votre@email.com"
+              placeholder="your@email.com"
               autoComplete="email"
               className="flex-1 rounded-[10px] border border-eje-beige/25 bg-eje-dark/80 px-4 py-2 text-sm placeholder:text-eje-beige/45 focus:border-eje-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-eje-accent focus-visible:ring-offset-2 focus-visible:ring-offset-eje-dark"
             />
@@ -126,7 +126,7 @@ export default function Footer() {
       </div>
 
       <div className="container flex flex-col items-center justify-between gap-4 border-t border-eje-beige/10 pt-8 text-xs text-eje-beige/70 md:flex-row">
-        <p>© {new Date().getFullYear()} ENSI Junior Entreprise. Tous droits réservés.</p>
+        <p>© {new Date().getFullYear()} ENSI Junior Entreprise. All rights reserved.</p>
         <div className="flex gap-6">
           <a
             href={media.documents.statuts}
@@ -134,7 +134,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="transition-colors hover:text-eje-accent"
           >
-            Statuts
+            Bylaws
           </a>
           <a
             href={media.documents.politiqueRse}
@@ -142,7 +142,7 @@ export default function Footer() {
             rel="noopener noreferrer"
             className="transition-colors hover:text-eje-accent"
           >
-            Politique RSE
+            CSR policy
           </a>
         </div>
       </div>

@@ -104,7 +104,7 @@ export default function HeroSection({ isReady = true, onBackgroundReady }) {
           <motion.img
             key={displaySlides[activeSlide]}
             src={displaySlides[activeSlide]}
-            alt="Fond visuel ENSI Junior Entreprise"
+            alt="ENSI Junior Entreprise visual background"
             className="absolute -inset-6 h-[calc(100%+3rem)] w-[calc(100%+3rem)] max-w-none object-cover opacity-35"
             loading="eager"
             fetchPriority="high"
@@ -151,7 +151,7 @@ export default function HeroSection({ isReady = true, onBackgroundReady }) {
             initial={signatureAnimation.initial}
             animate={heroMotionState === 'animate' ? signatureAnimation.animate : signatureAnimation.initial}
           >
-            Toujours en quete d'excellence
+            Always in pursuit of excellence
           </motion.p>
 
           <motion.h1
@@ -159,9 +159,9 @@ export default function HeroSection({ isReady = true, onBackgroundReady }) {
             initial={titleAnimation.initial}
             animate={heroMotionState === 'animate' ? titleAnimation.animate : titleAnimation.initial}
           >
-            L'excellence digitale
+            Digital excellence
             <br />
-            <span className="inline-block text-eje-beige">au service de vos ambitions.</span>
+            <span className="inline-block text-eje-beige">serving your ambitions.</span>
           </motion.h1>
 
           <motion.p
@@ -169,7 +169,7 @@ export default function HeroSection({ isReady = true, onBackgroundReady }) {
             initial={bodyAnimation.initial}
             animate={heroMotionState === 'animate' ? bodyAnimation.animate : bodyAnimation.initial}
           >
-            EJE accompagne startups, ONG et PME avec des solutions utiles, performantes et durables.
+            EJE supports startups, NGOs, and SMEs with useful, high-performance, and sustainable solutions.
           </motion.p>
 
           <motion.div
@@ -178,7 +178,7 @@ export default function HeroSection({ isReady = true, onBackgroundReady }) {
             animate={heroMotionState === 'animate' ? actionsAnimation.animate : actionsAnimation.initial}
           >
             <Link to="/contact" className="btn btn-primary gap-2 text-lg">
-              Demander un devis
+              Request a quote
               <ChevronRight className="h-5 w-5" />
             </Link>
           </motion.div>

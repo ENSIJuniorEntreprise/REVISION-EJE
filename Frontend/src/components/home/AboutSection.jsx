@@ -6,47 +6,45 @@ import { media } from '../../assets/media'
 import { milestones, pillars, sectionLinks } from './homeData'
 import { getRevealProps, usePrefersReducedMotion } from './motionPresets'
 
-const trianglePositions = ['lg:col-start-2', 'lg:col-start-1 lg:-mt-8', 'lg:col-start-3 lg:-mt-8']
-
 export default function AboutSection() {
   const reducedMotion = usePrefersReducedMotion()
 
   return (
     <section id="about" className="scroll-mt-32 bg-eje-dark py-24">
       <SectionHeading
-        eyebrow="A propos de nous"
+        eyebrow="About us"
         title={
           <>
-            ENSI Junior Entreprise, <span className="text-eje-accent">partenaire digital</span> de vos ambitions.
+            ENSI Junior Entreprise, the <span className="text-eje-accent">digital partner</span> for your ambitions.
           </>
         }
-        subtitle="Association etudiante basee a l'ENSI en Tunisie, EJE accompagne startups, ONG et PME avec des solutions digitales fiables, accessibles et utiles."
+        subtitle="A student association based at ENSI in Tunisia, EJE supports startups, NGOs, and SMEs with reliable, accessible, and useful digital solutions."
         links={sectionLinks.about}
       />
 
-      <div className="container grid grid-cols-1 items-start gap-16 lg:grid-cols-[1.05fr_1fr]">
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-start gap-12 px-6 lg:grid-cols-2 lg:gap-16">
         <motion.div className="relative" {...getRevealProps(0.08, reducedMotion)}>
-          <div className="image-frame aspect-[4/3]">
+          <div className="image-frame aspect-[4/3] w-full">
             <ImageWithFallback
               src={media.images.aboutPrimary}
-              alt="Équipe EJE"
+              alt="EJE team"
               wrapperClassName="h-full w-full"
-              className="h-full w-full object-cover"
-              fallbackLabel="Équipe EJE"
+              className="h-full w-full rounded-[10px] object-cover"
+              fallbackLabel="EJE team"
             />
           </div>
 
-          <div className="card-glass absolute -bottom-6 left-6 hidden max-w-xs p-4 md:block">
-            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-eje-accent">Depuis 2006</p>
-            <p className="text-sm text-eje-beige/80">EJE connecte excellence academique et execution terrain.</p>
+          <div className="absolute bottom-4 right-4 z-10 max-w-[240px] rounded-[10px] border border-eje-beige/20 bg-white/10 p-4 backdrop-blur-md sm:-bottom-6 sm:-right-6">
+            <p className="mb-1 text-xs font-semibold uppercase tracking-[0.14em] text-eje-accent">Since 2008</p>
+            <p className="text-sm text-eje-beige/80">EJE connects academic excellence with real-world execution.</p>
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:items-start">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
           {pillars.map((pillar, index) => (
             <motion.div
               key={pillar.title}
-              className={`h-full ${trianglePositions[index] ?? ''}`}
+              className={`h-full ${index === 0 ? 'sm:col-span-2' : ''}`}
               {...getRevealProps(0.14 + index * 0.08, reducedMotion)}
             >
               <TiltCard

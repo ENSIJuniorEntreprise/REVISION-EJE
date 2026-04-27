@@ -39,7 +39,7 @@ export default function HomePreloader({ startGradientPhase = false, onGradientCo
       initial={{ opacity: 0 }}
       animate={{ opacity: 1, transition: shellTransition }}
       exit={{ opacity: 0, transition: shellTransition }}
-      aria-label="Chargement de la page d'accueil"
+      aria-label="Loading home page"
       role="status"
       aria-live="polite"
     >

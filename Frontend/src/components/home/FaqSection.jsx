@@ -9,34 +9,34 @@ export default function FaqSection() {
   return (
     <section id="contact" className="scroll-mt-32 bg-eje-dark pb-24">
       <SectionHeading
-        eyebrow="FAQ et newsletter"
+        eyebrow="FAQ and newsletter"
         title={
           <>
-            Questions frequentes, <span className="text-eje-accent">reponses claires</span>.
+            Frequently asked questions, <span className="text-eje-accent">clear answers</span>.
           </>
         }
-        subtitle="Retrouvez les informations essentielles rapidement et recevez les actualites EJE en avant-premiere."
+        subtitle="Find essential information quickly and receive EJE news first."
         links={sectionLinks.faq}
       />
 
       <div className="container grid grid-cols-1 gap-16 lg:grid-cols-2">
         <motion.div className="card-glass p-8" {...getRevealProps(0.08, reducedMotion)}>
-          <h3 className="mb-4 text-3xl font-bold">Recevoir les actualites EJE</h3>
-          <p className="mb-6 text-eje-beige/70">Une synthese concise de nos projets, evenements et opportunites de collaboration.</p>
-          <form className="flex max-w-md gap-2" onSubmit={(event) => event.preventDefault()} aria-label="Inscription à la newsletter">
+          <h3 className="mb-4 text-3xl font-bold">Receive EJE news</h3>
+          <p className="mb-6 text-eje-beige/70">A concise summary of our projects, events, and collaboration opportunities.</p>
+          <form className="flex max-w-md gap-2" onSubmit={(event) => event.preventDefault()} aria-label="Newsletter signup">
             <label htmlFor="newsletter-home-email" className="sr-only">
-              Adresse email
+              Email address
             </label>
             <input
               id="newsletter-home-email"
               name="newsletterHomeEmail"
               type="email"
-              placeholder="votre.email@example.com"
+              placeholder="your.email@example.com"
               autoComplete="email"
               className="flex-1 rounded-[10px] border border-eje-beige/25 bg-eje-dark/80 px-6 py-3 text-eje-beige placeholder:text-eje-beige/45 focus:border-eje-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-eje-accent focus-visible:ring-offset-2 focus-visible:ring-offset-eje-dark"
             />
             <button type="submit" className="btn btn-primary px-6">
-              Envoyer
+              Send
             </button>
           </form>
         </motion.div>
