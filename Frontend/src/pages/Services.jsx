@@ -22,39 +22,39 @@ const CheckCircle = ({ size = 24, className = "" }) => (
 const services = [
   {
     id: "web",
-    label : "Développement Web",  
+    label : "Web Development",  
     icon: "/assets/globe.png",
-    title: "Développement Web",
-    desc: "Solutions web performantes, évolutives et centrées sur l'utilisateur utilisant React, Next.js et Node.js.",
-    features: ["Sites web d'entreprise et vitrines",
-      "Applications web progressives (PWA)",
-      "Plateformes e-commerce",
-      "Systèmes de gestion de contenu (CMS)",
-      "Intégrations API et services tiers",],
+    title: "Web Development",
+    desc: "High-performance, scalable, user-centric web solutions using React, Next.js, and Node.js.",
+    features: ["Corporate websites & showcases",
+      "Progressive Web Applications (PWA)",
+      "E-commerce platforms",
+      "Content Management Systems (CMS)",
+      "API integrations & third-party services",],
     image : "/assets/getent (1).png",
   },
   {
     id: "mobile",
-    label: "Développement Mobile",
+    label: "Mobile Development",
 
     icon: "/assets/telephone.png",
-    title: "Développement Mobile",
-    desc: "Applications natives et hybrides fluides pour iOS et Android avec Flutter ou React Native.",
-    features: ["iOS & Android natif et hybride",
-      "UI/UX Mobile optimisé",
-      "Intégration API",
-      "Mode hors-ligne (Offline Mode)",],
+    title: "Mobile Development",
+    desc: "Smooth native and hybrid applications for iOS and Android with Flutter or React Native.",
+    features: ["Native & hybrid iOS & Android",
+      "Optimized Mobile UI/UX",
+      "API Integration",
+      "Offline Mode",],
     image : "/assets/daam.png",
   },
   {
     id: "desktop",
-    label: "Développement Desktop",
+    label: "Desktop Development",
     icon: "/assets/portable.png",
-    title: "Développement Desktop",
-    desc: "Logiciels de bureau robustes pour Windows, macOS et Linux répondant à vos besoins métiers complexes.",
+    title: "Desktop Development",
+    desc: "Robust desktop software for Windows, macOS, and Linux tailored to your complex business needs.",
     features: ["Cross-platform (Win, Mac, Linux)",
-      "Haute performance",
-      "Sécurité avancée",
+      "High performance",
+      "Advanced security",
       "Legacy update & migration",],
     image : "/assets/dashbord.png",
   },
@@ -63,8 +63,8 @@ const services = [
     label: "ChatBot & IA",
     icon: "/assets/chatbot.png",
     title: "CHATBOT & IA",
-    desc: "Intégration de modèles d'IA générative et de machine learning pour automatiser et optimiser vos processus.",
-    features: ["NLP & traitement du langage",
+    desc: "Integration of generative AI and machine learning models to automate and optimize your processes.",
+    features: ["NLP & language processing",
       "Computer Vision",
       "Predictive Analytics",
       "Generative AI (Gen AI)",],
@@ -73,9 +73,9 @@ const services = [
 ];
 
 const mindsetValues = [
-  { icon: "/assets/agile.png", title: "Agilité", desc: "Méthodologie Scrum pour une livraison rapide et maîtrisée." },
-  { icon: "/assets/precision (1).png", title: "Précision", desc: "Alignement étroit avec vos objectifs stratégiques." },
-  { icon: "/assets/shop.png", title: "Excellence", desc: "Contrôle qualité rigoureux à chaque étape du projet." },
+  { icon: "/assets/agile.png", title: "Agility", desc: "Scrum methodology for fast and controlled delivery." },
+  { icon: "/assets/precision (1).png", title: "Precision", desc: "Close alignment with your strategic objectives." },
+  { icon: "/assets/shop.png", title: "Excellence", desc: "Rigorous quality control at every stage of the project." },
 ];
 
 const subServices = [
@@ -112,8 +112,8 @@ function useIntersection(threshold = 0.15) {
 const mindsetCards = [
   {
     icon: "/assets/agile.png",
-    title: "Agilité",
-    desc: "Méthodologie Scrum pour une livraison rapide et maîtrisée.",
+    title: "Agility",
+    desc: "Scrum methodology for fast and controlled delivery.",
     accent: "#2ea3dd",
     glowColor: "rgba(46,163,221,0.22)",
     delay: 0,
@@ -122,8 +122,8 @@ const mindsetCards = [
   },
   {
     icon: "/assets/precision (1).png",
-    title: "Précision",
-    desc: "Alignement étroit avec vos objectifs stratégiques.",
+    title: "Precision",
+    desc: "Close alignment with your strategic objectives.",
     accent: "#33ddff",
     glowColor: "rgba(51,221,255,0.22)",
     delay: 160,
@@ -133,7 +133,7 @@ const mindsetCards = [
   {
     icon: "/assets/shop.png",
     title: "Excellence",
-    desc: "Contrôle qualité rigoureux à chaque étape du projet.",
+    desc: "Rigorous quality control at every stage of the project.",
     accent: "#2ea3dd",
     glowColor: "rgba(46,163,221,0.22)",
     delay: 320,
@@ -257,7 +257,7 @@ function MindsetSection() {
           </span>
         </h2>
         <p className="text-sm sm:text-base text-white/55 max-w-md mx-auto leading-relaxed">
-          Notre approche structurée garantit le succès de chaque projet.
+          Our structured approach guarantees the success of every project.
         </p>
       </div>
 
@@ -513,7 +513,7 @@ function SubPrestationsSection() {
         
 
         <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-[#e0ded2]">
-          Les{" "}
+          Our{" "}
           <span
             style={{
               backgroundImage: "linear-gradient(90deg, #2ea3dd, #33ddff, #2ea3dd)",
@@ -524,13 +524,12 @@ function SubPrestationsSection() {
               animation: visible ? "textShimmer 3s linear infinite" : "none",
             }}
           >
-            sous-prestations
-          </span>
+            Additional Services          </span>
         </h2>
 
         <p className="mx-auto max-w-2xl text-sm sm:text-base leading-7 text-[#e0ded2]">
-          Au-delà du développement de base, nous fournissons un écosystème complet
-          de services numériques pour assurer le succès à long terme de vos projets.
+          Beyond core development, we provide a complete ecosystem of digital
+          services to ensure the long-term success of your projects.
         </p>
       </div>
 
@@ -646,42 +645,42 @@ function SubPrestationsSection() {
 const processSteps = [
   {
     icon: "/assets/analysing.png",
-    title: "Analyse des Besoins",
+    title: "Needs Analysis",
     delay: 0,
     items: [
-      "Premier contact",
-      "Analyse approfondie des besoins et exigences",
-      "Proposition de la solution adaptée",
+      "Initial contact",
+      "In-depth analysis of needs and requirements",
+      "Proposal of the appropriate solution",
     ],
   },
   {
     icon: "/assets/talk.png",
-    title: "Conseil",
+    title: "Consulting",
     delay: 150,
     items: [
-      "Préparation des spécifications du projet",
-      "Signature du contrat",
-      "Début de la collaboration",
+      "Preparation of project specifications",
+      "Contract signing",
+      "Start of collaboration",
     ],
   },
   {
     icon: "/assets/task-management.png",
-    title: "Exécution du Projet",
+    title: "Project Execution",
     delay: 300,
     items: [
-      "Mise en œuvre du projet",
-      "Réunions de suivi",
-      "Validation étape par étape",
+      "Project implementation",
+      "Follow-up meetings",
+      "Step-by-step validation",
     ],
   },
   {
     icon: "/assets/express-delivery.png",
-    title: "Livraison du Projet",
+    title: "Project Delivery",
     delay: 450,
     items: [
-      "Remise du projet",
-      "Mesure de la satisfaction",
-      "Support client",
+      "Project handover",
+      "Satisfaction measurement",
+      "Customer support",
     ],
   },
 ];
@@ -791,16 +790,16 @@ function ProcessSection() {
         >
           <div>
             <p className="text-lg font-light italic mt-4 mb-1 tracking-wide" style={{ color: "#2ea3dd" }}>
-              Notre
+              Our
             </p>
             <h2
               className="text-5xl sm:text-6xl font-extrabold uppercase tracking-tight leading-none mb-5"
               style={{ color: "#e0ded2" }}
             >
-              PROCESSUS
+              PROCESS
             </h2>
             <p className="text-sm sm:text-base leading-7 text-[#e0ded2]">
-              Guidé par une{" "}
+              Guided by an{" "}
               <span
                 style={{
                   backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #33ddff 40%, #2ea3dd 80%)",
@@ -812,9 +811,8 @@ function ProcessSection() {
                   fontWeight: 600,
                 }}
               >
-                expérience client
-              </span>{" "}
-              exceptionnelle
+                exceptional client experience
+              </span>
             </p>
             <div className="mt-6 h-px w-16" style={{ background: "linear-gradient(90deg, #2ea3dd, transparent)" }} />
           </div>
@@ -1035,7 +1033,7 @@ function ProcessSection() {
           onMouseEnter={e => { e.currentTarget.style.background = "#33ddff"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(46,163,221,0.35)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "#2ea3dd"; e.currentTarget.style.boxShadow = "none"; }}
         >
-          Démarrer un projet
+          Start a Project
         </button>
       </div>
     </section>
@@ -1128,19 +1126,18 @@ export default function Services() {
               backgroundClip: "text",
               animation: "shimmer 7s linear infinite",
             }} >
-            Nos Expertises
-          </h1>
+            Our Expertise          </h1>
           </span>
           <p className="mx-auto max-w-2xl text-base sm:text-lg leading-7 text-[#e0ded2]">
-            De la conception à la mise en production, nous transformons vos défis technologiques en avantages compétitifs.
+            From design to production, we transform your technological challenges into competitive advantages.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
             <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-1 hover:bg-[#33ddff] hover:shadow-[0_8px_16px_rgba(46,163,221,0.35)]">
-              Demander un devis
+              Request a Quote
             </button>
            <a href="\assets\Documents\Project-Portfolio-1.pdf">
   <button className="rounded-lg bg-transparent border border-[#e0ded2] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1f212d] hover:shadow-[0_8px_16px_#1f212d]">
-    Notre Portfolio
+    Our Portfolio
   </button>
 </a>
           </div>
@@ -1153,11 +1150,11 @@ export default function Services() {
       <div className="text-center mb-12">
         
         <h2 className="text-5xl font-bold text-[#e0ded2] mb-5">
-          Solutions de Développement
+          Development Solutions
         </h2>
         <p className="text-[#e0ded2] max-w-xl mx-auto text-sm leading-relaxed">
-          Explorez notre gamme complète de services de développement
-          informatique conçus pour répondre à vos besoins spécifiques.
+          Explore our full range of software development services
+          designed to meet your specific needs.
         </p>
       </div>
 
@@ -1247,11 +1244,11 @@ export default function Services() {
       >
         <div className="mb-16 sm:mb-20 text-center">
           <div className="mb-3 text-xs font-medium uppercase tracking-[0.15em] text-[#2ea3dd]">
-            L'ESPRIT DE PROJET
+            THE PROJECT SPIRIT
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold leading-tight text-[#e0ded2]">
-            Chaque projet est conçu avec{" "}
-            <span className="text-[#2ea3dd]">rigueur et précision</span>
+            Every project is built with{" "}
+            <span className="text-[#2ea3dd]">rigor and precision</span>
           </h2>
         </div>
 
@@ -1293,18 +1290,18 @@ export default function Services() {
             >
               <img src="/assets/save-time.png" alt="" className="w-10 h-10 object-contain" />
               <div>
-                <span>Maîtrise du</span>
+                <span>Time</span>
                 <br />
-                <span> Temps</span>
+                <span> Management</span>
               </div>
               
               {/* Tooltip inline for better responsiveness */}
               <div className={`absolute top-[-110px] left-1/2 -translate-x-1/2 w-[200px] rounded-xl border border-[#2ea3dd] bg-[#1f212d]/95 p-3 shadow-xl transition-all duration-300 pointer-events-none ${hoveredCircle === "temps" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                 <div className="mb-1 flex items-center gap-2 text-xs font-bold text-[#2ea3dd]">
-                  <span><img src="\assets\save-time.png"alt="" /></span> Respect des délais
+                  <span><img src="\assets\save-time.png"alt="" /></span> On-time delivery
                 </div>
                 <div className="text-[10px] leading-4 text-[#e0ded2]">
-                  Planification maîtrisée et exécution efficace pour garantir une livraison ponctuelle
+                  Controlled planning and efficient execution to guarantee timely delivery
                 </div>
               </div>
             </div>
@@ -1318,18 +1315,18 @@ export default function Services() {
             >
               <img src="/assets/profit.png" alt="" className="w-10 h-10 object-contain" />
               <div>
-                <span>Maîtrise</span>
+                <span>Cost</span>
                 <br />
-                <span> des Coûts</span>
+                <span> Control</span>
               </div>
 
               <div className={`absolute top-[-110px] left-1/2 -translate-x-1/2 w-[200px] rounded-xl border border-[#2ea3dd] bg-[#1f212d]/95 p-3 shadow-xl transition-all duration-300 pointer-events-none ${hoveredCircle === "coûts" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                 <div className="mb-1 flex items-center gap-2 text-xs font-bold text-[#2ea3dd]">
                   <span><img src="/assets/profit.png" alt="" className="w-10 h-10 object-contain" />
-                </span> Maîtriser les coûts
+                </span> Mastering costs
                 </div>
                 <div className="text-[10px] leading-4 text-[#e0ded2]">
-                  Des solutions optimisées, transparence et adaptation à votre projet
+                  Optimized solutions, transparency, and adaptation to your project
                 </div>
               </div>
             </div>
@@ -1343,17 +1340,17 @@ export default function Services() {
             >
               <img src="/assets/achievement.png" alt="" className="w-10 h-10 object-contain" />
               <div>
-                <span>Maîtrise de</span>
+                <span>Quality</span>
                 <br />
-                <span> Qualité</span>
+                <span> Mastery</span>
               </div>
 
               <div className={`absolute top-[-110px] left-1/2 -translate-x-1/2 w-[200px] rounded-xl border border-[#2ea3dd] bg-[#1f212d]/95 p-3 shadow-xl transition-all duration-300 pointer-events-none ${hoveredCircle === "qualité" ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
                 <div className="mb-1 flex items-center gap-2 text-xs font-bold text-[#2ea3dd]">
-                  <span><img src="/assets/achievement.png" alt="" className="w-10 h-10 object-contain" /></span> Exigence et précision
+                  <span><img src="/assets/achievement.png" alt="" className="w-10 h-10 object-contain" /></span> Rigor and precision
                 </div>
                 <div className="text-[10px] leading-4 text-[#e0ded2]">
-                  Un haut niveau de qualité assuré à chaque étape du projet
+                  A high level of quality ensured at every stage of the project
                 </div>
               </div>
             </div>
@@ -1362,7 +1359,7 @@ export default function Services() {
 
         <div className="text-center">
           <h3 className="text-lg sm:text-xl font-bold uppercase tracking-[0.08em] text-[#e0ded2]">
-            LA CONCRÉTISATION DE L'ÉQUILIBRE PARFAIT
+            THE REALIZATION OF PERFECT BALANCE
           </h3>
         </div>
       </section>
@@ -1382,15 +1379,15 @@ export default function Services() {
         }`}
       >
         <h2 className="mb-4 text-3xl sm:text-4xl font-extrabold text-[#e0ded2]">
-          Prêt à lancer votre projet ?
+          Ready to launch your project?
         </h2>
 
         <p className="mb-9 text-sm sm:text-base text-[#e0ded2]">
-          Contactez nos experts dès aujourd'hui pour une analyse gratuite de vos besoins.
+          Contact our experts today for a free analysis of your needs.
         </p>
 
         <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#1f212d] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#33ddff] hover:shadow-[0_8px_30px_rgba(46,163,221,0.35)]">
-          Demander un devis
+          Request a Quote
         </button>
       </section>
     </div>
