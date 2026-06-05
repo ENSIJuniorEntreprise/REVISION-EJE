@@ -1,0 +1,37 @@
+{
+  "version": 1.1,
+  "atDirectives": [
+    {
+      "name": "@tailwind",
+      "description": "Inject Tailwind base/components/utilities layers."
+    },
+    {
+      "name": "@apply",
+      "description": "Inline Tailwind utility classes in custom selectors."
+    },
+    {
+      "name": "@layer",
+      "description": "Place custom styles into Tailwind layers."
+    },
+    {
+      "name": "@config",
+      "description": "Point to a specific Tailwind config file."
+    },
+    {
+      "name": "@plugin",
+      "description": "Load a Tailwind plugin from CSS."
+    },
+    {
+      "name": "@screen",
+      "description": "Wrap styles with a Tailwind breakpoint."
+    },
+    {
+      "name": "@responsive",
+      "description": "Generate responsive variants for nested utilities."
+    },
+    {
+      "name": "@variants",
+      "description": "Generate selected variants for nested utilities."
+    }
+  ]
+}
