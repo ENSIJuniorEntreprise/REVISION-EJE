@@ -94,14 +94,14 @@ export default function Navbar() {
         </div>
         <ul className="navbar__links">
           <li><NavLink to="/" end>Accueil</NavLink></li>
-          <li><NavLink to="/apropos">À propos</NavLink></li>
+          <li><NavLink to="/a-propos">À propos</NavLink></li>
           <li><NavLink to="/services">Services</NavLink></li>
           <li><NavLink to="/actualites">Actualités</NavLink></li>
           <li><NavLink to="/contact">Contact</NavLink></li>
         </ul>
-        <button className="navbar__cta">
+        <NavLink to="/contact" className="navbar__cta">
           Demander un devis <span aria-hidden="true">→</span>
-        </button>
+        </NavLink>
         <button className="navbar__hamburger" aria-label="Ouvrir le menu mobile"
           onClick={() => setMenuOpen(!menuOpen)}>
           <span /><span /><span />
@@ -110,13 +110,13 @@ export default function Navbar() {
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
         <NavLink to="/" end onClick={() => setMenuOpen(false)}>Accueil</NavLink>
-        <NavLink to="/apropos" onClick={() => setMenuOpen(false)}>À propos</NavLink>
+        <NavLink to="/a-propos" onClick={() => setMenuOpen(false)}>À propos</NavLink>
         <NavLink to="/services" onClick={() => setMenuOpen(false)}>Services</NavLink>
         <NavLink to="/actualites" onClick={() => setMenuOpen(false)}>Actualités</NavLink>
         <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
-        <button className="navbar__cta" style={{ marginTop: '0.5rem', justifyContent: 'center' }}>
+        <NavLink to="/contact" className="navbar__cta" style={{ marginTop: '0.5rem', justifyContent: 'center', textAlign: 'center' }} onClick={() => setMenuOpen(false)}>
           Demander un devis <span aria-hidden="true">→</span>
-        </button>
+        </NavLink>
       </div>
     </>
   )

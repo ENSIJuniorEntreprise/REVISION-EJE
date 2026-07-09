@@ -41,7 +41,7 @@
 }
 @font-face {
   font-family: 'Proxima Nova';
-  src: url('merged-eje-project\Frontend\public\assets\Fonts\Proxima-Nova-Font\proxima_ssv\Proxima Nova Extrabold.otf') format('opentype');
+  src: url('/assets/Fonts/Proxima-Nova-Font/proxima_ssv/Proxima%20Nova%20Extrabold.otf') format('opentype');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -51,7 +51,7 @@
 
 @font-face {
   font-family: 'Photograph Signature';
-  src: url('/assets/Fonts/photograph_signature/Photograph Signature.ttf') format('truetype');
+  src: url('/assets/Fonts/photograph_signature/Photograph%20Signature.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -238,7 +238,7 @@
     @apply pointer-events-none absolute inset-0;
     background-image:
       linear-gradient(to bottom, rgb(var(--eje-dark-rgb) / 0.86), rgb(var(--eje-dark-rgb) / 0.92)),
-      url('/assets/images/20th Generation.png');
+      url('/assets/20th-generation.png');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;

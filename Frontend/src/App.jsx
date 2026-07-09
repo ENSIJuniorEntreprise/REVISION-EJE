@@ -1,11 +1,7 @@
-import APropos from "./pages/Apropos"; 
+import AppRouter from './routes/AppRouter'
 
 function App() {
-  return (
-    <div className="App">
-      <APropos />
-    </div>
-  );
+  return <AppRouter />
 }
 
 export default App;

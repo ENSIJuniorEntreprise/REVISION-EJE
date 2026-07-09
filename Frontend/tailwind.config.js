@@ -10,6 +10,9 @@ export default {
         'bg-primary': 'rgb(var(--color-bg-primary) / <alpha-value>)',
         accent: 'rgb(var(--color-accent) / <alpha-value>)',
         'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+        'eje-dark': 'rgb(var(--eje-dark-rgb) / <alpha-value>)',
+        'eje-accent': 'rgb(var(--eje-accent-rgb) / <alpha-value>)',
+        'eje-beige': 'rgb(var(--eje-beige-rgb) / <alpha-value>)',
       },
       fontFamily: {
         heading: ['Gilroy', 'Segoe UI', 'sans-serif'],

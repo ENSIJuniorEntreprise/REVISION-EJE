@@ -40,7 +40,7 @@ export const media = {
     hero: '/assets/images/hero.jpg',
     aboutPrimary: '/assets/images/EJE-stand.jpg',
     aboutSecondary: '/assets/images/EJE-cover-photo-2.jpg',
-    milestone: '/assets/images/20th Generation.png',
+    milestone: '/assets/20th-generation.png',
   },
   documents: {
     statuts: '/assets/Documents/statuts.pdf',
