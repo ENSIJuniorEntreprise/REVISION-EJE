@@ -15,6 +15,7 @@ export default function AppRouter() {
           <Route path="services" element={<Services />} />
           <Route path="a-propos" element={<APropos />} />
           <Route path="contact" element={<Contact />} />
+          {/* Updated Actualites page now includes Hero, Stats, LatestNews, Articles, Magazines from the layout kit */}
           <Route path="actualites" element={<Actualites />} />
           
         </Route>
