@@ -16,6 +16,7 @@ export default function AppRouter() {
           <Route path="a-propos" element={<APropos />} />
           <Route path="contact" element={<Contact />} />
           <Route path="actualites" element={<Actualites />} />
+          
         </Route>
       </Routes>
     </BrowserRouter>
