@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import PageHero, { Rise } from "../components/PageHero";
+import useReveal from "../hooks/useReveal";
 
 import heroBg1 from '../assets/images/ydin.jpg';
 import quiImg from '../assets/images/20th Generation.png';
@@ -68,40 +70,6 @@ const globalStyles = `
     box-shadow: 0 0 12px rgba(46,163,221,0.6);
   }
 
-  .reveal {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
-    will-change: opacity, transform;
-  }
-  .reveal.in { opacity: 1; transform: translateY(0); }
-  .reveal-left { transform: translateX(-60px); }
-  .reveal-right { transform: translateX(60px); }
-  .reveal-left.in, .reveal-right.in { transform: translateX(0); }
-
-  .hero {
-    position: relative;
-    min-height: 100vh;
-    display: flex; align-items: center; justify-content: center;
-    text-align: center;
-    overflow: hidden;
-  }
-  .hero-bg {
-    position: absolute; inset: -10%;
-    background-size: cover;
-    background-position: center;
-    filter: brightness(0.35) saturate(1.1);
-    will-change: transform;
-  }
-  .hero-overlay {
-    position: absolute; inset: 0;
-    background:
-      radial-gradient(circle at 30% 20%, rgba(46,163,221,0.18) 0%, transparent 50%),
-      radial-gradient(circle at 70% 80%, rgba(46,163,221,0.12) 0%, transparent 50%),
-      linear-gradient(to bottom, rgba(31,33,45,0.55) 0%, rgba(31,33,45,0.85) 100%);
-  }
-  .hero-content { position: relative; z-index: 2; padding: 0 24px; }
-
   .hero-label {
     font-size: 14px;
     color: ${COLORS.blue};
@@ -110,8 +78,6 @@ const globalStyles = `
     font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
-    opacity: 0;
-    animation: fadeUp 0.9s 0.2s forwards;
   }
   .hero-label::before, .hero-label::after { content: '—'; margin: 0 14px; opacity: 0.6; }
 
@@ -123,31 +89,14 @@ const globalStyles = `
     margin-bottom: 22px;
     letter-spacing: -0.02em;
   }
-  .hero-title .word {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(40px);
-    animation: fadeUp 0.8s forwards;
-  }
-  .hero-title .word.gradient {
-    background: linear-gradient(120deg, ${COLORS.blue} 0%, #7ed4f5 50%, ${COLORS.blue} 100%);
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: fadeUp 0.8s forwards, shimmer 4s linear 1s infinite;
-  }
-  .hero-title .word.white { color: ${COLORS.white}; }
 
   .hero-subtitle {
     font-size: 17px;
     color: ${COLORS.cream};
-    opacity: 0;
     letter-spacing: 0.12em;
     margin-bottom: 40px;
     font-family: 'Proxima Nova', sans-serif;
     font-weight: 500;
-    animation: fadeUp 0.9s 1.2s forwards;
   }
   .hero-subtitle span { color: ${COLORS.blue}; margin: 0 8px; }
 
@@ -163,8 +112,6 @@ const globalStyles = `
     font-family: 'Gilroy', sans-serif;
     position: relative;
     overflow: hidden;
-    opacity: 0;
-    animation: fadeUp 0.9s 1.4s forwards;
     box-shadow: 0 8px 28px rgba(46,163,221,0.4);
     transition: transform 0.25s, box-shadow 0.25s;
     letter-spacing: 0.05em;
@@ -179,42 +126,6 @@ const globalStyles = `
   .btn-discover:hover { transform: translateY(-3px); box-shadow: 0 14px 36px rgba(46,163,221,0.55); }
   .btn-discover:hover::before { transform: translateX(100%); }
 
-  .hero-scroll-indicator {
-    position: absolute;
-    bottom: 32px; left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
-    opacity: 0;
-    animation: fadeUp 1s 1.8s forwards;
-  }
-  .hero-scroll-indicator .mouse {
-    width: 24px; height: 38px;
-    border: 2px solid ${COLORS.cream};
-    border-radius: 14px;
-    position: relative;
-    opacity: 0.6;
-  }
-  .hero-scroll-indicator .mouse::after {
-    content: '';
-    position: absolute;
-    top: 8px; left: 50%;
-    width: 3px; height: 7px;
-    background: ${COLORS.cream};
-    border-radius: 2px;
-    transform: translateX(-50%);
-    animation: scrollDot 1.6s ease-in-out infinite;
-  }
-
-  @keyframes fadeUp {
-    to { opacity: 1; transform: translateY(0); }
-  }
-  @keyframes shimmer {
-    to { background-position: 200% center; }
-  }
-  @keyframes scrollDot {
-    0% { transform: translate(-50%, 0); opacity: 1; }
-    100% { transform: translate(-50%, 14px); opacity: 0; }
-  }
   @keyframes float {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-12px); }
@@ -224,7 +135,12 @@ const globalStyles = `
     100% { transform: scale(1.8); opacity: 0; }
   }
 
-  section { padding: 100px 64px; position: relative; z-index: 2; }
+  .qui-section, .histoire-section, .valeurs-section, .chiffres-section,
+  .axes-section, .prestations-section, .bureau-section {
+    padding: 100px 64px;
+    position: relative;
+    z-index: 2;
+  }
   .section-title {
     text-align: center;
     font-family: 'Gilroy', sans-serif;
@@ -811,7 +727,7 @@ const globalStyles = `
   }
 
   @media (max-width: 900px) {
-    section, .qui-section, .valeurs-section, .chiffres-section,
+    .qui-section, .valeurs-section, .chiffres-section,
     .axes-section, .prestations-section, .bureau-section,
     .histoire-section { padding: 70px 24px; }
     .qui-inner { grid-template-columns: 1fr; gap: 40px; }
@@ -954,21 +870,6 @@ const tiltHandlers = {
   },
 };
 
-const useReveal = () => {
-  const ref = useRef(null);
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) { el.classList.add("in"); obs.disconnect(); } },
-      { threshold: 0.12 }
-    );
-    obs.observe(el);
-    return () => obs.disconnect();
-  }, []);
-  return ref;
-};
-
 /* ── Empty placeholder card ── */
 const EmptyTeamCard = () => (
   <div className="team-card-empty">
@@ -985,7 +886,6 @@ const EmptyTeamCard = () => (
 export default function Index() {
   const [scrollPct, setScrollPct] = useState(0);
 
-  const heroBgRef      = useRef(null);
   const chiffresRef    = useRef(null);
   const prestationsRef = useRef(null);
 
@@ -1002,10 +902,6 @@ export default function Index() {
       const y = window.scrollY;
       const h = document.documentElement.scrollHeight - window.innerHeight;
       setScrollPct(h > 0 ? (y / h) * 100 : 0);
-      if (heroBgRef.current) {
-        heroBgRef.current.style.transform =
-          `translateY(${y * 0.35}px) scale(${1 + y * 0.0003})`;
-      }
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -1071,30 +967,18 @@ export default function Index() {
       <div className="scroll-progress" style={{ width: `${scrollPct}%` }} aria-hidden />
 
       {/* ── HERO ── */}
-      <section id="about-hero" className="hero">
-        <div
-          className="hero-bg"
-          ref={heroBgRef}
-          style={{ backgroundImage: `url('${heroBg1}')` }}
-        />
-        <div className="hero-overlay" />
-        <div className="hero-content">
-          <p className="hero-label">About</p>
-          <h1 className="hero-title">
-            <span className="word gradient" style={{ animationDelay: "0.4s" }}>ENSI</span>{" "}
-            <span className="word white"    style={{ animationDelay: "0.6s" }}>Junior</span>
-            <br />
-            <span className="word white"    style={{ animationDelay: "0.8s" }}>Enterprise</span>
-          </h1>
-          <p className="hero-subtitle">
-            Creativity<span>—</span>Professionalism<span>—</span>Excellence
-          </p>
+      <PageHero image={heroBg1} imageAlt="ENSI Junior Entreprise team" contentClassName="max-w-4xl" scrollTo="#apropos">
+        <Rise as="p" delay={0.4} className="hero-label">About</Rise>
+        <Rise as="h1" delay={0.6} className="hero-title">
+          <span className="brand-shine">ENSI</span> Junior<br />Enterprise
+        </Rise>
+        <Rise as="p" delay={0.9} className="hero-subtitle">
+          Creativity<span>—</span>Professionalism<span>—</span>Excellence
+        </Rise>
+        <Rise delay={1.2}>
           <button className="btn-discover" {...magnetic}>Discover</button>
-        </div>
-        <div className="hero-scroll-indicator">
-          <div className="mouse" />
-        </div>
-      </section>
+        </Rise>
+      </PageHero>
 
       {/* ── WHO WE ARE ── */}
       <section id="apropos" className="qui-section reveal" ref={quiRef}>

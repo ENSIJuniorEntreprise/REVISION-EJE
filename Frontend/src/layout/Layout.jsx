@@ -20,6 +20,18 @@ export default function Layout() {
   }, [])
 
   useEffect(() => {
+    if (location.hash) {
+      return
+    }
+
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }, [location.pathname])
+
+  useEffect(() => {
     if (!location.hash) {
       return
     }

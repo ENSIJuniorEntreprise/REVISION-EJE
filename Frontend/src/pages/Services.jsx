@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect, useRef } from "react";
+import PageHero, { Rise } from "../components/PageHero";
 
 
 const CheckCircle = ({ size = 24, className = "" }) => (
@@ -1044,7 +1045,6 @@ function ProcessSection() {
 
 export default function Services() {
   const [hoveredCircle, setHoveredCircle] = useState(null);
-  const [heroRef, heroVisible] = useIntersection(0.1);
   const [mindsetRef, mindsetVisible] = useIntersection(0.1);
   const [projectRef, projectVisible] = useIntersection(0.1);
   const [subRef, subVisible] = useIntersection(0.1);
@@ -1093,59 +1093,33 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-[#1f212d] text-white font-body overflow-x-hidden">
       {/* HERO */}
-      <section
-  ref={heroRef}
-  className={`relative w-full overflow-hidden 
-  min-h-[calc(100vh-64px)] 
-  bg-[linear-gradient(rgba(31,33,45,0.82),rgba(31,33,45,0.82)),url('/assets/20th-generation.png')] 
-  bg-cover bg-center bg-no-repeat 
-  flex items-center justify-center 
-  px-6 sm:px-10 lg:px-24 text-center 
-  transition-all duration-700 ${
-    heroVisible
-      ? "opacity-100 translate-y-0"
-      : "opacity-0 translate-y-10"
-  }`}
->
-        {/* Cercles orbitaux */}
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-          <div className="absolute w-[600px] h-[600px] rounded-full border border-[#2ea3dd]/10 animate-spin" />
-          <div className="absolute w-[400px] h-[400px] rounded-full border border-[#2ea3dd]/10 animate-[spin_15s_linear_infinite_reverse]" />
-        </div>
-
-        <div className="relative z-5">
-          
-        
-          <span>
-             
-          <h1 className="mb-8 text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-[#e0ded2]" style={{
-              backgroundImage: "linear-gradient(90deg, #e0ded2 0%, #2ea3dd 40%, #e0ded2 80%)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "shimmer 7s linear infinite",
-            }} >
-            Our Expertise          </h1>
-          </span>
-          <p className="mx-auto max-w-2xl text-base sm:text-lg leading-7 text-[#e0ded2]">
-            From design to production, we transform your technological challenges into competitive advantages.
-          </p>
-          <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-1 hover:bg-[#2ea3dd] hover:shadow-[0_8px_16px_rgba(46,163,221,0.35)]">
-              Request a Quote
-            </button>
-           <a href="\assets\Documents\Project-Portfolio-1.pdf">
-  <button className="rounded-lg bg-transparent border border-[#e0ded2] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1f212d] hover:shadow-[0_8px_16px_#1f212d]">
-    Our Portfolio
-  </button>
-</a>
+      <PageHero
+        image="/assets/20th-generation.png"
+        imageAlt="ENSI Junior Entreprise"
+        scrollTo="#service-cards"
+        decoration={
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className="absolute w-[600px] h-[600px] rounded-full border border-[#2ea3dd]/10 animate-spin" />
+            <div className="absolute w-[400px] h-[400px] rounded-full border border-[#2ea3dd]/10 animate-[spin_15s_linear_infinite_reverse]" />
           </div>
-        </div>
-      </section>
+        }
+      >
+        <Rise as="h1" delay={0.6} className="mb-8 font-heading text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-eje-beige">
+          Our <span className="text-eje-accent">Expertise</span>
+        </Rise>
+        <Rise as="p" delay={0.9} className="mx-auto max-w-2xl font-body text-base sm:text-lg leading-7 text-eje-beige/80">
+          From design to production, we transform your technological challenges into competitive advantages.
+        </Rise>
+        <Rise delay={1.2} className="mt-10 flex flex-wrap justify-center gap-4">
+          <button className="btn btn-primary">Request a Quote</button>
+          <a href="/assets/Documents/Project-Portfolio-1.pdf">
+            <button className="btn btn-outline">Our Portfolio</button>
+          </a>
+        </Rise>
+      </PageHero>
 
       {/* SERVICE CARDS */}
-       <section className="bg-[#1f212d] px-6 py-20">
+       <section id="service-cards" className="bg-[#1f212d] px-6 py-20">
       {/* Header */}
       <div className="text-center mb-12">
         

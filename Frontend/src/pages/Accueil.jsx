@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ChevronDown, Lightbulb, ShieldCheck, Target, Users, Globe, Smartphone, Monitor, Bot } from 'lucide-react'
+import { ArrowRight, Lightbulb, ShieldCheck, Target, Users, Globe, Smartphone, Monitor, Bot } from 'lucide-react'
 import { media } from '../assets/media'
 import Newsletter from '../components/kit/Newsletter'
+import PageHero, { Rise } from '../components/PageHero'
+import useReveal from '../hooks/useReveal'
+import useCountUp from '../hooks/useCountUp'
 
 const values = [
   { icon: Lightbulb, title: 'Creativity', desc: 'Innovative solutions that push past the conventional and challenge the expected.' },
@@ -18,15 +21,31 @@ const services = [
 ]
 
 const figures = [
-  { value: '+75', label: 'Clients Served' },
-  { value: '+78', label: 'Projects Completed' },
-  { value: '+48', label: 'Students & Members' },
-  { value: '+35', label: 'Former Collaborators' },
-  { value: '7', label: 'Junior Enterprises' },
-  { value: '9', label: 'Institutional Partners' },
+  { value: 75, prefix: '+', label: 'Clients Served' },
+  { value: 78, prefix: '+', label: 'Projects Completed' },
+  { value: 48, prefix: '+', label: 'Students & Members' },
+  { value: 35, prefix: '+', label: 'Former Collaborators' },
+  { value: 7, prefix: '', label: 'Junior Enterprises' },
+  { value: 9, prefix: '', label: 'Institutional Partners' },
 ]
 
+function FigureStat({ value, prefix, label }) {
+  const [ref, count] = useCountUp(value)
+  return (
+    <div ref={ref} className="text-center">
+      <div className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">{prefix}{count}</div>
+      <div className="mt-2 font-body text-xs uppercase tracking-wide text-eje-beige/60">{label}</div>
+    </div>
+  )
+}
+
 export default function Accueil() {
+  const whoWeAreRef = useReveal()
+  const valuesRef = useReveal()
+  const servicesRef = useReveal()
+  const figuresRef = useReveal()
+  const ctaRef = useReveal()
+
   return (
     <>
       <style>{`
@@ -38,50 +57,32 @@ export default function Accueil() {
       `}</style>
 
       {/* ── HERO ── */}
-      <section className="relative min-h-screen w-full overflow-hidden">
-        <div className="page-curtain" aria-hidden="true" />
-        <img
-          src={media.images.hero}
-          alt="ENSI Junior Entreprise"
-          className="absolute inset-0 h-full w-full object-cover animate-hero-zoom"
-        />
-        <div className="absolute inset-0 bg-eje-dark animate-veil" />
-        <div className="absolute inset-0 bg-gradient-to-b from-eje-dark/40 via-transparent to-eje-dark" />
-
-        <div className="relative z-10 mx-auto flex min-h-screen max-w-5xl flex-col items-center justify-center px-6 text-center">
-          <p className="eyebrow animate-rise" style={{ animationDelay: '0.4s' }}>Since 2006</p>
-          <h1
-            className="animate-rise font-heading text-5xl font-extrabold leading-[1.05] tracking-tight text-eje-beige sm:text-7xl lg:text-[6.5rem] lg:leading-[1.04]"
-            style={{ animationDelay: '0.6s' }}
-          >
-            Excellence <span className="text-eje-accent">in the service</span><br />of your ambitions.
-          </h1>
-          <p
-            className="animate-rise mt-6 max-w-xl font-body text-base font-light leading-relaxed text-eje-beige/65 sm:text-lg lg:text-xl"
-            style={{ animationDelay: '0.9s' }}
-          >
-            Innovation. Excellence. Creativity.
-          </p>
-          <div className="animate-rise mt-10 flex flex-wrap items-center justify-center gap-4" style={{ animationDelay: '1.2s' }}>
-            <Link to="/contact" className="btn btn-primary">
-              Request a Quote <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <a href="#who-we-are" className="btn btn-outline">Discover</a>
-          </div>
-        </div>
-
-        <a
-          href="#who-we-are"
-          aria-label="Scroll down"
-          className="animate-rise absolute bottom-10 left-1/2 -translate-x-1/2 text-eje-beige/35 transition hover:text-eje-beige/70"
-          style={{ animationDelay: '1.5s' }}
+      <PageHero image={media.images.hero} imageAlt="ENSI Junior Entreprise" scrollTo="#who-we-are">
+        <Rise as="p" delay={0.4} className="eyebrow">Since 2006</Rise>
+        <Rise
+          as="h1"
+          delay={0.6}
+          className="font-heading text-5xl font-extrabold leading-[1.05] tracking-tight text-eje-beige sm:text-7xl lg:text-[6.5rem] lg:leading-[1.04]"
         >
-          <ChevronDown className="h-7 w-7 animate-bounce" />
-        </a>
-      </section>
+          Excellence <span className="text-eje-accent">in the service</span><br />of your ambitions.
+        </Rise>
+        <Rise
+          as="p"
+          delay={0.9}
+          className="mt-6 max-w-xl font-body text-base font-light leading-relaxed text-eje-beige/65 sm:text-lg lg:text-xl"
+        >
+          Innovation. Excellence. Creativity.
+        </Rise>
+        <Rise delay={1.2} className="mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Link to="/contact" className="btn btn-primary">
+            Request a Quote <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+          <a href="#who-we-are" className="btn btn-outline">Discover</a>
+        </Rise>
+      </PageHero>
 
       {/* ── WHO WE ARE ── */}
-      <section id="who-we-are" className="section-shell px-6 py-24 sm:px-12 lg:px-32">
+      <section id="who-we-are" ref={whoWeAreRef} className="reveal section-shell px-6 py-24 sm:px-12 lg:px-32">
         <div className="container grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div>
             <p className="eyebrow !justify-start">Who we are</p>
@@ -120,7 +121,7 @@ export default function Accueil() {
       </section>
 
       {/* ── VALUES ── */}
-      <section className="border-t border-eje-beige/10 px-6 py-24 sm:px-12 lg:px-32">
+      <section ref={valuesRef} className="reveal border-t border-eje-beige/10 px-6 py-24 sm:px-12 lg:px-32">
         <div className="container">
           <div className="section-heading">
             <p className="eyebrow">What drives us</p>
@@ -130,7 +131,7 @@ export default function Accueil() {
             {values.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="card-glass p-8 text-center transition hover:-translate-y-1 hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]"
+                className="card-glass p-8 text-center transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]"
               >
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-eje-accent/10">
                   <Icon className="h-6 w-6 text-eje-accent" strokeWidth={1.75} />
@@ -144,7 +145,7 @@ export default function Accueil() {
       </section>
 
       {/* ── SERVICES PREVIEW ── */}
-      <section className="border-t border-eje-beige/10 bg-eje-dark/60 px-6 py-24 sm:px-12 lg:px-32">
+      <section ref={servicesRef} className="reveal border-t border-eje-beige/10 bg-eje-dark/60 px-6 py-24 sm:px-12 lg:px-32">
         <div className="container">
           <div className="section-heading">
             <p className="eyebrow">What we build</p>
@@ -158,7 +159,7 @@ export default function Accueil() {
             {services.map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="card-glass p-8 transition hover:-translate-y-1 hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]"
+                className="card-glass p-8 transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-eje-accent/10">
                   <Icon className="h-6 w-6 text-eje-accent" strokeWidth={1.75} />
@@ -177,7 +178,7 @@ export default function Accueil() {
       </section>
 
       {/* ── KEY FIGURES ── */}
-      <section className="border-t border-eje-beige/10 px-6 py-24 sm:px-12 lg:px-32">
+      <section ref={figuresRef} className="reveal border-t border-eje-beige/10 px-6 py-24 sm:px-12 lg:px-32">
         <div className="container">
           <div className="section-heading">
             <p className="eyebrow">Why ENSI Junior Entreprise</p>
@@ -185,16 +186,13 @@ export default function Accueil() {
           </div>
           <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
             {figures.map((f) => (
-              <div key={f.label} className="text-center">
-                <div className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">{f.value}</div>
-                <div className="mt-2 font-body text-xs uppercase tracking-wide text-eje-beige/60">{f.label}</div>
-              </div>
+              <FigureStat key={f.label} {...f} />
             ))}
           </div>
 
-          <div style={{ marginTop: 28, textAlign: 'center' }}>
-            <h3 style={{ color: 'rgb(var(--eje-accent-rgb))', fontWeight: 900, fontSize: 20 }}>Our Partners</h3>
-            <p style={{ color: 'rgba(224,222,210,0.6)', marginBottom: 10 }}>Trusted by those who believed in us</p>
+          <div className="mt-24 text-center">
+            <h3 className="section-title text-eje-accent">Our Partners</h3>
+            <p className="section-subtitle mb-2">Trusted by those who believed in us</p>
             <div className="partners-wrap">
               <div className="partners-track">
                 {media.partners &&
@@ -210,9 +208,9 @@ export default function Accueil() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="border-t border-eje-beige/10 bg-eje-dark/60 px-6 py-24 sm:px-12 lg:px-32">
+      <section ref={ctaRef} className="reveal border-t border-eje-beige/10 bg-eje-dark/60 px-6 py-24 sm:px-12 lg:px-32">
         <div className="container grid grid-cols-1 gap-6 lg:grid-cols-2">
-          <div className="card-glass p-10">
+          <div className="card-glass p-10 transition duration-300 hover:-translate-y-1 hover:border-eje-accent/40">
             <h3 className="font-heading text-2xl font-extrabold leading-tight text-eje-beige sm:text-3xl">
               Ready to build your next <span className="text-eje-accent">masterpiece?</span>
             </h3>
@@ -223,7 +221,7 @@ export default function Accueil() {
               Request a Quote <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
           </div>
-          <div className="card-glass p-10">
+          <div className="card-glass p-10 transition duration-300 hover:-translate-y-1 hover:border-eje-accent/40">
             <h3 className="font-heading text-2xl font-extrabold leading-tight text-eje-beige sm:text-3xl">
               Contact <span className="text-eje-accent">Us</span>
             </h3>
