@@ -46,7 +46,7 @@ const timelineEvents = [
 ];
 
 const globalStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&family=Sora:wght@400;600;700;800;900&display=swap');
+  
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -54,21 +54,8 @@ const globalStyles = `
   body, #root {
     background: ${COLORS.bg};
     color: ${COLORS.cream};
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
     overflow-x: hidden;
-  }
-
-  .cursor-glow {
-    position: fixed;
-    top: 0; left: 0;
-    width: 500px; height: 500px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(46,163,221,0.18) 0%, rgba(46,163,221,0) 60%);
-    pointer-events: none;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s;
-    will-change: transform;
   }
 
   .scroll-progress {
@@ -119,7 +106,7 @@ const globalStyles = `
     font-size: 14px;
     color: ${COLORS.blue};
     margin-bottom: 16px;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 600;
     letter-spacing: 0.3em;
     text-transform: uppercase;
@@ -129,7 +116,7 @@ const globalStyles = `
   .hero-label::before, .hero-label::after { content: '—'; margin: 0 14px; opacity: 0.6; }
 
   .hero-title {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 900;
     font-size: clamp(48px, 7.5vw, 92px);
     line-height: 1.05;
@@ -158,7 +145,7 @@ const globalStyles = `
     opacity: 0;
     letter-spacing: 0.12em;
     margin-bottom: 40px;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
     font-weight: 500;
     animation: fadeUp 0.9s 1.2s forwards;
   }
@@ -173,7 +160,7 @@ const globalStyles = `
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     position: relative;
     overflow: hidden;
     opacity: 0;
@@ -240,7 +227,7 @@ const globalStyles = `
   section { padding: 100px 64px; position: relative; z-index: 2; }
   .section-title {
     text-align: center;
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 900;
     font-size: clamp(30px, 4vw, 46px);
     color: ${COLORS.white};
@@ -275,7 +262,7 @@ const globalStyles = `
     margin: 0 auto;
   }
   .qui-label {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 800;
     font-size: clamp(28px, 3vw, 38px);
     color: ${COLORS.white};
@@ -352,7 +339,7 @@ const globalStyles = `
     opacity: 0.6;
     margin-top: -52px;
     margin-bottom: 80px;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
     font-weight: 500;
     letter-spacing: 0.04em;
   }
@@ -455,7 +442,7 @@ const globalStyles = `
   }
   .timeline-tick.down { background: linear-gradient(to top, ${COLORS.blue}, transparent); }
   .timeline-year {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 900;
     font-size: clamp(22px, 2.5vw, 30px);
     color: ${COLORS.blue};
@@ -463,7 +450,7 @@ const globalStyles = `
     margin-bottom: 8px;
   }
   .timeline-title {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 700;
     font-size: clamp(12px, 1.2vw, 14px);
     color: ${COLORS.white};
@@ -475,7 +462,7 @@ const globalStyles = `
     color: ${COLORS.cream};
     opacity: 0.6;
     line-height: 1.55;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Proxima Nova', sans-serif;
   }
 
   .valeurs-section { padding: 80px 64px 100px; }
@@ -542,7 +529,7 @@ const globalStyles = `
     transform: scale(1.08) !important;
   }
   .valeur-title {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 800;
     font-size: 18px;
     color: ${COLORS.blue};
@@ -576,7 +563,7 @@ const globalStyles = `
   }
   .chiffre-item:hover { transform: translateY(-6px); }
   .chiffre-number {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 900;
     font-size: 48px;
     color: ${COLORS.white};
@@ -588,7 +575,7 @@ const globalStyles = `
     line-height: 1;
   }
   .chiffre-label {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-size: 12px;
     color: ${COLORS.cream};
     opacity: 0.7;
@@ -643,7 +630,7 @@ const globalStyles = `
   }
   .axe-card:hover .axe-icon { transform: scale(1.2) rotate(-8deg); }
   .axe-title {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-weight: 800;
     font-size: 19px;
     color: ${COLORS.blue};
@@ -774,7 +761,7 @@ const globalStyles = `
     transform: translateY(0);
     transition: transform 0.4s;
   }
-  .team-name { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 15px; color: ${COLORS.white}; }
+  .team-name { font-family: 'Gilroy', sans-serif; font-weight: 800; font-size: 15px; color: ${COLORS.white}; }
   .team-role { font-size: 12px; color: ${COLORS.blue}; font-weight: 700; margin-top: 4px; letter-spacing: 0.05em; }
 
   /* Empty placeholder card */
@@ -806,7 +793,7 @@ const globalStyles = `
     display: flex; align-items: center; justify-content: center;
   }
   .team-card-empty-label {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Gilroy', sans-serif;
     font-size: 13px;
     font-weight: 600;
     color: ${COLORS.cream};
@@ -837,7 +824,6 @@ const globalStyles = `
     .presta-col-right { padding-top: 0; }
     .presta-center-wrapper { display: none; }
     .presta-connector { display: none; }
-    .cursor-glow { display: none; }
     .timeline-wrapper { overflow-x: auto; padding-bottom: 16px; }
     .timeline-track { min-width: 700px; }
     .timeline-top, .timeline-bottom { min-height: 100px; }
@@ -1000,7 +986,6 @@ export default function Index() {
   const [scrollPct, setScrollPct] = useState(0);
 
   const heroBgRef      = useRef(null);
-  const cursorRef      = useRef(null);
   const chiffresRef    = useRef(null);
   const prestationsRef = useRef(null);
 
@@ -1024,17 +1009,6 @@ export default function Index() {
     };
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  useEffect(() => {
-    const onMove = (e) => {
-      if (cursorRef.current) {
-        cursorRef.current.style.transform =
-          `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
-      }
-    };
-    window.addEventListener("mousemove", onMove);
-    return () => window.removeEventListener("mousemove", onMove);
   }, []);
 
   useEffect(() => {
@@ -1094,11 +1068,10 @@ export default function Index() {
     <>
       <style>{globalStyles}</style>
 
-      <div className="cursor-glow" ref={cursorRef} aria-hidden />
       <div className="scroll-progress" style={{ width: `${scrollPct}%` }} aria-hidden />
 
       {/* ── HERO ── */}
-      <section id="accueil" className="hero">
+      <section id="about-hero" className="hero">
         <div
           className="hero-bg"
           ref={heroBgRef}

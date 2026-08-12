@@ -4,11 +4,11 @@ import { FileText, Clock, ArrowRight, ChevronDown, ChevronUp } from 'lucide-reac
 
 const articles = [
   {
-    tag: 'Analyse',
+    tag: 'Analysis',
     date: '2 Sep 2025',
     read: '5 min',
-    title: "Les Sociétés Communautaires : Pilier d’une Économie Locale Durable en Tunisie",
-    excerpt: "Nous ne créons pas seulement des entreprises, nous construisons l’avenir de nos villages», confie Amira Benali, fondatrice d’une coopérative agricole dans la région de Béja.À l’image de son initiative, une nouvelle génération d’entrepreneurs tunisiens réinvente l’économie locale à travers les sociétés communautaires.",
+    title: "Community Enterprises: A Pillar of Sustainable Local Economy in Tunisia",
+    excerpt: "\"We're not just building businesses, we're building the future of our villages,\" says Amira Benali, founder of an agricultural cooperative in the Béja region. Following her lead, a new generation of Tunisian entrepreneurs is reinventing the local economy through community enterprises.",
     img: 'https://media.licdn.com/dms/image/v2/D4E12AQF-3PKnF02pnA/article-cover_image-shrink_423_752/B4EZkH13OkIQAU-/0/1756773192250?e=1779321600&v=beta&t=I6CdThGFXT0GRqd3jserumU5OUFjZfjdihbST_pO2zY',
     link: 'https://www.linkedin.com/pulse/les-sociétés-communautaires-pilier-dune-économie-b4u3e/?trackingId=TUkjcFL4jbPbqmgooKPZOA%3D%3D',
   },
@@ -16,23 +16,23 @@ const articles = [
     tag: 'Guide',
     date: '17 Jun 2025',
     read: '4 min',
-    title: 'La télésanté en Tunisie : en un clic, les soins sont accessibles partout et pour tous',
-    excerpt: "La révolution numérique transforme le monde, et la santé en Tunisie est en première ligne de ce changement. La télésanté, qui permet de consulter des médecins à distance grâce aux outils numériques, s’impose comme une solution innovante et inclusive.",
+    title: 'Telehealth in Tunisia: Healthcare Accessible Everywhere, for Everyone, in One Click',
+    excerpt: "The digital revolution is transforming the world, and healthcare in Tunisia is at the forefront of that change. Telehealth, which lets patients consult doctors remotely through digital tools, is emerging as an innovative and inclusive solution.",
     img: 'https://media.licdn.com/dms/image/v2/D4E12AQHj2fkcoZX74g/article-cover_image-shrink_720_1280/B4EZd9jA0sHsAI-/0/1750158075554?e=1779926400&v=beta&t=mxOQBsb8VdaEFLIFeEt6zqPjydNoTMFDmx1dik7uA0M',
     link: 'https://www.linkedin.com/pulse/la-télésanté-en-tunisie-un-clic-les-soins-sont-1f2le/?trackingId=oNmN9vK%2Ff7dfYylkdHZA4A%3D%3D',
   },
   {
-    tag: 'Événement',
+    tag: 'Feature',
     date: '27 Mar 2025',
     read: '6 min',
-    title: 'Vers une Tunisie visionnaire : l’innovation comme clé de l’évolution économique',
-    excerpt: "Il est indéniable que la Tunisie traverse actuellement une période économique critique. Entre le chômage, les inégalités sociales, les effets du changement climatique, un déficit commercial atteignant -1 765,5  millions de dinars et un taux de croissance limité à seulement 2,4 % , il devient impératif de repenser les modèles traditionnels de développement économique.",
+    title: 'Towards a Visionary Tunisia: Innovation as the Key to Economic Growth',
+    excerpt: "There's no denying Tunisia is going through a critical economic period. Between unemployment, social inequality, the effects of climate change, a trade deficit reaching -1,765.5 million dinars, and growth limited to just 2.4%, rethinking traditional development models has become essential.",
     img: 'https://media.licdn.com/dms/image/v2/D4E12AQFPmUMgujMoxw/article-cover_image-shrink_720_1280/B4EZd9qcznHsAQ-/0/1750160051652?e=1779926400&v=beta&t=FnjsRbgyUR2F3J2yX2mS47vwvCtm2gOJu3Rwj-hDX7c',
     link: 'https://www.linkedin.com/pulse/vers-une-tunisie-visionnaire-linnovation-comme-6dete/?trackingId=qaaqcmUC0Wm8%2Fo7UC6ddqA%3D%3D',
   },
   
   {
-    tag: 'Événement',
+    tag: 'Feature',
     date: '8 May 2023',
     read: '5 min',
     title: 'Why TIKTOK ADS are the future of Social Media advertising ?',
@@ -50,11 +50,11 @@ const articles = [
     link: 'https://www.linkedin.com/pulse/artificial-intelligence-has-potential-transform/?trackingId=STXHIU8WLKlpYBKg69NKXw%3D%3D',
   },
   {
-    tag: 'Formation',
+    tag: 'Training',
     date: '27 Mar 2023',
     read: '5 min',
-    title: 'L ENSI Junior Entreprise, un exemple pour les associations étudiantes',
-    excerpt: "L'ENSI Junior Entreprise est une organisation à but non lucratif fondée en 2006 par des étudiants de l'École Nationale des Sciences de l'Informatique en Tunisie. Aujourd'hui, elle est l'une des plus importantes Junior Entreprises du pays, offrant des services de haute qualité dans le domaine de l'informatique tout en permettant aux étudiants de gagner une expérience pratique et de se familiariser avec le monde professionnel.",
+    title: 'ENSI Junior Entreprise, a Model for Student Associations',
+    excerpt: "ENSI Junior Entreprise is a non-profit organization founded in 2006 by students of the National School of Computer Science in Tunisia. Today, it stands as one of the country's leading Junior Enterprises, delivering high-quality IT services while giving students hands-on experience and a first taste of the professional world.",
     img: 'https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80',
     link: 'https://www.linkedin.com/pulse/lensi-junior-entreprise-un-exemple-pour-les-associations/?trackingId=VTIoCu3AqIr0UIC5PSlk6g%3D%3D',
   },
@@ -153,7 +153,7 @@ export default function Articles() {
           ))}
         </div>
 
-        {/* Voir plus / Voir moins button */}
+        {/* See more / See less button */}
         {articles.length > 3 && (
           <div className="mt-12 flex justify-center">
             <button

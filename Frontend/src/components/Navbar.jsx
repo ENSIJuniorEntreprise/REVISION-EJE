@@ -44,7 +44,7 @@ export default function Navbar() {
         }
         .navbar__cta {
           background-color: #2ea3dd; color: white; border: none;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Proxima Nova', sans-serif;
           font-size: 1rem; font-weight: 600;
           padding: 0.75rem 2.2rem; border-radius: 999px;
           cursor: pointer; display: flex; align-items: center; gap: 0.5rem;
@@ -73,7 +73,7 @@ export default function Navbar() {
         .mobile-menu.open { display: flex; }
         .mobile-menu a {
           color: #e0ded2; text-decoration: none;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Proxima Nova', sans-serif;
           font-size: 1rem; font-weight: 500;
           padding: 0.5rem 0;
           border-bottom: 1px solid rgba(224,222,210,0.1);
@@ -88,34 +88,34 @@ export default function Navbar() {
         }
       `}</style>
 
-      <nav className="navbar" aria-label="Navigation principale">
+      <nav className="navbar" aria-label="Main navigation">
         <div className="navbar__logo">
-          <img src={ejeLogo} alt="Logo ENSI Junior Entreprise" />
+          <img src={ejeLogo} alt="ENSI Junior Entreprise logo" />
         </div>
         <ul className="navbar__links">
-          <li><NavLink to="/" end>Accueil</NavLink></li>
-          <li><NavLink to="/a-propos">À propos</NavLink></li>
+          <li><NavLink to="/" end>Home</NavLink></li>
+          <li><NavLink to="/a-propos">About</NavLink></li>
           <li><NavLink to="/services">Services</NavLink></li>
-          <li><NavLink to="/actualites">Actualités</NavLink></li>
+          <li><NavLink to="/actualites">News</NavLink></li>
           <li><NavLink to="/contact">Contact</NavLink></li>
         </ul>
         <NavLink to="/contact" className="navbar__cta">
-          Demander un devis <span aria-hidden="true">→</span>
+          Request a Quote <span aria-hidden="true">→</span>
         </NavLink>
-        <button className="navbar__hamburger" aria-label="Ouvrir le menu mobile"
+        <button className="navbar__hamburger" aria-label="Open mobile menu"
           onClick={() => setMenuOpen(!menuOpen)}>
           <span /><span /><span />
         </button>
       </nav>
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <NavLink to="/" end onClick={() => setMenuOpen(false)}>Accueil</NavLink>
-        <NavLink to="/a-propos" onClick={() => setMenuOpen(false)}>À propos</NavLink>
+        <NavLink to="/" end onClick={() => setMenuOpen(false)}>Home</NavLink>
+        <NavLink to="/a-propos" onClick={() => setMenuOpen(false)}>About</NavLink>
         <NavLink to="/services" onClick={() => setMenuOpen(false)}>Services</NavLink>
-        <NavLink to="/actualites" onClick={() => setMenuOpen(false)}>Actualités</NavLink>
+        <NavLink to="/actualites" onClick={() => setMenuOpen(false)}>News</NavLink>
         <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
         <NavLink to="/contact" className="navbar__cta" style={{ marginTop: '0.5rem', justifyContent: 'center', textAlign: 'center' }} onClick={() => setMenuOpen(false)}>
-          Demander un devis <span aria-hidden="true">→</span>
+          Request a Quote <span aria-hidden="true">→</span>
         </NavLink>
       </div>
     </>

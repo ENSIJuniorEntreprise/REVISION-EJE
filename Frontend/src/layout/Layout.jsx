@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useLenis } from '@studio-freight/react-lenis'
 import { Outlet, useLocation } from 'react-router-dom'
 import Navbar from '../components/Navbar'
@@ -7,6 +7,17 @@ import Footer from '../components/Footer'
 export default function Layout() {
   const location = useLocation()
   const lenis = useLenis()
+  const cursorRef = useRef(null)
+
+  useEffect(() => {
+    const onMove = (e) => {
+      if (cursorRef.current) {
+        cursorRef.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`
+      }
+    }
+    window.addEventListener('mousemove', onMove)
+    return () => window.removeEventListener('mousemove', onMove)
+  }, [])
 
   useEffect(() => {
     if (!location.hash) {
@@ -54,6 +65,7 @@ export default function Layout() {
 
   return (
     <div className="app-shell">
+      <div className="cursor-glow" ref={cursorRef} aria-hidden="true" />
       <Navbar />
       <main className="app-main">
         <Outlet />

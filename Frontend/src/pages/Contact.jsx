@@ -2,8 +2,7 @@ import { useState } from "react";
 
 const COLORS = {
   dark: "#1F212D",
-  darkCard: "#252736",
-  darkNav: "#191B26",
+  darkCard: "#181A24",
   blue: "#2EA3DD",
   cream: "#E0DED2",
   inputBg: "rgba(255,255,255,0.06)",
@@ -80,37 +79,7 @@ function validate(name, value) {
   return null;
 }
 
-/* ── LOGO SVG ── */
-const LogoSVG = ({ size = 38 }) => (
-  <svg width={size} height={size} viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <ellipse cx="60" cy="60" rx="56" ry="56" stroke={COLORS.cream} strokeWidth="3.5" fill="none" opacity="0.9"/>
-    <ellipse cx="60" cy="60" rx="24" ry="56" stroke={COLORS.cream} strokeWidth="2.5" fill="none" opacity="0.9"/>
-    <line x1="6" y1="60" x2="114" y2="60" stroke={COLORS.cream} strokeWidth="2.5" opacity="0.9"/>
-    <path d="M12 38 Q60 28 108 38" stroke={COLORS.cream} strokeWidth="2" fill="none" opacity="0.75"/>
-    <path d="M12 82 Q60 92 108 82" stroke={COLORS.cream} strokeWidth="2" fill="none" opacity="0.75"/>
-  </svg>
-);
-
 /* ── ICONS ── */
-const IconMail = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={COLORS.blue} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/>
-  </svg>
-);
-const IconPhone = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={COLORS.blue} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.22 1.18 2 2 0 012.22 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.18 6.18l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
-  </svg>
-);
-const IconPin = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={COLORS.blue} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/>
-  </svg>
-);
-const IconFB = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>);
-const IconIG = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>);
-const IconLI = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>);
-const IconTW = () => (<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>);
 const IconChevron = () => (<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"/></svg>);
 
 const IconCheck = () => (
@@ -129,40 +98,17 @@ const IconAlert = () => (
 /* ── STYLES ── */
 const S = {
   page: {
-    backgroundColor: COLORS.dark,
+    backgroundColor: "transparent",
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
-    fontFamily: "'Montserrat', 'Nunito Sans', sans-serif",
+    fontFamily: "'Proxima Nova', sans-serif",
     color: COLORS.cream,
     overflowX: "hidden",
   },
-  nav: {
-    position: "sticky",
-    top: 0,
-    zIndex: 100,
-    backgroundColor: COLORS.darkNav,
-    borderBottom: `1px solid rgba(46,163,221,0.12)`,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "0 48px",
-    height: "64px",
-  },
-  navBrand: { display: "flex", alignItems: "center", gap: "12px", textDecoration: "none" },
-  navBrandName: { fontWeight: 700, fontSize: "15px", color: COLORS.cream, letterSpacing: "0.02em", whiteSpace: "nowrap" },
-  navLinks: { display: "flex", alignItems: "center", gap: "36px", listStyle: "none", margin: 0, padding: 0 },
-  navLink: { fontSize: "14px", fontWeight: 600, color: COLORS.cream, textDecoration: "none", opacity: 0.75, cursor: "pointer" },
-  navLinkActive: { fontSize: "14px", fontWeight: 600, color: COLORS.blue, textDecoration: "none", opacity: 1, cursor: "pointer" },
-  btnDevis: {
-    display: "flex", alignItems: "center", gap: "6px",
-    fontFamily: "inherit", fontSize: "13px", fontWeight: 700, letterSpacing: "0.04em",
-    color: "#fff", backgroundColor: COLORS.blue, border: "none",
-    borderRadius: "6px", padding: "10px 20px", cursor: "pointer", whiteSpace: "nowrap",
-  },
   main: {
     flex: 1, display: "flex", flexDirection: "column", alignItems: "center",
-    padding: "72px 24px 100px", position: "relative",
+    padding: "156px 24px 100px", position: "relative",
   },
   glow: {
     position: "absolute", top: 0, left: "50%", transform: "translateX(-50%)",
@@ -222,19 +168,6 @@ const S = {
     borderRadius: "50px", padding: "12px 44px", cursor: "pointer",
     transition: "background 0.2s, color 0.2s, transform 0.15s, box-shadow 0.2s",
   },
-  footer: { backgroundColor: COLORS.darkNav, borderTop: `1px solid rgba(224,222,210,0.07)`, padding: "52px 64px 36px" },
-  footerInner: { maxWidth: "1100px", margin: "0 auto", display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr", gap: "48px" },
-  footerBrand: { display: "flex", flexDirection: "column", gap: "14px" },
-  footerLogoRow: { display: "flex", alignItems: "center", gap: "12px" },
-  footerBrandName: { fontWeight: 700, fontSize: "15px", color: COLORS.cream },
-  footerDesc: { fontSize: "13px", color: COLORS.muted, lineHeight: 1.7, maxWidth: "220px" },
-  footerTagline: { fontFamily: "'Brush Script MT', cursive", fontSize: "20px", color: COLORS.blue, opacity: 0.8, marginTop: "4px" },
-  footerColTitle: { fontWeight: 700, fontSize: "13px", letterSpacing: "0.06em", textTransform: "uppercase", color: COLORS.cream, marginBottom: "18px" },
-  footerLink: { fontSize: "13px", color: COLORS.muted, textDecoration: "none", display: "block", marginBottom: "10px", cursor: "pointer" },
-  footerContactItem: { display: "flex", alignItems: "flex-start", gap: "10px", fontSize: "13px", color: COLORS.muted, marginBottom: "10px" },
-  footerBottom: { maxWidth: "1100px", margin: "40px auto 0", paddingTop: "24px", borderTop: `1px solid rgba(224,222,210,0.07)`, display: "flex", alignItems: "center", justifyContent: "space-between" },
-  socialLinks: { display: "flex", gap: "10px" },
-  socialLink: { width: "34px", height: "34px", borderRadius: "8px", backgroundColor: "rgba(255,255,255,0.06)", border: `1px solid rgba(224,222,210,0.1)`, display: "flex", alignItems: "center", justifyContent: "center", textDecoration: "none", color: COLORS.muted, cursor: "pointer" },
 };
 
 /* ── DYNAMIC BORDER STYLE ── */
@@ -378,40 +311,6 @@ function ValidatedTextarea({ name, placeholder, value, touched, error, onChange,
   );
 }
 
-/* ── SOCIAL BUTTON ── */
-function SocialBtn({ icon }) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <button style={{ ...S.socialLink, backgroundColor: hovered ? COLORS.blue : "rgba(255,255,255,0.06)", color: hovered ? "#fff" : COLORS.muted }}
-      onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}>
-      {icon}
-    </button>
-  );
-}
-
-/* ── NAVBAR ── */
-function Navbar() {
-  const [h, setH] = useState(false);
-  return (
-    <nav style={S.nav}>
-      <a href="#" style={S.navBrand}>
-        <LogoSVG size={36} />
-        <span style={S.navBrandName}>ENSI Junior Enterprise</span>
-      </a>
-      <ul style={S.navLinks}>
-        {["Home", "About", "Services"].map((l) => (
-          <li key={l}><a href="#" style={S.navLink}>{l}</a></li>
-        ))}
-        <li><a href="#" style={S.navLinkActive}>Contact</a></li>
-      </ul>
-      <button style={{ ...S.btnDevis, backgroundColor: h ? "#1d8abf" : COLORS.blue }}
-        onMouseEnter={() => setH(true)} onMouseLeave={() => setH(false)}>
-        Request a Quote <IconChevron />
-      </button>
-    </nav>
-  );
-}
-
 /* ── CONTACT FORM ── */
 const INITIAL_VALUES = { nom: "", telephone: "", email: "", profession: "", demande: "", message: "" };
 const INITIAL_TOUCHED = { nom: false, telephone: false, email: false, profession: false, demande: false, message: false };
@@ -499,59 +398,27 @@ function ContactForm() {
   );
 }
 
-/* ── FOOTER ── */
-function Footer() {
-  return (
-    <footer style={S.footer}>
-      <div style={S.footerInner}>
-        <div style={S.footerBrand}>
-          <div style={S.footerLogoRow}>
-            <LogoSVG size={44} />
-            <span style={S.footerBrandName}>ENSI Junior Enterprise</span>
-          </div>
-          <p style={S.footerDesc}>The student association connecting businesses with tomorrow's talents.</p>
-          <span style={S.footerTagline}>Always Striving For Greatness</span>
-        </div>
-        <div>
-          <p style={S.footerColTitle}>Navigation</p>
-          {["Home", "About", "Services", "Activities", "Contact"].map((l) => (
-            <a key={l} href="#" style={S.footerLink}>{l}</a>
-          ))}
-        </div>
-        <div>
-          <p style={S.footerColTitle}>Contact</p>
-          <div style={S.footerContactItem}><IconMail /><span>contact@ensi-je.com</span></div>
-          <div style={S.footerContactItem}><IconPhone /><span>+216 XX XXX XXX</span></div>
-          <div style={S.footerContactItem}><IconPin /><span>ENSI, Manouba, Tunisia</span></div>
-        </div>
-      </div>
-      <div style={S.footerBottom}>
-        <span style={{ fontSize: "12px", color: COLORS.muted }}>© 2025 ENSI Junior Enterprise</span>
-        <div style={S.socialLinks}>
-          <SocialBtn icon={<IconFB />} />
-          <SocialBtn icon={<IconIG />} />
-          <SocialBtn icon={<IconLI />} />
-          <SocialBtn icon={<IconTW />} />
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 /* ── PAGE ── */
 export default function ContactPage() {
   return (
     <div style={S.page}>
-      <Navbar />
       <main style={S.main}>
         <div style={S.glow} />
         <div style={S.heading}>
+          <span
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8,
+              fontSize: 12, fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase",
+              color: COLORS.blue, marginBottom: 16,
+            }}
+          >
+            Get in touch
+          </span>
           <h1 style={S.h1}>Contact Us</h1>
           <p style={S.subtitle}>Let's work together</p>
         </div>
         <ContactForm />
       </main>
-      <Footer />
     </div>
   );
 }

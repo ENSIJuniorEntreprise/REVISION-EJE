@@ -60,9 +60,9 @@ const services = [
   },
   {
     id: "ia",
-    label: "ChatBot & IA",
+    label: "ChatBot & AI",
     icon: "/assets/chatbot.png",
-    title: "CHATBOT & IA",
+    title: "CHATBOT & AI",
     desc: "Integration of generative AI and machine learning models to automate and optimize your processes.",
     features: ["NLP & language processing",
       "Computer Vision",
@@ -124,7 +124,7 @@ const mindsetCards = [
     icon: "/assets/precision (1).png",
     title: "Precision",
     desc: "Close alignment with your strategic objectives.",
-    accent: "#33ddff",
+    accent: "#2ea3dd",
     glowColor: "rgba(51,221,255,0.22)",
     delay: 160,
     fromX: 0,
@@ -166,7 +166,7 @@ function MindsetSection() {
       ref={sectionRef}
       className="relative overflow-hidden px-6 sm:px-10 lg:px-16 py-20 sm:py-28"
       style={{
-        background: "linear-gradient(135deg, #0a1628 0%, #0d2040 40%, #0a1a30 70%, #061220 100%)",
+        background: "linear-gradient(135deg, #1f212d 0%, #181a24 40%, #14151d 70%, #0d0e12 100%)",
       }}
     >
       <style>{`
@@ -245,7 +245,7 @@ function MindsetSection() {
           Project{" "}
           <span
             style={{
-              backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #33ddff 40%, #2ea3dd 80%)",
+              backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #2ea3dd 40%, #2ea3dd 80%)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -516,7 +516,7 @@ function SubPrestationsSection() {
           Our{" "}
           <span
             style={{
-              backgroundImage: "linear-gradient(90deg, #2ea3dd, #33ddff, #2ea3dd)",
+              backgroundImage: "linear-gradient(90deg, #2ea3dd, #2ea3dd, #2ea3dd)",
               backgroundSize: "200% auto",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
@@ -631,7 +631,7 @@ function SubPrestationsSection() {
                 style={{
                   height: 2,
                   width: isHovered ? "70%" : "0%",
-                  background: "linear-gradient(90deg, transparent, #2ea3dd, #33ddff, transparent)",
+                  background: "linear-gradient(90deg, transparent, #2ea3dd, #2ea3dd, transparent)",
                   transition: "width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
                 }}
               />
@@ -725,7 +725,7 @@ function ProcessSection() {
       className="relative overflow-hidden border-t border-[#2ea3dd]/10 px-6 sm:px-10 lg:px-16 py-20 sm:py-28"
       style={{
         background:
-          "linear-gradient(135deg, #0a1628 0%, #0d2040 40%, #0a1a30 70%, #061220 100%)",
+          "linear-gradient(135deg, #1f212d 0%, #181a24 40%, #14151d 70%, #0d0e12 100%)",
       }}
     >
       <style>{`
@@ -802,7 +802,7 @@ function ProcessSection() {
               Guided by an{" "}
               <span
                 style={{
-                  backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #33ddff 40%, #2ea3dd 80%)",
+                  backgroundImage: "linear-gradient(90deg, #2ea3dd 0%, #2ea3dd 40%, #2ea3dd 80%)",
                   backgroundSize: "200% auto",
                   WebkitBackgroundClip: "text",
                   WebkitTextFillColor: "transparent",
@@ -963,7 +963,7 @@ function ProcessSection() {
                     </span>
                     <h3
                       className="text-sm sm:text-base font-extrabold mb-2 tracking-wide"
-                      style={{ color: isHovered ? "#33ddff" : "#2ea3dd", transition: "color .3s ease" }}
+                      style={{ color: isHovered ? "#2ea3dd" : "#2ea3dd", transition: "color .3s ease" }}
                     >
                       {step.title}
                     </h3>
@@ -1003,7 +1003,7 @@ function ProcessSection() {
                       style={{
                         height: 2,
                         width: isHovered ? "65%" : "0%",
-                        background: "linear-gradient(90deg, transparent, #2ea3dd, #33ddff, transparent)",
+                        background: "linear-gradient(90deg, transparent, #2ea3dd, #2ea3dd, transparent)",
                         transition: "width .4s cubic-bezier(.34,1.56,.64,1)",
                       }}
                     />
@@ -1030,7 +1030,7 @@ function ProcessSection() {
         <button
           className="rounded-xl px-9 py-3.5 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5"
           style={{ background: "#2ea3dd", color: "#1f212d" }}
-          onMouseEnter={e => { e.currentTarget.style.background = "#33ddff"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(46,163,221,0.35)"; }}
+          onMouseEnter={e => { e.currentTarget.style.background = "#2ea3dd"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(46,163,221,0.35)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "#2ea3dd"; e.currentTarget.style.boxShadow = "none"; }}
         >
           Start a Project
@@ -1053,7 +1053,7 @@ export default function Services() {
   const current = services.find((s) => s.id === active);
 
   const circleBase =
-    "absolute w-40 h-40 rounded-full border-2 border-[#2ea3dd] bg-[#2ea3dd]/10 flex flex-col items-center justify-center gap-3 text-[#2ea3dd] font-bold text-sm text-center leading-snug cursor-pointer transition-all duration-500 hover:scale-110 hover:bg-[#2ea3dd]/20 hover:border-[#33ddff] hover:shadow-[0_0_30px_rgba(46,163,221,0.4)]";
+    "absolute w-40 h-40 rounded-full border-2 border-[#2ea3dd] bg-[#2ea3dd]/10 flex flex-col items-center justify-center gap-3 text-[#2ea3dd] font-bold text-sm text-center leading-snug cursor-pointer transition-all duration-500 hover:scale-110 hover:bg-[#2ea3dd]/20 hover:border-[#2ea3dd] hover:shadow-[0_0_30px_rgba(46,163,221,0.4)]";
 
   // Animation variants for the circles
   const getCircleStyle = (position, isVisible, delay) => {
@@ -1091,7 +1091,7 @@ export default function Services() {
   };
 
   return (
-    <div className="min-h-screen bg-[#1f212d] text-white font-sans overflow-x-hidden">
+    <div className="min-h-screen bg-[#1f212d] text-white font-body overflow-x-hidden">
       {/* HERO */}
       <section
   ref={heroRef}
@@ -1132,7 +1132,7 @@ export default function Services() {
             From design to production, we transform your technological challenges into competitive advantages.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-1 hover:bg-[#33ddff] hover:shadow-[0_8px_16px_rgba(46,163,221,0.35)]">
+            <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#e0ded2] tracking-wide transition-all duration-300 hover:-translate-y-1 hover:bg-[#2ea3dd] hover:shadow-[0_8px_16px_rgba(46,163,221,0.35)]">
               Request a Quote
             </button>
            <a href="\assets\Documents\Project-Portfolio-1.pdf">
@@ -1386,7 +1386,7 @@ export default function Services() {
           Contact our experts today for a free analysis of your needs.
         </p>
 
-        <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#1f212d] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#33ddff] hover:shadow-[0_8px_30px_rgba(46,163,221,0.35)]">
+        <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#1f212d] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2ea3dd] hover:shadow-[0_8px_30px_rgba(46,163,221,0.35)]">
           Request a Quote
         </button>
       </section>

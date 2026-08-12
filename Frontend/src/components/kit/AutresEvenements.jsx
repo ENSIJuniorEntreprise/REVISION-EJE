@@ -11,7 +11,7 @@ const events = [
   },
   {
     tag: 'Entertainment',
-    date: '10 Avr 2026',
+    date: '10 Apr 2026',
     title: 'External Birthday',
     image: anniv,
   },

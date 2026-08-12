@@ -34,7 +34,7 @@ export default function Newsletter() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
-              placeholder="votre.email@example.com"
+              placeholder="your.email@example.com"
               className="flex-1 bg-transparent py-4 font-body text-sm text-eje-beige placeholder-eje-beige/30 outline-none"
             />
             <button

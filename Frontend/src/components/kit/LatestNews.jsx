@@ -76,7 +76,7 @@ export default function LatestNews() {
               onClick={() => scrollTo(current - 1)}
               disabled={current === 0}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-eje-beige/20 text-eje-beige/60 transition hover:border-eje-accent hover:text-eje-accent disabled:opacity-25 disabled:cursor-not-allowed"
-              aria-label="Précédent"
+              aria-label="Previous"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -84,7 +84,7 @@ export default function LatestNews() {
               onClick={() => scrollTo(current + 1)}
               disabled={current >= max}
               className="flex h-10 w-10 items-center justify-center rounded-full border border-eje-beige/20 text-eje-beige/60 transition hover:border-eje-accent hover:text-eje-accent disabled:opacity-25 disabled:cursor-not-allowed"
-              aria-label="Suivant"
+              aria-label="Next"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -129,7 +129,7 @@ export default function LatestNews() {
               className={`h-2 rounded-full transition-all duration-300 ${
                 i === current ? 'w-6 bg-eje-accent' : 'w-2 bg-eje-beige/25 hover:bg-eje-beige/50'
               }`}
-              aria-label={`Aller à la diapositive ${i + 1}`}
+              aria-label={`Go to slide ${i + 1}`}
             />
           ))}
         </div>

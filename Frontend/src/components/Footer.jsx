@@ -1,13 +1,13 @@
+import { Link } from 'react-router-dom'
 import ejeLogo from '../assets/EJE_White.png'
 export default function Footer() {
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@400;500;600;700&display=swap');
         .footer {
           background: #191b26;
           padding-top: 3.5rem;
-          font-family: 'Montserrat', sans-serif;
+          font-family: 'Proxima Nova', sans-serif;
           color: #e0ded2;
         }
         .footer__grid {
@@ -21,12 +21,12 @@ export default function Footer() {
           display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.9rem; margin-top:0.1rem;
                 }
         .footer__globe { width: 52px; height: 52px; flex-shrink: 0; }
-        .footer__logo-name { font-size: 1rem; font-weight: 700; color: #e0ded2; letter-spacing: 0.01em; }
+        .footer__logo-name { font-family: 'Gilroy', sans-serif; font-size: 1rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.01em; }
         .footer__tagline { font-size: 0.83rem; color: rgba(224,222,210,0.5); line-height: 1.65; max-width: 240px; margin-bottom: 1.8rem; }
         .footer__slogan { font-family: 'Photograph Signature', cursive; font-size: 2rem; color: #2ea3dd; letter-spacing: 0.02em; line-height: 1.3; }
-        .footer__col-title { font-size: 0.92rem; font-weight: 700; color: #e0ded2; letter-spacing: 0.04em; margin-bottom: 1.4rem; }
+        .footer__col-title { font-family: 'Gilroy', sans-serif; font-size: 0.92rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.04em; margin-bottom: 1.4rem; }
         .footer__nav { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
-        .footer__nav a { font-size: 0.88rem; color: rgba(224,222,210,0.5); text-decoration: none; transition: color 0.2s ease; }
+        .footer__nav a { font-size: 0.88rem; color: rgba(224,222,210,0.5); text-decoration: none; transition: color 0.2s ease; cursor: pointer; }
         .footer__nav a:hover { color: #2ea3dd; }
         .footer__contact-list { list-style: none; display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.8rem; }
         .footer__contact-item { display: flex; align-items: center; gap: 0.65rem; font-size: 0.87rem; color: rgba(224,222,210,0.5); }
@@ -89,14 +89,14 @@ export default function Footer() {
           </div>
 
           {/* Column 2: Navigation */}
-          <nav aria-label="Navigation footer">
+          <nav aria-label="Footer navigation">
             <h3 className="footer__col-title">Navigation</h3>
             <ul className="footer__nav">
-              <li><a href="#accueil">Accueil</a></li>
-              <li><a href="#apropos">À propos</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#actualites">Actualités</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/a-propos">About</Link></li>
+              <li><Link to="/services">Services</Link></li>
+              <li><Link to="/actualites">News</Link></li>
+              <li><Link to="/contact">Contact</Link></li>
             </ul>
           </nav>
 
@@ -154,7 +154,7 @@ export default function Footer() {
 
         <div className="footer__divider" aria-hidden="true"></div>
         <div className="footer__bottom">
-          <p className="footer__copy">&copy; 2026 ENSI Junior Entreprise. Tous droits réservés.</p>
+          <p className="footer__copy">&copy; 2026 ENSI Junior Entreprise. All rights reserved.</p>
         </div>
       </footer>
     </>

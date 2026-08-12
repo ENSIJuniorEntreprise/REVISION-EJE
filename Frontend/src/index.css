@@ -279,6 +279,27 @@
   .page-placeholder {
     @apply min-h-[65vh] pt-36;
   }
+
+  .cursor-glow {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgb(var(--eje-accent-rgb) / 0.13) 0%, rgb(var(--eje-accent-rgb) / 0) 60%);
+    pointer-events: none;
+    z-index: 2 !important;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.3s;
+    will-change: transform;
+  }
+
+  @media (max-width: 900px) {
+    .cursor-glow {
+      display: none;
+    }
+  }
 }
 
 /* ─── Keyframes (original) ──────────────────────────────────────────────── */
