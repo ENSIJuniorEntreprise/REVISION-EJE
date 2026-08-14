@@ -1,18 +1,37 @@
-
+import { useEffect, useState } from 'react'
 import { BookOpen, Eye, Download } from 'lucide-react'
+import { apiFetch, API_BASE_URL } from '../../config/api'
 
-const magazines = [
-  {
-    n: 'N°12',
-    pages: '48 pages',
-    title: 'ENSI Magazine — 2026 Edition',
-    desc: "Our latest edition covers technological innovation, success stories from our alumni and a special feature on AI in Tunisia.",
-    img: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?auto=format&fit=crop&w=600&q=80',
-  },
-  
-]
+function resolveFileUrl(fileUrl) {
+  if (!fileUrl) return null
+  // Uploaded files come back as relative paths (e.g. "/uploads/..."); external
+  // URLs are already absolute.
+  return fileUrl.startsWith('http') ? fileUrl : `${API_BASE_URL.replace(/\/api$/, '')}${fileUrl}`
+}
 
 export default function Magazines() {
+  const [magazines, setMagazines] = useState([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    let cancelled = false
+    apiFetch('/magazines')
+      .then((body) => {
+        if (!cancelled) setMagazines(body?.data || [])
+      })
+      .catch(() => {
+        if (!cancelled) setMagazines([])
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => {
+      cancelled = true
+    }
+  }, [])
+
+  if (!loading && magazines.length === 0) return null
+
   return (
     <section className="bg-eje-dark px-6 py-24 sm:px-12 lg:px-32">
       <div className="mx-auto max-w-6xl">
@@ -31,46 +50,63 @@ export default function Magazines() {
         </div>
 
         <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-          {magazines.map((m) => (
-            <article
-              key={m.n}
-              className="card-glass group flex flex-col overflow-hidden transition hover:-translate-y-1 hover:border-eje-accent/50 hover:shadow-[0_30px_70px_-30px_rgb(46_163_221/0.5)] sm:flex-row"
-            >
-              <div className="h-56 overflow-hidden sm:h-auto sm:w-44 sm:flex-shrink-0">
-                <img
-                  src={m.img}
-                  alt={m.title}
-                  className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
-                />
-              </div>
-              <div className="flex flex-1 flex-col justify-between p-6">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <span className="rounded-full bg-eje-accent px-3 py-1 font-body text-xs font-semibold text-white">
-                      {m.n}
-                    </span>
-                    <span className="font-body text-xs text-eje-beige/50">{m.pages}</span>
+          {magazines.map((m) => {
+            const fileUrl = resolveFileUrl(m.fileUrl)
+            return (
+              <article
+                key={m._id}
+                className="card-glass group flex flex-col overflow-hidden transition hover:-translate-y-1 hover:border-eje-accent/50 hover:shadow-[0_30px_70px_-30px_rgb(46_163_221/0.5)] sm:flex-row"
+              >
+                <div className="h-56 overflow-hidden sm:h-auto sm:w-44 sm:flex-shrink-0">
+                  <img
+                    src={m.coverImage}
+                    alt={m.title}
+                    loading="lazy"
+                    className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col justify-between p-6">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <span className="rounded-full bg-eje-accent px-3 py-1 font-body text-xs font-semibold text-white">
+                        {m.number}
+                      </span>
+                      <span className="font-body text-xs text-eje-beige/50">{m.pages} pages</span>
+                    </div>
+                    <h3 className="mt-3 font-heading text-lg font-extrabold leading-tight text-eje-beige">
+                      {m.title}
+                    </h3>
+                    <p className="mt-3 font-body text-sm leading-relaxed text-eje-beige/60">
+                      {m.description}
+                    </p>
                   </div>
-                  <h3 className="mt-3 font-heading text-lg font-extrabold leading-tight text-eje-beige">
-                    {m.title}
-                  </h3>
-                  <p className="mt-3 font-body text-sm leading-relaxed text-eje-beige/60">
-                    {m.desc}
-                  </p>
+                  <div className="mt-5 flex flex-wrap items-center gap-3">
+                    {fileUrl ? (
+                      <>
+                        <a
+                          href={fileUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="btn btn-primary inline-flex items-center gap-2"
+                        >
+                          <Eye className="h-4 w-4" />
+                          Browse
+                        </a>
+                        <a href={fileUrl} download className="btn btn-outline inline-flex items-center gap-2">
+                          <Download className="h-4 w-4" />
+                          Download
+                        </a>
+                      </>
+                    ) : (
+                      <span className="font-body text-xs font-semibold uppercase tracking-wide text-eje-beige/40">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
                 </div>
-                <div className="mt-5 flex flex-wrap gap-3">
-                  <button className="btn btn-primary inline-flex items-center gap-2">
-                    <Eye className="h-4 w-4" />
-                      Browse
-                  </button>
-                  <button className="btn btn-outline inline-flex items-center gap-2">
-                    <Download className="h-4 w-4" />
-                    Download
-                  </button>
-                </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            )
+          })}
         </div>
       </div>
     </section>

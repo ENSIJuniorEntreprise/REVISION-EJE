@@ -1,9 +1,19 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
+import { useLenis } from '@studio-freight/react-lenis'
 import ejeLogo from '../assets/EJE_White.png'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const lenis = useLenis()
+
+  const scrollToTop = () => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true })
+    } else {
+      window.scrollTo(0, 0)
+    }
+  }
 
   return (
     <>
@@ -93,13 +103,13 @@ export default function Navbar() {
           <img src={ejeLogo} alt="ENSI Junior Entreprise logo" />
         </div>
         <ul className="navbar__links">
-          <li><NavLink to="/" end>Home</NavLink></li>
-          <li><NavLink to="/a-propos">About</NavLink></li>
-          <li><NavLink to="/services">Services</NavLink></li>
-          <li><NavLink to="/actualites">News</NavLink></li>
-          <li><NavLink to="/contact">Contact</NavLink></li>
+          <li><NavLink to="/" end onClick={scrollToTop}>Home</NavLink></li>
+          <li><NavLink to="/a-propos" onClick={scrollToTop}>About</NavLink></li>
+          <li><NavLink to="/services" onClick={scrollToTop}>Services</NavLink></li>
+          <li><NavLink to="/actualites" onClick={scrollToTop}>News</NavLink></li>
+          <li><NavLink to="/contact" onClick={scrollToTop}>Contact</NavLink></li>
         </ul>
-        <NavLink to="/contact" className="navbar__cta">
+        <NavLink to="/contact" className="navbar__cta" onClick={scrollToTop}>
           Request a Quote <span aria-hidden="true">→</span>
         </NavLink>
         <button className="navbar__hamburger" aria-label="Open mobile menu"
@@ -109,12 +119,12 @@ export default function Navbar() {
       </nav>
 
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-        <NavLink to="/" end onClick={() => setMenuOpen(false)}>Home</NavLink>
-        <NavLink to="/a-propos" onClick={() => setMenuOpen(false)}>About</NavLink>
-        <NavLink to="/services" onClick={() => setMenuOpen(false)}>Services</NavLink>
-        <NavLink to="/actualites" onClick={() => setMenuOpen(false)}>News</NavLink>
-        <NavLink to="/contact" onClick={() => setMenuOpen(false)}>Contact</NavLink>
-        <NavLink to="/contact" className="navbar__cta" style={{ marginTop: '0.5rem', justifyContent: 'center', textAlign: 'center' }} onClick={() => setMenuOpen(false)}>
+        <NavLink to="/" end onClick={() => { setMenuOpen(false); scrollToTop(); }}>Home</NavLink>
+        <NavLink to="/a-propos" onClick={() => { setMenuOpen(false); scrollToTop(); }}>About</NavLink>
+        <NavLink to="/services" onClick={() => { setMenuOpen(false); scrollToTop(); }}>Services</NavLink>
+        <NavLink to="/actualites" onClick={() => { setMenuOpen(false); scrollToTop(); }}>News</NavLink>
+        <NavLink to="/contact" onClick={() => { setMenuOpen(false); scrollToTop(); }}>Contact</NavLink>
+        <NavLink to="/contact" className="navbar__cta" style={{ marginTop: '0.5rem', justifyContent: 'center', textAlign: 'center' }} onClick={() => { setMenuOpen(false); scrollToTop(); }}>
           Request a Quote <span aria-hidden="true">→</span>
         </NavLink>
       </div>

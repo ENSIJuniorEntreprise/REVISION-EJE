@@ -5,6 +5,7 @@ import Services from '../pages/Services'
 import Contact from '../pages/Contact'
 import Actualites from '../pages/Actualites'
 import APropos from '../pages/APropos'
+import NotFound from '../pages/NotFound'
 
 export default function AppRouter() {
   return (
@@ -17,7 +18,7 @@ export default function AppRouter() {
           <Route path="contact" element={<Contact />} />
           {/* Updated Actualites page now includes Hero, Stats, LatestNews, Articles, Magazines from the layout kit */}
           <Route path="actualites" element={<Actualites />} />
-          
+          <Route path="*" element={<NotFound />} />
         </Route>
       </Routes>
     </BrowserRouter>

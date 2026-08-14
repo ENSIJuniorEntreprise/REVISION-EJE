@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ReactLenis } from '@studio-freight/react-lenis'
+import { HelmetProvider } from 'react-helmet-async'
 import App from './App.jsx'
 import './index.css'
 
@@ -46,8 +47,10 @@ function SmoothScrollProvider({ children }) {
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <SmoothScrollProvider>
-      <App />
-    </SmoothScrollProvider>
+    <HelmetProvider>
+      <SmoothScrollProvider>
+        <App />
+      </SmoothScrollProvider>
+    </HelmetProvider>
   </React.StrictMode>,
 )

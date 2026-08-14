@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import PageHero, { Rise } from "../components/PageHero";
+import Seo from "../components/Seo";
 import useReveal from "../hooks/useReveal";
 
 import heroBg1 from '../assets/images/ydin.jpg';
@@ -34,7 +35,7 @@ const timelineEvents = [
     above: false,
   },
   {
-    year: "2011",
+    year: "2012",
     title: "Adoption of association bylaws",
     desc: "formalizing the organization’s governance structure",
     above: true,
@@ -44,6 +45,12 @@ const timelineEvents = [
     title: "Excellence Award",
     desc: "Recognition for the excellence of delivered projects.",
     above: false,
+  },
+  {
+    year: "2024",
+    title: "Get Entrepreneurial",
+    desc: "First Get Entrepreneurial edition.",
+    above: true,
   },
 ];
 
@@ -155,18 +162,6 @@ const globalStyles = `
     position: relative;
     display: inline-block;
   }
-  .section-title span::after {
-    content: '';
-    position: absolute;
-    bottom: -6px; left: 0;
-    width: 100%; height: 3px;
-    background: ${COLORS.blue};
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.8s 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-  .reveal.in .section-title span::after,
-  .section-title.in span::after { transform: scaleX(1); }
 
   .qui-section { padding: 100px 64px; }
   .qui-inner {
@@ -778,7 +773,7 @@ const ImageCarousel = ({ images }) => {
     >
       {images.map((src, i) => (
         <div key={i} className={`carousel-slide${i === activeIndex ? " active" : ""}`}>
-          <img src={src} alt={`Slide ${i + 1}`} />
+          <img src={src} alt={`Slide ${i + 1}`} loading="lazy" />
         </div>
       ))}
       <div className="carousel-dots">
@@ -962,6 +957,11 @@ export default function Index() {
 
   return (
     <>
+      <Seo
+        title="About Us"
+        description="Discover ENSI Junior Entreprise's story, mission, and team — the student association connecting businesses with the talents of tomorrow since 2006."
+        path="/a-propos"
+      />
       <style>{globalStyles}</style>
 
       <div className="scroll-progress" style={{ width: `${scrollPct}%` }} aria-hidden />

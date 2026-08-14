@@ -1,5 +1,8 @@
-﻿import { useState, useEffect, useRef } from "react";
+﻿import { useState, useEffect } from "react";
 import PageHero, { Rise } from "../components/PageHero";
+import Seo from "../components/Seo";
+import { media } from "../assets/media";
+import useIntersection from "../hooks/useIntersection";
 
 
 const CheckCircle = ({ size = 24, className = "" }) => (
@@ -88,28 +91,6 @@ const subServices = [
   "Staff Training",
 ];
 
-function useIntersection(threshold = 0.15) {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold }
-    );
-
-    if (ref.current) obs.observe(ref.current);
-
-    return () => obs.disconnect();
-  }, [threshold]);
-
-  return [ref, visible];
-}
 const mindsetCards = [
   {
     icon: "/assets/agile.png",
@@ -144,23 +125,8 @@ const mindsetCards = [
 ];
 
 function MindsetSection() {
-  const [visible, setVisible] = useState(false);
+  const [sectionRef, visible] = useIntersection(0.2);
   const [hovered, setHovered] = useState(null);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, []);
 
   return (
     <section
@@ -408,24 +374,9 @@ const subServicesList = [
 ];
 
 function SubPrestationsSection() {
-  const [visible, setVisible]   = useState(false);
-  const [hovered, setHovered]   = useState(null);
-  const [active,  setActive]    = useState(null);
-  const sectionRef              = useRef(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.2 }
-    );
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, []);
+  const [sectionRef, visible] = useIntersection(0.2);
+  const [hovered, setHovered] = useState(null);
+  const [active,  setActive]  = useState(null);
 
   return (
     <section
@@ -687,24 +638,9 @@ const processSteps = [
 ];
 
 function ProcessSection() {
-  const [visible,    setVisible]    = useState(false);
+  const [sectionRef, visible] = useIntersection(0.15);
   const [lineHeight, setLineHeight] = useState(0);
   const [hovered,    setHovered]    = useState(null);
-  const sectionRef = useRef(null);
-
-  useEffect(() => {
-    const obs = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          obs.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    if (sectionRef.current) obs.observe(sectionRef.current);
-    return () => obs.disconnect();
-  }, []);
 
   useEffect(() => {
     if (!visible) return;
@@ -1045,9 +981,7 @@ function ProcessSection() {
 
 export default function Services() {
   const [hoveredCircle, setHoveredCircle] = useState(null);
-  const [mindsetRef, mindsetVisible] = useIntersection(0.1);
   const [projectRef, projectVisible] = useIntersection(0.1);
-  const [subRef, subVisible] = useIntersection(0.1);
   const [ctaRef, ctaVisible] = useIntersection(0.1);
   const [active, setActive] = useState("web");
   const current = services.find((s) => s.id === active);
@@ -1092,17 +1026,16 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-[#1f212d] text-white font-body overflow-x-hidden">
+      <Seo
+        title="Services"
+        description="Explore ENSI Junior Entreprise's web, mobile, desktop, and AI/chatbot development services delivered by student consultants."
+        path="/services"
+      />
       {/* HERO */}
       <PageHero
         image="/assets/20th-generation.png"
         imageAlt="ENSI Junior Entreprise"
         scrollTo="#service-cards"
-        decoration={
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="absolute w-[600px] h-[600px] rounded-full border border-[#2ea3dd]/10 animate-spin" />
-            <div className="absolute w-[400px] h-[400px] rounded-full border border-[#2ea3dd]/10 animate-[spin_15s_linear_infinite_reverse]" />
-          </div>
-        }
       >
         <Rise as="h1" delay={0.6} className="mb-8 font-heading text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-eje-beige">
           Our <span className="text-eje-accent">Expertise</span>
@@ -1112,7 +1045,7 @@ export default function Services() {
         </Rise>
         <Rise delay={1.2} className="mt-10 flex flex-wrap justify-center gap-4">
           <button className="btn btn-primary">Request a Quote</button>
-          <a href="/assets/Documents/Project-Portfolio-1.pdf">
+          <a href={media.documents.portfolio}>
             <button className="btn btn-outline">Our Portfolio</button>
           </a>
         </Rise>
@@ -1235,15 +1168,15 @@ export default function Services() {
             >
               <path
                 d="M 300 450 Q 600 350 600 150"
-                stroke="rgba(46,163,221,0.15)"
-                strokeWidth="2"
+                stroke="rgba(46,163,221,0.28)"
+                strokeWidth="3"
                 fill="none"
                 strokeDasharray="4 4"
               />
               <path
                 d="M 900 450 Q 600 350 600 150"
-                stroke="rgba(46,163,221,0.15)"
-                strokeWidth="2"
+                stroke="rgba(46,163,221,0.28)"
+                strokeWidth="3"
                 fill="none"
                 strokeDasharray="4 4"
               />

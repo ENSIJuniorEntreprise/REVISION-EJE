@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { media } from "../assets/media";
+import Seo from "../components/Seo";
+import { apiFetch, ApiError } from "../config/api";
 
 const COLORS = {
   dark: "#1F212D",
@@ -98,7 +101,11 @@ const IconAlert = () => (
 /* ── STYLES ── */
 const S = {
   page: {
-    backgroundColor: "transparent",
+    backgroundColor: COLORS.dark,
+    backgroundImage: `linear-gradient(to bottom, rgba(31,33,45,0.88) 0%, rgba(31,33,45,0.93) 100%), url(${media.images.hero})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    backgroundRepeat: "no-repeat",
     minHeight: "100vh",
     display: "flex",
     flexDirection: "column",
@@ -319,6 +326,8 @@ function ContactForm() {
   const [values, setValues] = useState(INITIAL_VALUES);
   const [touched, setTouched] = useState(INITIAL_TOUCHED);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const errors = Object.fromEntries(
     Object.keys(values).map((k) => [k, validate(k, values[k])])
@@ -329,16 +338,26 @@ function ContactForm() {
   const handleChange = (name, value) => setValues((v) => ({ ...v, [name]: value }));
   const handleBlur = (name) => setTouched((t) => ({ ...t, [name]: true }));
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const allTouched = Object.fromEntries(Object.keys(touched).map((k) => [k, true]));
     setTouched(allTouched);
-    if (!isFormValid) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setValues(INITIAL_VALUES);
-      setTouched(INITIAL_TOUCHED);
-    }, 3000);
+    if (!isFormValid || submitting) return;
+
+    setSubmitError("");
+    setSubmitting(true);
+    try {
+      await apiFetch("/contact", { method: "POST", body: JSON.stringify(values) });
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setValues(INITIAL_VALUES);
+        setTouched(INITIAL_TOUCHED);
+      }, 3000);
+    } catch (err) {
+      setSubmitError(err instanceof ApiError ? err.message : "Something went wrong. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   const [hoverBtn, setHoverBtn] = useState(false);
@@ -378,10 +397,13 @@ function ContactForm() {
         value={values.message} touched={touched.message} error={errors.message}
         onChange={handleChange} onBlur={handleBlur} />
 
+      {submitError && <div style={S.errorMsg}><IconAlert />{submitError}</div>}
+
       <button
         onClick={handleSubmit}
         onMouseEnter={() => setHoverBtn(true)}
         onMouseLeave={() => setHoverBtn(false)}
+        disabled={submitting}
         style={{
           ...S.btnSubmit,
           color: submitted ? COLORS.success : (hoverBtn ? "#fff" : COLORS.blue),
@@ -389,10 +411,11 @@ function ContactForm() {
           border: submitted ? `2px solid ${COLORS.success}` : `2px solid ${COLORS.blue}`,
           boxShadow: hoverBtn && !submitted ? "0 6px 24px rgba(46,163,221,0.35)" : "none",
           transform: hoverBtn && !submitted ? "translateY(-2px)" : "none",
-          opacity: !isFormValid && !submitted ? 0.6 : 1,
+          opacity: (!isFormValid && !submitted) || submitting ? 0.6 : 1,
+          cursor: submitting ? "not-allowed" : "pointer",
         }}
       >
-        {submitted ? "✓ SENT" : "SEND"}
+        {submitted ? "✓ SENT" : submitting ? "SENDING..." : "SEND"}
       </button>
     </div>
   );
@@ -402,6 +425,11 @@ function ContactForm() {
 export default function ContactPage() {
   return (
     <div style={S.page}>
+      <Seo
+        title="Contact"
+        description="Get in touch with ENSI Junior Entreprise to discuss your web, mobile, desktop, or AI/chatbot project."
+        path="/contact"
+      />
       <main style={S.main}>
         <div style={S.glow} />
         <div style={S.heading}>

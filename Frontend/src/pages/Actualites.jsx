@@ -11,10 +11,16 @@ import Magazines from '../components/kit/Magazines'
 import GetEntrepreneurial from '../components/kit/GetEntrepreneurial'
 import AutresEvenements from '../components/kit/AutresEvenements'
 import Newsletter from '../components/kit/Newsletter'
+import Seo from '../components/Seo'
 
 export default function Actualites() {
   return (
     <main className="min-h-screen bg-eje-dark font-body text-eje-beige antialiased">
+      <Seo
+        title="News"
+        description="Stay up to date with ENSI Junior Entreprise's latest news, articles, events, and magazines."
+        path="/actualites"
+      />
       <Hero />
       <Stats />
       <LatestNews />

@@ -32,6 +32,7 @@ export default function PageHero({
           src={image}
           alt={imageAlt}
           className={`absolute inset-0 h-full w-full object-cover animate-hero-zoom ${imgClassName}`}
+          fetchPriority="high"
         />
       )}
       <div className="absolute inset-0 bg-eje-dark animate-veil" />

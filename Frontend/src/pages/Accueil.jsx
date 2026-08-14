@@ -3,6 +3,7 @@ import { ArrowRight, Lightbulb, ShieldCheck, Target, Users, Globe, Smartphone, M
 import { media } from '../assets/media'
 import Newsletter from '../components/kit/Newsletter'
 import PageHero, { Rise } from '../components/PageHero'
+import Seo from '../components/Seo'
 import useReveal from '../hooks/useReveal'
 import useCountUp from '../hooks/useCountUp'
 
@@ -48,6 +49,11 @@ export default function Accueil() {
 
   return (
     <>
+      <Seo
+        title="Home"
+        description="ENSI Junior Entreprise is a student-run digital consulting association delivering web, mobile, desktop, and AI/chatbot projects since 2006."
+        path="/"
+      />
       <style>{`
         .partners-wrap{ overflow:hidden; margin-top:14px }
         .partners-track{ display:flex; gap:28px; align-items:center; white-space:nowrap; animation:scroll-left 24s linear infinite }
@@ -64,7 +70,7 @@ export default function Accueil() {
           delay={0.6}
           className="font-heading text-5xl font-extrabold leading-[1.05] tracking-tight text-eje-beige sm:text-7xl lg:text-[6.5rem] lg:leading-[1.04]"
         >
-          Excellence <span className="text-eje-accent">in the service</span><br />of your ambitions.
+          Driving <span className="text-eje-accent">Innovation.</span><br />Creating Impact.
         </Rise>
         <Rise
           as="p"
@@ -96,11 +102,11 @@ export default function Accueil() {
               partner with.
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
-              <div className="stat-card">
+              <div className="stat-card transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]">
                 <div className="font-heading text-2xl font-extrabold text-eje-accent">20+</div>
                 <div className="mt-1 font-body text-xs uppercase tracking-wide text-eje-beige/60">Years of Experience</div>
               </div>
-              <div className="stat-card">
+              <div className="stat-card transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]">
                 <div className="font-heading text-2xl font-extrabold text-eje-accent">+78</div>
                 <div className="mt-1 font-body text-xs uppercase tracking-wide text-eje-beige/60">Projects Completed</div>
               </div>
@@ -110,11 +116,11 @@ export default function Accueil() {
             </Link>
           </div>
 
-          <div className="image-frame">
+          <div className="image-frame group transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]">
             <img
               src={media.images.aboutPrimary}
               alt="EJE team at work"
-              className="h-full w-full object-cover"
+              className="h-full w-full object-cover transition duration-300 group-hover:scale-110"
             />
           </div>
         </div>

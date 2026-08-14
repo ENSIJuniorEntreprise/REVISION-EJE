@@ -45,6 +45,8 @@ export const media = {
   documents: {
     statuts: '/assets/Documents/statuts.pdf',
     politiqueRse: '/assets/Documents/politique-rse.pdf',
+    financialReport: '/assets/Documents/EtatsFin_23-24.pdf',
+    portfolio: '/assets/Documents/Project-Portfolio-1.pdf',
   },
   partners: partnerFiles.map((file) => ({
     name: toLabel(file),

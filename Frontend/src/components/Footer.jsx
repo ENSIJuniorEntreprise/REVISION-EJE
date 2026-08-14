@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import ejeLogo from '../assets/EJE_White.png'
+import { media } from '../assets/media'
 export default function Footer() {
   return (
     <>
@@ -18,12 +19,12 @@ export default function Footer() {
           gap: 0; align-items: start;
         }
         .footer__logo-row {
-          display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.9rem; margin-top:0.1rem;
+          display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; margin-top:0.1rem;
                 }
-        .footer__globe { width: 52px; height: 52px; flex-shrink: 0; }
-        .footer__logo-name { font-family: 'Gilroy', sans-serif; font-size: 1rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.01em; }
+        .footer__globe { width: 62px; height: 62px; flex-shrink: 0; }
+        .footer__logo-name { font-family: 'Gilroy', sans-serif; font-size: 1.2rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.01em; }
         .footer__tagline { font-size: 0.83rem; color: rgba(224,222,210,0.5); line-height: 1.65; max-width: 240px; margin-bottom: 1.8rem; }
-        .footer__slogan { font-family: 'Photograph Signature', cursive; font-size: 2rem; color: #2ea3dd; letter-spacing: 0.02em; line-height: 1.3; }
+        .footer__slogan { font-family: 'Photograph Signature', cursive; font-size: 1.7rem; color: #2ea3dd; letter-spacing: 0.02em; line-height: 1.3; }
         .footer__col-title { font-family: 'Gilroy', sans-serif; font-size: 0.92rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.04em; margin-bottom: 1.4rem; }
         .footer__nav { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; }
         .footer__nav a { font-size: 0.88rem; color: rgba(224,222,210,0.5); text-decoration: none; transition: color 0.2s ease; cursor: pointer; }
@@ -70,7 +71,7 @@ export default function Footer() {
         }
       `}</style>
 
-      <footer className="footer" aria-label="Pied de page">
+      <footer className="footer" aria-label="Footer">
         <div className="footer__grid">
 
           {/* Column 1: Brand */}
@@ -105,16 +106,16 @@ export default function Footer() {
             <h3 className="footer__col-title">Legally</h3>
             <ul className="footer__nav">
               <li><a href="#">Legal Mention</a></li>
-              <li><a href="#">Status</a></li>
+              <li><a href={media.documents.statuts} target="_blank" rel="noopener noreferrer">Status</a></li>
               <li><a href="#">Moral Report</a></li>
-              <li><a href="#">Financial Report</a></li>
+              <li><a href={media.documents.financialReport} target="_blank" rel="noopener noreferrer">Financial Report</a></li>
             </ul>
           </div>
 
           {/* Column 3: Contact */}
           <div className="footer__contact">
             <h3 className="footer__col-title">Contact</h3>
-            <ul className="footer__contact-list" aria-label="Informations de contact">
+            <ul className="footer__contact-list" aria-label="Contact information">
               <li className="footer__contact-item">
                 <div className="footer__contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
@@ -125,7 +126,7 @@ export default function Footer() {
                 <div className="footer__contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                 </div>
-                <span>+216 XX XXX XXX</span>
+                <a href="tel:+21628844888">+216 28 844 888</a>
               </li>
               <li className="footer__contact-item">
                 <div className="footer__contact-icon" aria-hidden="true">
@@ -134,7 +135,7 @@ export default function Footer() {
                 <span>ENSI, Manouba, Tunisie</span>
               </li>
             </ul>
-            <div className="footer__socials" aria-label="Réseaux sociaux">
+            <div className="footer__socials" aria-label="Social media">
               <a href="https://www.facebook.com/ENSI.Junior.Entreprise" className="footer__social-btn" aria-label="Facebook">
                 <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
               </a>

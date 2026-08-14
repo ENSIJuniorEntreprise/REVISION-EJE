@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Users, Briefcase, Award, Calendar, MapPin, ExternalLink, Star } from 'lucide-react'
+import useCountUp from '../../hooks/useCountUp'
 import bg1 from '../../assets/ge-bg.jpg'
 import bg2 from '../../assets/ge-bg2.jpg'
 import bg3 from '../../assets/ge-bg3.jpg'
@@ -8,27 +9,10 @@ import bg5 from '../../assets/ge-bg5.jpg'
 
 const images = [bg1, bg2, bg3, bg4, bg5]
 
-function useCountUp(target, duration = 2500, started = false) {
-  const [count, setCount] = useState(0)
-  useEffect(() => {
-    if (!started) return
-    let startTime = null
-    const step = (timestamp) => {
-      if (!startTime) startTime = timestamp
-      const progress = Math.min((timestamp - startTime) / duration, 1)
-      const eased = 1 - Math.pow(1 - progress, 3)
-      setCount(Math.floor(eased * target))
-      if (progress < 1) requestAnimationFrame(step)
-    }
-    requestAnimationFrame(step)
-  }, [started, target, duration])
-  return count
-}
-
-function StatItem({ icon: Icon, value, suffix, label, started }) {
-  const count = useCountUp(value, 2500, started)
+function StatItem({ icon: Icon, value, suffix, label }) {
+  const [ref, count] = useCountUp(value, { duration: 2500, threshold: 0.3 })
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div ref={ref} className="flex flex-col items-center gap-1">
       <Icon className="h-7 w-7 text-eje-accent mb-1" strokeWidth={1.5} />
       <span className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">
         {count}{suffix}
@@ -39,19 +23,7 @@ function StatItem({ icon: Icon, value, suffix, label, started }) {
 }
 
 export default function GetEntrepreneurial() {
-  const statsRef = useRef(null)
-  const [started, setStarted] = useState(false)
   const [currentBg, setCurrentBg] = useState(0)
-
-  // Stats count-up trigger
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setStarted(true) },
-      { threshold: 0.3 }
-    )
-    if (statsRef.current) observer.observe(statsRef.current)
-    return () => observer.disconnect()
-  }, [])
 
   // Background slideshow
   useEffect(() => {
@@ -136,13 +108,12 @@ export default function GetEntrepreneurial() {
 
         {/* Stats */}
         <div
-          ref={statsRef}
           className="animate-rise flex flex-wrap items-start justify-center gap-12 pt-2"
           style={{ animationDelay: '0.7s' }}
         >
-          <StatItem icon={Users}     value={500} suffix="+" label="Participants" started={started} />
-          <StatItem icon={Briefcase} value={30}  suffix="+" label="Speakers" started={started} />
-          <StatItem icon={Award}     value={3}   suffix=""  label="Editions"     started={started} />
+          <StatItem icon={Users}     value={500} suffix="+" label="Participants" />
+          <StatItem icon={Briefcase} value={30}  suffix="+" label="Speakers" />
+          <StatItem icon={Award}     value={3}   suffix=""  label="Editions" />
         </div>
 
         {/* CTA Button */}
