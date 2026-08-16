@@ -35,22 +35,45 @@ function mountCmsRoutes(app) {
   )
 
   app.use('/api/stats', singletonFactory(Stats))
-  app.use('/api/home-content', singletonFactory(HomeContent))
+
+  app.use(
+    '/api/home-content',
+    singletonFactory(HomeContent, {
+      uploadMiddleware: makeUploader('home', [{ name: 'hero', kind: 'image' }]),
+      fileFields: [{ field: 'hero', urlPrefix: '/uploads/home', bodyField: 'heroImage' }],
+    }),
+  )
 
   app.use(
     '/api/about-content',
-    singletonFactory(AboutContent, { parseFields: ['galleryImages'] }),
+    singletonFactory(AboutContent, {
+      uploadMiddleware: makeUploader('about', [{ name: 'hero', kind: 'image' }]),
+      fileFields: [{ field: 'hero', urlPrefix: '/uploads/about', bodyField: 'heroImage' }],
+      parseFields: ['galleryImages'],
+    }),
   )
 
   app.use(
     '/api/services-content',
     singletonFactory(ServicesContent, {
-      uploadMiddleware: makeUploader('services', [{ name: 'portfolio', kind: 'pdf' }]),
-      fileFields: [{ field: 'portfolio', urlPrefix: '/uploads/services', bodyField: 'portfolioFileUrl' }],
+      uploadMiddleware: makeUploader('services', [
+        { name: 'portfolio', kind: 'pdf' },
+        { name: 'hero', kind: 'image' },
+      ]),
+      fileFields: [
+        { field: 'portfolio', urlPrefix: '/uploads/services', bodyField: 'portfolioFileUrl' },
+        { field: 'hero', urlPrefix: '/uploads/services', bodyField: 'heroImage' },
+      ],
     }),
   )
 
-  app.use('/api/news-content', singletonFactory(NewsContent))
+  app.use(
+    '/api/news-content',
+    singletonFactory(NewsContent, {
+      uploadMiddleware: makeUploader('news', [{ name: 'hero', kind: 'image' }]),
+      fileFields: [{ field: 'hero', urlPrefix: '/uploads/news', bodyField: 'heroImage' }],
+    }),
+  )
 
   // ── Repeatable lists ────────────────────────────────────────
   app.use(

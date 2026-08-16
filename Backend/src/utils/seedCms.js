@@ -9,8 +9,10 @@ const path = require('path')
 const mongoose = require('mongoose')
 const connectDB = require('../config/db')
 
+const HomeContent = require('../models/HomeContent')
 const AboutContent = require('../models/AboutContent')
 const ServicesContent = require('../models/ServicesContent')
+const NewsContent = require('../models/NewsContent')
 const BoardMember = require('../models/BoardMember')
 const TimelineEvent = require('../models/TimelineEvent')
 const Value = require('../models/Value')
@@ -42,6 +44,21 @@ function copyIntoUploads(sourceRelativeToSrcAssets, subdir, destFilename) {
   return `/uploads/${subdir}/${destFilename}`
 }
 
+// Sets a single field on a singleton content doc, but only if it's not
+// already set — never overwrites something an admin has since edited.
+async function setFieldIfEmpty(Model, field, value) {
+  if (!value) return
+  let doc = await Model.findOne()
+  if (!doc) {
+    doc = await Model.create({ [field]: value })
+    return
+  }
+  if (!doc[field]) {
+    doc[field] = value
+    await doc.save()
+  }
+}
+
 async function upsertByKey(Model, key, items) {
   let created = 0
   for (const item of items) {
@@ -55,6 +72,20 @@ async function upsertByKey(Model, key, items) {
 
 async function seedCms() {
   await connectDB()
+
+  // ── Page hero images ──
+  await setFieldIfEmpty(HomeContent, 'heroImage', '/assets/images/hero.jpg')
+  await setFieldIfEmpty(ServicesContent, 'heroImage', '/assets/20th-generation.png')
+  await setFieldIfEmpty(
+    AboutContent,
+    'heroImage',
+    copyIntoUploads('images/ydin.jpg', 'about', 'hero-ydin.jpg'),
+  )
+  await setFieldIfEmpty(
+    NewsContent,
+    'heroImage',
+    copyIntoUploads('hero-newsroom.png', 'news', 'hero-newsroom.png'),
+  )
 
   // ── About gallery (bundled imports -> /uploads/about) ──
   const galleryImages = [

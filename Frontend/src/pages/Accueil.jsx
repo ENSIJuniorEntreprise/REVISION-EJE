@@ -10,6 +10,7 @@ import useApiData from '../hooks/useApiData'
 import { resolveMediaUrl } from '../config/api'
 
 const HOME_CONTENT_FALLBACK = {
+  heroImage: '',
   heroSince: 'Since 2006',
   heroTitle: 'Driving Innovation. Creating Impact.',
   heroSubtitle: 'Innovation. Excellence. Creativity.',
@@ -79,7 +80,7 @@ export default function Accueil() {
       `}</style>
 
       {/* ── HERO ── */}
-      <PageHero image={media.images.hero} imageAlt="ENSI Junior Entreprise" scrollTo="#who-we-are">
+      <PageHero image={resolveMediaUrl(home.heroImage) || media.images.hero} imageAlt="ENSI Junior Entreprise" scrollTo="#who-we-are">
         <Rise as="p" delay={0.4} className="eyebrow">{home.heroSince}</Rise>
         <Rise
           as="h1"

@@ -49,6 +49,7 @@ export const singletonSections = [
     label: 'Home Page',
     apiPath: '/home-content',
     fields: [
+      { name: 'heroImage', label: 'Hero image', type: 'image', uploadField: 'hero' },
       { name: 'heroSince', label: 'Hero eyebrow (e.g. "Since 2006")', type: 'text' },
       { name: 'heroTitle', label: 'Hero title', type: 'text' },
       { name: 'heroSubtitle', label: 'Hero subtitle', type: 'text' },
@@ -65,6 +66,7 @@ export const singletonSections = [
     label: 'About Page',
     apiPath: '/about-content',
     fields: [
+      { name: 'heroImage', label: 'Hero image', type: 'image', uploadField: 'hero' },
       { name: 'heroTitle', label: 'Hero title', type: 'text' },
       { name: 'heroSubtitle', label: 'Hero subtitle', type: 'text' },
       { name: 'introText', label: '"Who are we?" text', type: 'textarea' },
@@ -76,6 +78,7 @@ export const singletonSections = [
     label: 'Services Page',
     apiPath: '/services-content',
     fields: [
+      { name: 'heroImage', label: 'Hero image', type: 'image', uploadField: 'hero' },
       { name: 'heroTitle', label: 'Hero title', type: 'text' },
       { name: 'heroSubtitle', label: 'Hero subtitle', type: 'textarea' },
       { name: 'portfolioFileUrl', label: 'Portfolio PDF', type: 'pdf', uploadField: 'portfolio' },
@@ -86,6 +89,7 @@ export const singletonSections = [
     label: 'News Page',
     apiPath: '/news-content',
     fields: [
+      { name: 'heroImage', label: 'Hero image', type: 'image', uploadField: 'hero' },
       { name: 'heroTitle', label: 'Hero title', type: 'text' },
       { name: 'heroSubtitle', label: 'Hero subtitle', type: 'textarea' },
     ],

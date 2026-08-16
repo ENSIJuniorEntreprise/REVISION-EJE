@@ -3,8 +3,10 @@ import { ArrowDown } from 'lucide-react'
 import heroImg from '../../assets/hero-newsroom.png'
 import PageHero, { Rise } from '../PageHero'
 import useApiData from '../../hooks/useApiData'
+import { resolveMediaUrl } from '../../config/api'
 
 const NEWS_CONTENT_FALLBACK = {
+  heroImage: '',
   heroTitle: 'Discover ENSI Junior Entreprise',
   heroSubtitle: 'Dive into the latest news and highlights of our association.',
 }
@@ -13,7 +15,7 @@ export default function Hero() {
   const { data: news } = useApiData('/news-content', NEWS_CONTENT_FALLBACK)
 
   return (
-    <PageHero image={heroImg} imageAlt="L'Actu' ENSI Junior Entreprise newsroom" scrollTo="#stats" scrollLabel="Scroll down">
+    <PageHero image={resolveMediaUrl(news.heroImage) || heroImg} imageAlt="L'Actu' ENSI Junior Entreprise newsroom" scrollTo="#stats" scrollLabel="Scroll down">
       <Rise
         as="h1"
         delay={0.9}

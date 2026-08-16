@@ -16,6 +16,7 @@ const COLORS = {
 };
 
 const ABOUT_CONTENT_FALLBACK = {
+  heroImage: '',
   heroTitle: 'ENSI Junior Enterprise',
   heroSubtitle: 'Creativity—Professionalism—Excellence',
   introText:
@@ -894,7 +895,7 @@ export default function Index() {
       <div className="scroll-progress" style={{ width: `${scrollPct}%` }} aria-hidden />
 
       {/* ── HERO ── */}
-      <PageHero image={heroBg1} imageAlt="ENSI Junior Entreprise team" contentClassName="max-w-4xl" scrollTo="#apropos">
+      <PageHero image={resolveMediaUrl(about.heroImage) || heroBg1} imageAlt="ENSI Junior Entreprise team" contentClassName="max-w-4xl" scrollTo="#apropos">
         <Rise as="p" delay={0.4} className="hero-label">About</Rise>
         <Rise as="h1" delay={0.6} className="hero-title">
           {about.heroTitle}

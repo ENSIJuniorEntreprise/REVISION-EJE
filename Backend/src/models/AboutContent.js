@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const aboutContentSchema = new mongoose.Schema(
   {
+    heroImage: { type: String, default: '' },
     heroTitle: { type: String, default: 'ENSI Junior Enterprise' },
     heroSubtitle: { type: String, default: 'Creativity—Professionalism—Excellence' },
     introText: {

@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 
 const homeContentSchema = new mongoose.Schema(
   {
+    heroImage: { type: String, default: '' },
     heroSince: { type: String, default: 'Since 2006' },
     heroTitle: { type: String, default: 'Driving Innovation. Creating Impact.' },
     heroSubtitle: { type: String, default: 'Innovation. Excellence. Creativity.' },

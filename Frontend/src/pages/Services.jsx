@@ -7,6 +7,7 @@ import useApiData from "../hooks/useApiData";
 import { resolveMediaUrl } from "../config/api";
 
 const SERVICES_CONTENT_FALLBACK = {
+  heroImage: '',
   heroTitle: 'Our Expertise',
   heroSubtitle: 'From design to production, we transform your technological challenges into competitive advantages.',
   portfolioFileUrl: media.documents.portfolio,
@@ -997,7 +998,7 @@ export default function Services() {
       />
       {/* HERO */}
       <PageHero
-        image="/assets/20th-generation.png"
+        image={resolveMediaUrl(servicesContent.heroImage) || '/assets/20th-generation.png'}
         imageAlt="ENSI Junior Entreprise"
         scrollTo="#service-cards"
       >
