@@ -1,7 +1,28 @@
 import { Link } from 'react-router-dom'
-import ejeLogo from '../assets/EJE_White.png'
-import { media } from '../assets/media'
+import useApiData from '../hooks/useApiData'
+import { resolveMediaUrl } from '../config/api'
+
+const SITE_SETTINGS_FALLBACK = {
+  logoUrl: '/assets/Logoo.png',
+  email: 'contact@ensi-je.com',
+  phone: '+216 28 844 888',
+  address: 'ENSI, Manouba, Tunisie',
+  tagline: 'The student association connecting businesses with the talents of tomorrow.',
+  slogan: 'Always Striving For Greatness',
+  socialLinks: {
+    linkedin: 'https://www.linkedin.com/company/ensi-junior-entreprise/',
+    facebook: 'https://www.facebook.com/ENSI.Junior.Entreprise',
+    instagram: 'https://www.instagram.com/ensijunior/',
+    youtube: 'https://www.youtube.com/@ENSIJuniorEntreprise',
+  },
+  copyrightText: '© 2026 ENSI Junior Entreprise. All rights reserved.',
+}
+
 export default function Footer() {
+  const { data: settings } = useApiData('/site-settings', SITE_SETTINGS_FALLBACK)
+  const { data: legalDocuments } = useApiData('/legal-documents', [], { list: true })
+  const social = settings.socialLinks || SITE_SETTINGS_FALLBACK.socialLinks
+
   return (
     <>
       <style>{`
@@ -21,7 +42,7 @@ export default function Footer() {
         .footer__logo-row {
           display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; margin-top:0.1rem;
                 }
-        .footer__globe { width: 62px; height: 62px; flex-shrink: 0; }
+        .footer__globe { width: 62px; height: 62px; flex-shrink: 0; object-fit: contain; }
         .footer__logo-name { font-family: 'Gilroy', sans-serif; font-size: 1.2rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.01em; }
         .footer__tagline { font-size: 0.83rem; color: rgba(224,222,210,0.5); line-height: 1.65; max-width: 240px; margin-bottom: 1.8rem; }
         .footer__slogan { font-family: 'Photograph Signature', cursive; font-size: 1.7rem; color: #2ea3dd; letter-spacing: 0.02em; line-height: 1.3; }
@@ -77,15 +98,14 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <div className="footer__brand">
             <div className="footer__logo-row">
-              <img src={ejeLogo} alt="Logo ENSI Junior Entreprise" className='footer__globe' />
+              <img src={resolveMediaUrl(settings.logoUrl)} alt="Logo ENSI Junior Entreprise" className='footer__globe' />
               <span className="footer__logo-name">ENSI Junior Entreprise</span>
             </div>
             <p className="footer__tagline">
-                The student association connecting<br/>
-                businesses with the talents of tomorrow.
+              {settings.tagline}
             </p>
-            <p className="footer__slogan" aria-label="Always Striving For Greatness">
-              Always Striving For Greatness
+            <p className="footer__slogan" aria-label={settings.slogan}>
+              {settings.slogan}
             </p>
           </div>
 
@@ -105,10 +125,13 @@ export default function Footer() {
           <div className="footer__legal">
             <h3 className="footer__col-title">Legally</h3>
             <ul className="footer__nav">
-              <li><a href="#">Legal Mention</a></li>
-              <li><a href={media.documents.statuts} target="_blank" rel="noopener noreferrer">Status</a></li>
-              <li><a href="#">Moral Report</a></li>
-              <li><a href={media.documents.financialReport} target="_blank" rel="noopener noreferrer">Financial Report</a></li>
+              {legalDocuments.map((doc) => (
+                <li key={doc._id}>
+                  <a href={resolveMediaUrl(doc.fileUrl)} target="_blank" rel="noopener noreferrer">
+                    {doc.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
@@ -120,32 +143,32 @@ export default function Footer() {
                 <div className="footer__contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
                 </div>
-                <a href="mailto:contact@ensi-je.com">contact@ensi-je.com</a>
+                <a href={`mailto:${settings.email}`}>{settings.email}</a>
               </li>
               <li className="footer__contact-item">
                 <div className="footer__contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
                 </div>
-                <a href="tel:+21628844888">+216 28 844 888</a>
+                <a href={`tel:${settings.phone.replace(/\s+/g, '')}`}>{settings.phone}</a>
               </li>
               <li className="footer__contact-item">
                 <div className="footer__contact-icon" aria-hidden="true">
                   <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 1118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </div>
-                <span>ENSI, Manouba, Tunisie</span>
+                <span>{settings.address}</span>
               </li>
             </ul>
             <div className="footer__socials" aria-label="Social media">
-              <a href="https://www.facebook.com/ENSI.Junior.Entreprise" className="footer__social-btn" aria-label="Facebook">
+              <a href={social.facebook} className="footer__social-btn" aria-label="Facebook" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
               </a>
-              <a href="https://www.instagram.com/ensijunior/" className="footer__social-btn" aria-label="Instagram">
+              <a href={social.instagram} className="footer__social-btn" aria-label="Instagram" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2"/></svg>
               </a>
-              <a href="https://www.linkedin.com/company/ensi-junior-entreprise/" className="footer__social-btn" aria-label="LinkedIn">
+              <a href={social.linkedin} className="footer__social-btn" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
               </a>
-              <a href="https://www.youtube.com/@ENSIJuniorEntreprise" className="footer__social-btn" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
+              <a href={social.youtube} className="footer__social-btn" aria-label="YouTube" target="_blank" rel="noopener noreferrer">
                 <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 001.46 6.42 29 29 0 001 12a29 29 0 00.46 5.58 2.78 2.78 0 001.95 1.96C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.96A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/></svg>
               </a>
             </div>
@@ -155,7 +178,7 @@ export default function Footer() {
 
         <div className="footer__divider" aria-hidden="true"></div>
         <div className="footer__bottom">
-          <p className="footer__copy">&copy; 2026 ENSI Junior Entreprise. All rights reserved.</p>
+          <p className="footer__copy">{settings.copyrightText}</p>
         </div>
       </footer>
     </>

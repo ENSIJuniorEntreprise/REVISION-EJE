@@ -3,6 +3,14 @@ import PageHero, { Rise } from "../components/PageHero";
 import Seo from "../components/Seo";
 import { media } from "../assets/media";
 import useIntersection from "../hooks/useIntersection";
+import useApiData from "../hooks/useApiData";
+import { resolveMediaUrl } from "../config/api";
+
+const SERVICES_CONTENT_FALLBACK = {
+  heroTitle: 'Our Expertise',
+  heroSubtitle: 'From design to production, we transform your technological challenges into competitive advantages.',
+  portfolioFileUrl: media.documents.portfolio,
+};
 
 
 const CheckCircle = ({ size = 24, className = "" }) => (
@@ -22,59 +30,6 @@ const CheckCircle = ({ size = 24, className = "" }) => (
     <polyline points="22 4 12 14.01 9 11.01" />
   </svg>
 );
-
-const services = [
-  {
-    id: "web",
-    label : "Web Development",  
-    icon: "/assets/globe.png",
-    title: "Web Development",
-    desc: "High-performance, scalable, user-centric web solutions using React, Next.js, and Node.js.",
-    features: ["Corporate websites & showcases",
-      "Progressive Web Applications (PWA)",
-      "E-commerce platforms",
-      "Content Management Systems (CMS)",
-      "API integrations & third-party services",],
-    image : "/assets/getent (1).png",
-  },
-  {
-    id: "mobile",
-    label: "Mobile Development",
-
-    icon: "/assets/telephone.png",
-    title: "Mobile Development",
-    desc: "Smooth native and hybrid applications for iOS and Android with Flutter or React Native.",
-    features: ["Native & hybrid iOS & Android",
-      "Optimized Mobile UI/UX",
-      "API Integration",
-      "Offline Mode",],
-    image : "/assets/daam.png",
-  },
-  {
-    id: "desktop",
-    label: "Desktop Development",
-    icon: "/assets/portable.png",
-    title: "Desktop Development",
-    desc: "Robust desktop software for Windows, macOS, and Linux tailored to your complex business needs.",
-    features: ["Cross-platform (Win, Mac, Linux)",
-      "High performance",
-      "Advanced security",
-      "Legacy update & migration",],
-    image : "/assets/dashbord.png",
-  },
-  {
-    id: "ia",
-    label: "ChatBot & AI",
-    icon: "/assets/chatbot.png",
-    title: "CHATBOT & AI",
-    desc: "Integration of generative AI and machine learning models to automate and optimize your processes.",
-    features: ["NLP & language processing",
-      "Computer Vision",
-      "Predictive Analytics",
-      "Generative AI (Gen AI)",],
-    image : "/assets/chatbot.jpg",
-  },
-];
 
 const mindsetValues = [
   { icon: "/assets/agile.png", title: "Agility", desc: "Scrum methodology for fast and controlled delivery." },
@@ -983,8 +938,17 @@ export default function Services() {
   const [hoveredCircle, setHoveredCircle] = useState(null);
   const [projectRef, projectVisible] = useIntersection(0.1);
   const [ctaRef, ctaVisible] = useIntersection(0.1);
-  const [active, setActive] = useState("web");
-  const current = services.find((s) => s.id === active);
+  const { data: servicesContent } = useApiData('/services-content', SERVICES_CONTENT_FALLBACK);
+  const { data: serviceCategories } = useApiData('/service-categories', [], { list: true });
+  const [activeId, setActiveId] = useState(null);
+
+  useEffect(() => {
+    if (!activeId && serviceCategories.length > 0) {
+      setActiveId(serviceCategories[0]._id);
+    }
+  }, [activeId, serviceCategories]);
+
+  const current = serviceCategories.find((s) => s._id === activeId);
 
   const circleBase =
     "absolute w-40 h-40 rounded-full border-2 border-[#2ea3dd] bg-[#2ea3dd]/10 flex flex-col items-center justify-center gap-3 text-[#2ea3dd] font-bold text-sm text-center leading-snug cursor-pointer transition-all duration-500 hover:scale-110 hover:bg-[#2ea3dd]/20 hover:border-[#2ea3dd] hover:shadow-[0_0_30px_rgba(46,163,221,0.4)]";
@@ -1038,16 +1002,18 @@ export default function Services() {
         scrollTo="#service-cards"
       >
         <Rise as="h1" delay={0.6} className="mb-8 font-heading text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight text-eje-beige">
-          Our <span className="text-eje-accent">Expertise</span>
+          {servicesContent.heroTitle}
         </Rise>
         <Rise as="p" delay={0.9} className="mx-auto max-w-2xl font-body text-base sm:text-lg leading-7 text-eje-beige/80">
-          From design to production, we transform your technological challenges into competitive advantages.
+          {servicesContent.heroSubtitle}
         </Rise>
         <Rise delay={1.2} className="mt-10 flex flex-wrap justify-center gap-4">
           <button className="btn btn-primary">Request a Quote</button>
-          <a href={media.documents.portfolio}>
-            <button className="btn btn-outline">Our Portfolio</button>
-          </a>
+          {servicesContent.portfolioFileUrl && (
+            <a href={resolveMediaUrl(servicesContent.portfolioFileUrl)} target="_blank" rel="noopener noreferrer">
+              <button className="btn btn-outline">Our Portfolio</button>
+            </a>
+          )}
         </Rise>
       </PageHero>
 
@@ -1067,75 +1033,77 @@ export default function Services() {
 
       {/* Tabs */}
       <div className="flex justify-center flex-wrap gap-2 mb-10">
-        {services.map(({ id, label, icon }) => (
+        {serviceCategories.map(({ _id, name, iconUrl }) => (
           <button
-            key={id}
-            onClick={() => setActive(id)}
+            key={_id}
+            onClick={() => setActiveId(_id)}
             className={`flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium transition-all duration-200
               ${
-                active === id
+                activeId === _id
                   ? "bg-[#2ea3dd] border-[#2ea3dd] text-white"
                   : "border-white/20 text-[#e0ded2] hover:border-[#2ea3dd] hover:text-[#2ea3dd]"
               }`}
           >
-            <img src={icon} alt={label} className="w-[15px] h-[15px] opacity-80" />
-            {label}
+            {iconUrl && <img src={resolveMediaUrl(iconUrl)} alt={name} className="w-[15px] h-[15px] opacity-80" />}
+            {name}
           </button>
         ))}
       </div>
 
       {/* Panel */}
-      <div className="flex flex-col md:flex-row gap-10 items-start max-w-6xl mx-auto">
-        {/* Left */}
-        <div className="flex-1">
-          <h3 className="text-xl font-bold text-[#2ea3dd] mb-4">
-            {current.title}
-          </h3>
-          <p className="text-[#e0ded2] font-bold text-sm leading-relaxed mb-6">
-            {current.desc}
-          </p>
-          <ul className="flex flex-col gap-3">
-            {current.features.map((feat) => (
-              <li
-                key={feat}
-                className="flex items-center gap-3 text-sm font-semibold text-[#e0ded2]"
-              >
-                <CheckCircle
-                  size={18}
-                  className="text-[#2ea3dd] flex-shrink-0"
-                />
-                {feat}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Right */}
-        <div className="flex-1 max-w-md w-full">
-          <div className="bg-[#171a27] rounded-xl p-8 min-h-[280px] flex items-center justify-center shadow-2xl">
-            {current.image ? (
-              <img
-                src={current.image}
-                alt={current.title}
-                className="rounded-lg w-full h-auto max-h-64 object-contain opacity-90"
-              />
-            ) : (
-              <div className="bg-[#e8e6df]/10 rounded-lg w-full h-52 flex items-center justify-center">
-                <svg
-                  className="w-10 h-10 text-[#2ea3dd]"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+      {current && (
+        <div className="flex flex-col md:flex-row gap-10 items-start max-w-6xl mx-auto">
+          {/* Left */}
+          <div className="flex-1">
+            <h3 className="text-xl font-bold text-[#2ea3dd] mb-4">
+              {current.name}
+            </h3>
+            <p className="text-[#e0ded2] font-bold text-sm leading-relaxed mb-6">
+              {current.longDescription}
+            </p>
+            <ul className="flex flex-col gap-3">
+              {(current.bulletPoints || []).map((feat) => (
+                <li
+                  key={feat}
+                  className="flex items-center gap-3 text-sm font-semibold text-[#e0ded2]"
                 >
-                  <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="1.5" />
-                  <circle cx="8.5" cy="8.5" r="1.5" strokeWidth="1.5" />
-                  <polyline points="21 15 16 10 5 21" strokeWidth="1.5" />
-                </svg>
-              </div>
-            )}
+                  <CheckCircle
+                    size={18}
+                    className="text-[#2ea3dd] flex-shrink-0"
+                  />
+                  {feat}
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Right */}
+          <div className="flex-1 max-w-md w-full">
+            <div className="bg-[#171a27] rounded-xl p-8 min-h-[280px] flex items-center justify-center shadow-2xl">
+              {current.image ? (
+                <img
+                  src={resolveMediaUrl(current.image)}
+                  alt={current.name}
+                  className="rounded-lg w-full h-auto max-h-64 object-contain opacity-90"
+                />
+              ) : (
+                <div className="bg-[#e8e6df]/10 rounded-lg w-full h-52 flex items-center justify-center">
+                  <svg
+                    className="w-10 h-10 text-[#2ea3dd]"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <rect x="3" y="3" width="18" height="18" rx="2" strokeWidth="1.5" />
+                    <circle cx="8.5" cy="8.5" r="1.5" strokeWidth="1.5" />
+                    <polyline points="21 15 16 10 5 21" strokeWidth="1.5" />
+                  </svg>
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </section>
   
 

@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useLenis } from '@studio-freight/react-lenis'
-import ejeLogo from '../assets/EJE_White.png'
+import useApiData from '../hooks/useApiData'
+import { resolveMediaUrl } from '../config/api'
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
   const lenis = useLenis()
+  const { data: settings } = useApiData('/site-settings', { logoUrl: '/assets/Logoo.png' })
 
   const scrollToTop = () => {
     if (lenis) {
@@ -100,7 +102,7 @@ export default function Navbar() {
 
       <nav className="navbar" aria-label="Main navigation">
         <div className="navbar__logo">
-          <img src={ejeLogo} alt="ENSI Junior Entreprise logo" />
+          <img src={resolveMediaUrl(settings.logoUrl)} alt="ENSI Junior Entreprise logo" />
         </div>
         <ul className="navbar__links">
           <li><NavLink to="/" end onClick={scrollToTop}>Home</NavLink></li>

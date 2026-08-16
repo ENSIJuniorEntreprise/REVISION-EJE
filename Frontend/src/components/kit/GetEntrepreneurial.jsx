@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react'
 import { Users, Briefcase, Award, Calendar, MapPin, ExternalLink, Star } from 'lucide-react'
 import useCountUp from '../../hooks/useCountUp'
-import bg1 from '../../assets/ge-bg.jpg'
-import bg2 from '../../assets/ge-bg2.jpg'
-import bg3 from '../../assets/ge-bg3.jpg'
-import bg4 from '../../assets/ge-bg4.jpg'
-import bg5 from '../../assets/ge-bg5.jpg'
-
-const images = [bg1, bg2, bg3, bg4, bg5]
+import useApiData from '../../hooks/useApiData'
+import { resolveMediaUrl } from '../../config/api'
 
 function StatItem({ icon: Icon, value, suffix, label }) {
   const [ref, count] = useCountUp(value, { duration: 2500, threshold: 0.3 })
@@ -22,27 +17,37 @@ function StatItem({ icon: Icon, value, suffix, label }) {
   )
 }
 
+function formatDate(date) {
+  if (!date) return ''
+  return new Date(date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+}
+
 export default function GetEntrepreneurial() {
+  const { data: events } = useApiData('/events', [], { list: true })
+  const event = events.find((e) => e.isMajor)
+  const images = event?.images || []
   const [currentBg, setCurrentBg] = useState(0)
 
-  // Background slideshow
   useEffect(() => {
+    if (images.length === 0) return
     const interval = setInterval(() => {
-      setCurrentBg(prev => (prev + 1) % images.length)
+      setCurrentBg((prev) => (prev + 1) % images.length)
     }, 3000)
     return () => clearInterval(interval)
-  }, [])
+  }, [images.length])
+
+  if (!event) return null
 
   return (
     <section
       className="relative min-h-screen w-full overflow-hidden flex items-center justify-center"
-      aria-label="Get Entrepreneurial Event"
+      aria-label={event.name}
     >
       {/* Slideshow images — same style as Hero */}
       {images.map((src, i) => (
         <img
           key={src}
-          src={src}
+          src={resolveMediaUrl(src)}
           alt=""
           aria-hidden="true"
           className="absolute inset-0 h-full w-full object-cover"
@@ -69,7 +74,7 @@ export default function GetEntrepreneurial() {
         {/* Badge */}
         <div className="animate-rise flex items-center gap-2 rounded-full border border-eje-accent/30 bg-eje-accent/10 px-4 py-1.5 text-sm font-semibold text-eje-accent backdrop-blur-sm">
           <Star className="h-4 w-4 fill-eje-accent" />
-          Major Event
+          {event.category || 'Major Event'}
         </div>
 
         {/* Title */}
@@ -77,8 +82,7 @@ export default function GetEntrepreneurial() {
           className="animate-rise font-heading text-5xl font-extrabold leading-tight tracking-tight text-eje-beige sm:text-6xl lg:text-7xl"
           style={{ animationDelay: '0.2s' }}
         >
-          Get{' '}
-          <span className="text-eje-accent">Entrepreneurial</span>
+          {event.name}
         </h1>
 
         {/* Description */}
@@ -86,9 +90,7 @@ export default function GetEntrepreneurial() {
           className="animate-rise max-w-2xl font-body text-base leading-relaxed text-eje-beige/75 sm:text-lg"
           style={{ animationDelay: '0.4s' }}
         >
-          Our flagship annual event dedicated to innovation,
-           entrepreneurship and business creation. 
-           An immersive day to connect creative minds and the leaders of tomorrow.
+          {event.description}
         </p>
 
         {/* Date & Location */}
@@ -96,14 +98,18 @@ export default function GetEntrepreneurial() {
           className="animate-rise flex flex-wrap items-center justify-center gap-6 text-sm font-medium text-eje-beige/80"
           style={{ animationDelay: '0.55s' }}
         >
-          <span className="flex items-center gap-2">
-            <Calendar className="h-4 w-4 text-eje-accent" strokeWidth={1.8} />
-            15 October 2026
-          </span>
-          <span className="flex items-center gap-2">
-            <MapPin className="h-4 w-4 text-eje-accent" strokeWidth={1.8} />
-            UTICA, Tunis
-          </span>
+          {event.date && (
+            <span className="flex items-center gap-2">
+              <Calendar className="h-4 w-4 text-eje-accent" strokeWidth={1.8} />
+              {formatDate(event.date)}
+            </span>
+          )}
+          {event.location && (
+            <span className="flex items-center gap-2">
+              <MapPin className="h-4 w-4 text-eje-accent" strokeWidth={1.8} />
+              {event.location}
+            </span>
+          )}
         </div>
 
         {/* Stats */}
@@ -111,34 +117,38 @@ export default function GetEntrepreneurial() {
           className="animate-rise flex flex-wrap items-start justify-center gap-12 pt-2"
           style={{ animationDelay: '0.7s' }}
         >
-          <StatItem icon={Users}     value={500} suffix="+" label="Participants" />
-          <StatItem icon={Briefcase} value={30}  suffix="+" label="Speakers" />
-          <StatItem icon={Award}     value={3}   suffix=""  label="Editions" />
+          {!!event.participants && <StatItem icon={Users} value={event.participants} suffix="+" label="Participants" />}
+          {!!event.speakers && <StatItem icon={Briefcase} value={event.speakers} suffix="+" label="Speakers" />}
+          {!!event.editions && <StatItem icon={Award} value={event.editions} suffix="" label="Editions" />}
         </div>
 
         {/* CTA Button */}
-        <a
-          href="#"
-          className="animate-rise mt-2 inline-flex items-center gap-3 rounded-full bg-eje-accent px-8 py-4 font-heading text-base font-bold text-white shadow-[0_8px_30px_-8px_rgba(46,163,221,0.7)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_16px_40px_-8px_rgba(46,163,221,0.8)]"
-          style={{ animationDelay: '0.85s' }}
-        >
-          <ExternalLink className="h-5 w-5" strokeWidth={2} />
-            Visit the site — coming soon
-        </a>
+        {event.link && (
+          <a
+            href={event.link}
+            className="animate-rise mt-2 inline-flex items-center gap-3 rounded-full bg-eje-accent px-8 py-4 font-heading text-base font-bold text-white shadow-[0_8px_30px_-8px_rgba(46,163,221,0.7)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_16px_40px_-8px_rgba(46,163,221,0.8)]"
+            style={{ animationDelay: '0.85s' }}
+          >
+            <ExternalLink className="h-5 w-5" strokeWidth={2} />
+            {event.linkLabel || 'Learn more'}
+          </a>
+        )}
 
         {/* Slide indicators */}
-        <div className="animate-rise flex gap-2" style={{ animationDelay: '1s' }}>
-          {images.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setCurrentBg(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                i === currentBg ? 'w-6 bg-eje-accent' : 'w-2 bg-eje-beige/30 hover:bg-eje-beige/60'
-              }`}
-              aria-label={`Image ${i + 1}`}
-            />
-          ))}
-        </div>
+        {images.length > 1 && (
+          <div className="animate-rise flex gap-2" style={{ animationDelay: '1s' }}>
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentBg(i)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  i === currentBg ? 'w-6 bg-eje-accent' : 'w-2 bg-eje-beige/30 hover:bg-eje-beige/60'
+                }`}
+                aria-label={`Image ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )

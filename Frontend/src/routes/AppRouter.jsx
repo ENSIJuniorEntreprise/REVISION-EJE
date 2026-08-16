@@ -7,10 +7,29 @@ import Actualites from '../pages/Actualites'
 import APropos from '../pages/APropos'
 import NotFound from '../pages/NotFound'
 
+import AdminLogin from '../admin/AdminLogin'
+import AdminLayout from '../admin/AdminLayout'
+import AdminDashboard from '../admin/AdminDashboard'
+import SectionPage from '../admin/SectionPage'
+import ProtectedRoute from '../admin/ProtectedRoute'
+
 export default function AppRouter() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <AdminLayout />
+            </ProtectedRoute>
+          }
+        >
+          <Route index element={<AdminDashboard />} />
+          <Route path=":type/:key" element={<SectionPage />} />
+        </Route>
+
         <Route path="/" element={<Layout />}>
           <Route index element={<Accueil />} />
           <Route path="services" element={<Services />} />

@@ -1,40 +1,41 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Lightbulb, ShieldCheck, Target, Users, Globe, Smartphone, Monitor, Bot } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { media } from '../assets/media'
 import Newsletter from '../components/kit/Newsletter'
 import PageHero, { Rise } from '../components/PageHero'
 import Seo from '../components/Seo'
 import useReveal from '../hooks/useReveal'
 import useCountUp from '../hooks/useCountUp'
+import useApiData from '../hooks/useApiData'
+import { resolveMediaUrl } from '../config/api'
 
-const values = [
-  { icon: Lightbulb, title: 'Creativity', desc: 'Innovative solutions that push past the conventional and challenge the expected.' },
-  { icon: ShieldCheck, title: 'Reliability', desc: 'Secure, scalable systems architected to hold up over time and under real traffic.' },
-  { icon: Target, title: 'Precision', desc: 'Focused development strategies that align tightly with your business goals.' },
-  { icon: Users, title: 'Collaboration', desc: 'Your growth partners, working as a genuine extension of your own team.' },
-]
+const HOME_CONTENT_FALLBACK = {
+  heroSince: 'Since 2006',
+  heroTitle: 'Driving Innovation. Creating Impact.',
+  heroSubtitle: 'Innovation. Excellence. Creativity.',
+  whoWeAreTitle: 'Digital solutions that inspire.',
+  whoWeAreText:
+    "At EJE, we don't just build software — we craft experiences. Our team of student developers and designers works at the intersection of creativity and technical excellence to deliver projects that make a real difference for the businesses we partner with.",
+  yearsOfExperience: 20,
+  projectsCompletedLabel: 'Projects Completed',
+  ctaTitle: 'Ready to build your next masterpiece?',
+  ctaText: "We can't wait to hear about your vision. Reach out and let's start the conversation.",
+}
 
-const services = [
-  { icon: Globe, title: 'Web Development', desc: 'Custom web applications built with modern frameworks for speed and scale.' },
-  { icon: Smartphone, title: 'Mobile Solutions', desc: 'Smooth iOS and Android experiences built with Flutter and React Native.' },
-  { icon: Monitor, title: 'Desktop Development', desc: 'Robust desktop software tailored to your team’s day-to-day workflows.' },
-  { icon: Bot, title: 'Chatbots & AI', desc: 'Intelligent automation, AI-powered chatbots, and smart FAQ systems.' },
-]
+const STATS_FALLBACK = {
+  clientsServed: 75,
+  projectsCompleted: 78,
+  studentsMembers: 48,
+  formerCollaborators: 35,
+  juniorEnterprisesCount: 7,
+  institutionalPartnersCount: 9,
+}
 
-const figures = [
-  { value: 75, prefix: '+', label: 'Clients Served' },
-  { value: 78, prefix: '+', label: 'Projects Completed' },
-  { value: 48, prefix: '+', label: 'Students & Members' },
-  { value: 35, prefix: '+', label: 'Former Collaborators' },
-  { value: 7, prefix: '', label: 'Junior Enterprises' },
-  { value: 9, prefix: '', label: 'Institutional Partners' },
-]
-
-function FigureStat({ value, prefix, label }) {
+function FigureStat({ value, label }) {
   const [ref, count] = useCountUp(value)
   return (
     <div ref={ref} className="text-center">
-      <div className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">{prefix}{count}</div>
+      <div className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">{count}</div>
       <div className="mt-2 font-body text-xs uppercase tracking-wide text-eje-beige/60">{label}</div>
     </div>
   )
@@ -46,6 +47,21 @@ export default function Accueil() {
   const servicesRef = useReveal()
   const figuresRef = useReveal()
   const ctaRef = useReveal()
+
+  const { data: home } = useApiData('/home-content', HOME_CONTENT_FALLBACK)
+  const { data: stats } = useApiData('/stats', STATS_FALLBACK)
+  const { data: principles } = useApiData('/principles', [], { list: true })
+  const { data: serviceCategories } = useApiData('/service-categories', [], { list: true })
+  const { data: partners } = useApiData('/partners', [], { list: true })
+
+  const figures = [
+    { value: stats.clientsServed, prefix: '+', label: 'Clients Served' },
+    { value: stats.projectsCompleted, prefix: '+', label: 'Projects Completed' },
+    { value: stats.studentsMembers, prefix: '+', label: 'Students & Members' },
+    { value: stats.formerCollaborators, prefix: '+', label: 'Former Collaborators' },
+    { value: stats.juniorEnterprisesCount, prefix: '', label: 'Junior Enterprises' },
+    { value: stats.institutionalPartnersCount, prefix: '', label: 'Institutional Partners' },
+  ]
 
   return (
     <>
@@ -64,20 +80,20 @@ export default function Accueil() {
 
       {/* ── HERO ── */}
       <PageHero image={media.images.hero} imageAlt="ENSI Junior Entreprise" scrollTo="#who-we-are">
-        <Rise as="p" delay={0.4} className="eyebrow">Since 2006</Rise>
+        <Rise as="p" delay={0.4} className="eyebrow">{home.heroSince}</Rise>
         <Rise
           as="h1"
           delay={0.6}
           className="font-heading text-5xl font-extrabold leading-[1.05] tracking-tight text-eje-beige sm:text-7xl lg:text-[6.5rem] lg:leading-[1.04]"
         >
-          Driving <span className="text-eje-accent">Innovation.</span><br />Creating Impact.
+          {home.heroTitle}
         </Rise>
         <Rise
           as="p"
           delay={0.9}
           className="mt-6 max-w-xl font-body text-base font-light leading-relaxed text-eje-beige/65 sm:text-lg lg:text-xl"
         >
-          Innovation. Excellence. Creativity.
+          {home.heroSubtitle}
         </Rise>
         <Rise delay={1.2} className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <Link to="/contact" className="btn btn-primary">
@@ -93,22 +109,19 @@ export default function Accueil() {
           <div>
             <p className="eyebrow !justify-start">Who we are</p>
             <h2 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-eje-beige sm:text-5xl">
-              Digital solutions that <span className="text-eje-accent">inspire.</span>
+              {home.whoWeAreTitle}
             </h2>
             <p className="mt-5 font-body text-base leading-relaxed text-eje-beige/75">
-              At EJE, we don't just build software — we craft experiences. Our team of student
-              developers and designers works at the intersection of creativity and technical
-              excellence to deliver projects that make a real difference for the businesses we
-              partner with.
+              {home.whoWeAreText}
             </p>
             <div className="mt-8 flex flex-wrap gap-4">
               <div className="stat-card transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]">
-                <div className="font-heading text-2xl font-extrabold text-eje-accent">20+</div>
+                <div className="font-heading text-2xl font-extrabold text-eje-accent">{home.yearsOfExperience}+</div>
                 <div className="mt-1 font-body text-xs uppercase tracking-wide text-eje-beige/60">Years of Experience</div>
               </div>
               <div className="stat-card transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]">
-                <div className="font-heading text-2xl font-extrabold text-eje-accent">+78</div>
-                <div className="mt-1 font-body text-xs uppercase tracking-wide text-eje-beige/60">Projects Completed</div>
+                <div className="font-heading text-2xl font-extrabold text-eje-accent">+{stats.projectsCompleted}</div>
+                <div className="mt-1 font-body text-xs uppercase tracking-wide text-eje-beige/60">{home.projectsCompletedLabel}</div>
               </div>
             </div>
             <Link to="/a-propos" className="section-link-pill mt-8">
@@ -134,16 +147,16 @@ export default function Accueil() {
             <h2 className="section-title">Built on four principles</h2>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {values.map(({ icon: Icon, title, desc }) => (
+            {principles.map(({ _id, name, description, iconUrl }) => (
               <div
-                key={title}
+                key={_id}
                 className="card-glass p-8 text-center transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]"
               >
                 <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-eje-accent/10">
-                  <Icon className="h-6 w-6 text-eje-accent" strokeWidth={1.75} />
+                  {iconUrl && <img src={resolveMediaUrl(iconUrl)} alt="" className="h-6 w-6 object-contain" />}
                 </div>
-                <h3 className="mt-5 font-heading text-lg font-extrabold text-eje-beige">{title}</h3>
-                <p className="mt-2 font-body text-sm leading-relaxed text-eje-beige/60">{desc}</p>
+                <h3 className="mt-5 font-heading text-lg font-extrabold text-eje-beige">{name}</h3>
+                <p className="mt-2 font-body text-sm leading-relaxed text-eje-beige/60">{description}</p>
               </div>
             ))}
           </div>
@@ -162,16 +175,16 @@ export default function Accueil() {
             </p>
           </div>
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {services.map(({ icon: Icon, title, desc }) => (
+            {serviceCategories.map(({ _id, name, shortDescription, iconUrl }) => (
               <div
-                key={title}
+                key={_id}
                 className="card-glass p-8 transition duration-300 hover:-translate-y-2 hover:scale-[1.02] hover:border-eje-accent/40 hover:shadow-[0_20px_50px_-20px_rgb(46_163_221/0.4)]"
               >
                 <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-eje-accent/10">
-                  <Icon className="h-6 w-6 text-eje-accent" strokeWidth={1.75} />
+                  {iconUrl && <img src={resolveMediaUrl(iconUrl)} alt="" className="h-6 w-6 object-contain" />}
                 </div>
-                <h3 className="mt-5 font-heading text-lg font-extrabold text-eje-beige">{title}</h3>
-                <p className="mt-2 font-body text-sm leading-relaxed text-eje-beige/60">{desc}</p>
+                <h3 className="mt-5 font-heading text-lg font-extrabold text-eje-beige">{name}</h3>
+                <p className="mt-2 font-body text-sm leading-relaxed text-eje-beige/60">{shortDescription}</p>
               </div>
             ))}
           </div>
@@ -201,10 +214,10 @@ export default function Accueil() {
             <p className="section-subtitle mb-2">Trusted by those who believed in us</p>
             <div className="partners-wrap">
               <div className="partners-track">
-                {media.partners &&
-                  [...media.partners.slice(0, 8), ...media.partners.slice(0, 8)].map((p, idx) => (
-                    <div key={p.name + idx} className="partner-item">
-                      <img src={p.src} alt={p.name} style={{ height: 56, objectFit: 'contain', display: 'block' }} />
+                {partners.length > 0 &&
+                  [...partners.slice(0, 8), ...partners.slice(0, 8)].map((p, idx) => (
+                    <div key={p._id + idx} className="partner-item">
+                      <img src={resolveMediaUrl(p.logoUrl)} alt={p.name} style={{ height: 56, objectFit: 'contain', display: 'block' }} />
                     </div>
                   ))}
               </div>
@@ -218,10 +231,10 @@ export default function Accueil() {
         <div className="container grid grid-cols-1 gap-6 lg:grid-cols-2">
           <div className="card-glass p-10 transition duration-300 hover:-translate-y-1 hover:border-eje-accent/40">
             <h3 className="font-heading text-2xl font-extrabold leading-tight text-eje-beige sm:text-3xl">
-              Ready to build your next <span className="text-eje-accent">masterpiece?</span>
+              {home.ctaTitle}
             </h3>
             <p className="mt-3 font-body text-sm leading-relaxed text-eje-beige/70">
-              We can't wait to hear about your vision. Reach out and let's start the conversation.
+              {home.ctaText}
             </p>
             <Link to="/contact" className="btn btn-primary mt-6">
               Request a Quote <ArrowRight className="ml-2 h-4 w-4" />

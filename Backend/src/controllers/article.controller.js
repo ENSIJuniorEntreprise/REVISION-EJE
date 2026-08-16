@@ -23,6 +23,7 @@ const listArticles = asyncHandler(async (req, res) => {
   res.json({
     success: true,
     articles,
+    data: articles, // alias: lets the generic admin ListEditor consume this like every other list endpoint
     page,
     totalPages: Math.max(Math.ceil(total / limit), 1),
     total,

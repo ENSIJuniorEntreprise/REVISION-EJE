@@ -2,14 +2,10 @@ import { useState, useEffect, useRef } from "react";
 import PageHero, { Rise } from "../components/PageHero";
 import Seo from "../components/Seo";
 import useReveal from "../hooks/useReveal";
+import useApiData from "../hooks/useApiData";
+import { resolveMediaUrl } from "../config/api";
 
 import heroBg1 from '../assets/images/ydin.jpg';
-import quiImg from '../assets/images/20th Generation.png';
-import getEntrepImg from '../assets/images/GET E 3.0.jpg';
-import riyedaImg from '../assets/images/riyeda.png';
-import hassineImg from '../assets/images/hassine.jpg';
-import fekiImg from '../assets/images/feki.jpg';
-import zribiImg from '../assets/images/zribi.jpg';
 
 const COLORS = {
   bg: "#1F212D",
@@ -19,40 +15,22 @@ const COLORS = {
   darkCard: "#181A24",
 };
 
-const carouselImages = [quiImg, getEntrepImg, riyedaImg];
+const ABOUT_CONTENT_FALLBACK = {
+  heroTitle: 'ENSI Junior Enterprise',
+  heroSubtitle: 'Creativity—Professionalism—Excellence',
+  introText:
+    "Founded in 2006, ENSI Junior Enterprise (EJE) is a non-profit association dedicated to introducing students to the world of entrepreneurship. For 20 years, our association has tirelessly carved out its own path toward excellence, innovation and expertise, establishing itself as a pioneer within the Junior Enterprise movement in Tunisia.",
+  galleryImages: [],
+};
 
-const timelineEvents = [
-  {
-    year: "2006",
-    title: "Foundation of EJE",
-    desc: "Birth of the ENSI Junior Enterprise.",
-    above: true,
-  },
-  {
-    year: "2011",
-    title: "Co-founding of JET",
-    desc: "EJE among the founders of Junior Enterprise Tunisia.",
-    above: false,
-  },
-  {
-    year: "2012",
-    title: "Adoption of association bylaws",
-    desc: "formalizing the organization’s governance structure",
-    above: true,
-  },
-  {
-    year: "2020",
-    title: "Excellence Award",
-    desc: "Recognition for the excellence of delivered projects.",
-    above: false,
-  },
-  {
-    year: "2024",
-    title: "Get Entrepreneurial",
-    desc: "First Get Entrepreneurial edition.",
-    above: true,
-  },
-];
+const STATS_FALLBACK = {
+  clientsServed: 75,
+  projectsCompleted: 78,
+  studentsMembers: 48,
+  formerCollaborators: 35,
+  juniorEnterprisesCount: 7,
+  institutionalPartnersCount: 9,
+};
 
 const globalStyles = `
   
@@ -758,7 +736,7 @@ const ImageCarousel = ({ images }) => {
   const timerRef = useRef(null);
 
   useEffect(() => {
-    if (paused) return;
+    if (paused || images.length === 0) return;
     timerRef.current = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % images.length);
     }, 4000);
@@ -785,61 +763,6 @@ const ImageCarousel = ({ images }) => {
   );
 };
 
-const chiffres = [
-  { number: "+75", label: "Clients Served" },
-  { number: "+78", label: "Projects Completed" },
-  { number: "+48", label: "Students & Members" },
-  { number: "+35", label: "Former Collaborators" },
-  { number: "7",   label: "Junior Enterprises" },
-  { number: "9",   label: "Institutional Partners" },
-];
-
-const valeurs = [
-  { title: "Creativity",       desc: "We push the boundaries of innovation to deliver original, tailor-made solutions." },
-  { title: "Professionalism",  desc: "Rigor, commitment, and respect for deadlines in every project we carry out." },
-  { title: "Excellence",       desc: "We aim for excellence in every detail, from design through to delivery." },
-];
-
-const axes = [
-  {
-    icon: (
-      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3.33 1.67 8.67 1.67 12 0v-5"/>
-      </svg>
-    ),
-    title: "Training Division",
-    desc: "Intensive workshops and technical training to elevate our members' skills.",
-  },
-  {
-    icon: (
-      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <circle cx="12" cy="12" r="6"/>
-        <circle cx="12" cy="12" r="2"/>
-        <line x1="22" y1="2" x2="16" y2="8"/>
-        <polyline points="17 2 22 2 22 7"/>
-      </svg>
-    ),
-    title: "Project Division",
-    desc: "Concrete, challenging projects for real clients — immersive, hands-on learning.",
-  },
-  {
-    icon: (
-      <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><rect x="8" y="14" width="3" height="3"/>
-      </svg>
-    ),
-    title: "Events Division",
-    desc: "High-impact event organization that bridges the gap between academia and industry.",
-  },
-];
-
-const team = [
-  { name: "Ahmed ZRIBI",   role: "President",          img: zribiImg },
-  { name: "Mohamed FEKI",  role: "Vice President",      img: fekiImg   },
-  { name: "Hassine KOOLI", role: "Treasurer",           img: hassineImg  },
-];
-
 const useMagnetic = () => ({
   onMouseMove: (e) => {
     const r = e.currentTarget.getBoundingClientRect();
@@ -865,19 +788,6 @@ const tiltHandlers = {
   },
 };
 
-/* ── Empty placeholder card ── */
-const EmptyTeamCard = () => (
-  <div className="team-card-empty">
-    <div className="team-card-empty-icon">
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke={COLORS.blue} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" opacity="0.5">
-        <circle cx="12" cy="8" r="4"/>
-        <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
-      </svg>
-    </div>
-    <span className="team-card-empty-label">Coming Soon</span>
-  </div>
-);
-
 export default function Index() {
   const [scrollPct, setScrollPct] = useState(0);
 
@@ -891,6 +801,23 @@ export default function Index() {
   const axesRef           = useReveal();
   const bureauRef         = useReveal();
   const chiffresRevealRef = useReveal();
+
+  const { data: about } = useApiData('/about-content', ABOUT_CONTENT_FALLBACK);
+  const { data: stats } = useApiData('/stats', STATS_FALLBACK);
+  const { data: timelineEvents } = useApiData('/timeline-events', [], { list: true });
+  const { data: valeurs } = useApiData('/values', [], { list: true });
+  const { data: axes } = useApiData('/divisions', [], { list: true });
+  const { data: team } = useApiData('/board-members', [], { list: true });
+  const { data: serviceCategories } = useApiData('/service-categories', [], { list: true });
+
+  const chiffres = [
+    { number: `+${stats.clientsServed}`, label: 'Clients Served' },
+    { number: `+${stats.projectsCompleted}`, label: 'Projects Completed' },
+    { number: `+${stats.studentsMembers}`, label: 'Students & Members' },
+    { number: `+${stats.formerCollaborators}`, label: 'Former Collaborators' },
+    { number: `${stats.juniorEnterprisesCount}`, label: 'Junior Enterprises' },
+    { number: `${stats.institutionalPartnersCount}`, label: 'Institutional Partners' },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -970,10 +897,10 @@ export default function Index() {
       <PageHero image={heroBg1} imageAlt="ENSI Junior Entreprise team" contentClassName="max-w-4xl" scrollTo="#apropos">
         <Rise as="p" delay={0.4} className="hero-label">About</Rise>
         <Rise as="h1" delay={0.6} className="hero-title">
-          <span className="brand-shine">ENSI</span> Junior<br />Enterprise
+          {about.heroTitle}
         </Rise>
         <Rise as="p" delay={0.9} className="hero-subtitle">
-          Creativity<span>—</span>Professionalism<span>—</span>Excellence
+          {about.heroSubtitle}
         </Rise>
         <Rise delay={1.2}>
           <button className="btn-discover" {...magnetic}>Discover</button>
@@ -986,16 +913,11 @@ export default function Index() {
           <div>
             <h2 className="qui-label"><span>Who</span> are we?</h2>
             <p className="qui-text">
-              Founded in <strong>2006</strong>, ENSI Junior Enterprise (EJE) is a non-profit association
-              dedicated to introducing students to the world of entrepreneurship.
-              <br /><br />
-              For <strong>20 years</strong>, our association has tirelessly carved out its own path toward
-              excellence, innovation and expertise, establishing itself as a pioneer within the Junior
-              Enterprise movement in Tunisia.
+              {about.introText}
             </p>
           </div>
           <div className="qui-img-wrap" style={{ perspective: "1200px" }} {...tiltHandlers}>
-            <ImageCarousel images={carouselImages} />
+            <ImageCarousel images={(about.galleryImages || []).map(resolveMediaUrl)} />
           </div>
         </div>
       </section>
@@ -1010,13 +932,13 @@ export default function Index() {
           <div className="timeline-track">
             <div className="timeline-line" />
             {timelineEvents.map((event, i) => (
-              <div key={i} className="timeline-event">
-                {event.above ? (
+              <div key={event._id} className="timeline-event">
+                {i % 2 === 0 ? (
                   <>
                     <div className="timeline-top">
                       <div className="timeline-year">{event.year}</div>
                       <div className="timeline-title">{event.title}</div>
-                      <div className="timeline-desc">{event.desc}</div>
+                      <div className="timeline-desc">{event.description}</div>
                     </div>
                     <div className="timeline-tick" />
                     <div className="timeline-dot-wrap">
@@ -1034,7 +956,7 @@ export default function Index() {
                     <div className="timeline-bottom">
                       <div className="timeline-year">{event.year}</div>
                       <div className="timeline-title">{event.title}</div>
-                      <div className="timeline-desc">{event.desc}</div>
+                      <div className="timeline-desc">{event.description}</div>
                     </div>
                   </>
                 )}
@@ -1052,10 +974,10 @@ export default function Index() {
         <div className="valeurs-timeline">
           <div className="valeurs-line" />
           <div className="valeur-dot-left" />
-          {valeurs.map((v, i) => (
-            <div key={i} className="valeur-circle">
-              <div className="valeur-title">{v.title}</div>
-              <div className="valeur-desc">{v.desc}</div>
+          {valeurs.map((v) => (
+            <div key={v._id} className="valeur-circle">
+              <div className="valeur-title">{v.name}</div>
+              <div className="valeur-desc">{v.description}</div>
             </div>
           ))}
           <div className="valeur-dot-right" />
@@ -1089,11 +1011,15 @@ export default function Index() {
       <section id="services" className="axes-section reveal" ref={axesRef}>
         <h2 className="section-title"><span>Our</span> Divisions</h2>
         <div className="axes-grid">
-          {axes.map((a, i) => (
-            <div key={i} className="axe-card">
-              <span className="axe-icon">{a.icon}</span>
-              <div className="axe-title">{a.title}</div>
-              <div className="axe-desc">{a.desc}</div>
+          {axes.map((a) => (
+            <div key={a._id} className="axe-card">
+              {a.iconUrl && (
+                <span className="axe-icon">
+                  <img src={resolveMediaUrl(a.iconUrl)} alt="" style={{ width: 38, height: 38, objectFit: 'contain' }} />
+                </span>
+              )}
+              <div className="axe-title">{a.name}</div>
+              <div className="axe-desc">{a.description}</div>
             </div>
           ))}
         </div>
@@ -1113,7 +1039,7 @@ export default function Index() {
                     <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
                   </svg>
                 </span>
-                Web Design & Development
+                {serviceCategories[0]?.name || 'Web Design & Development'}
               </div>
               <div className="presta-connector">
                 <div className="presta-connector-line" />
@@ -1127,7 +1053,7 @@ export default function Index() {
                     <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
                   </svg>
                 </span>
-                Mobile Application Development
+                {serviceCategories[1]?.name || 'Mobile Application Development'}
               </div>
               <div className="presta-connector">
                 <div className="presta-connector-line" />
@@ -1152,7 +1078,7 @@ export default function Index() {
                     <rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/>
                   </svg>
                 </span>
-                Software Solution Development
+                {serviceCategories[2]?.name || 'Software Solution Development'}
               </div>
             </div>
             <div className="presta-row-right">
@@ -1167,7 +1093,7 @@ export default function Index() {
                     <line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/>
                   </svg>
                 </span>
-                ChatBot Agent Design & Deployment
+                {serviceCategories[3]?.name || 'ChatBot Agent Design & Deployment'}
               </div>
             </div>
           </div>
@@ -1180,20 +1106,15 @@ export default function Index() {
       <section className="bureau-section reveal" ref={bureauRef}>
         <h2 className="section-title"><span>Executive</span> Board</h2>
         <div className="bureau-grid">
-          {/* Row 1 — existing members */}
-          {team.map((member, i) => (
-            <div key={i} className="team-card">
-              <Avatar src={member.img} name={member.name} />
+          {team.map((member) => (
+            <div key={member._id} className="team-card">
+              <Avatar src={resolveMediaUrl(member.photoUrl)} name={member.name} />
               <div className="team-info">
                 <div className="team-name">{member.name}</div>
                 <div className="team-role">{member.role}</div>
               </div>
             </div>
           ))}
-          {/* Row 2 — empty cards */}
-          <EmptyTeamCard />
-          <EmptyTeamCard />
-          <EmptyTeamCard />
         </div>
       </section>
     </>

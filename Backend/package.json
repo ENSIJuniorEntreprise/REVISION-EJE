@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "dev": "nodemon src/server.js",
     "seed:admin": "node src/utils/seedAdmin.js",
-    "seed:content": "node src/utils/seedContent.js"
+    "seed:content": "node src/utils/seedContent.js",
+    "seed:cms": "node src/utils/seedCms.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

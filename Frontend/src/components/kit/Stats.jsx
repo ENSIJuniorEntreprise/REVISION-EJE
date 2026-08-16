@@ -1,11 +1,12 @@
 import useCountUp from '../../hooks/useCountUp'
+import useApiData from '../../hooks/useApiData'
 
-const stats = [
-  { value: 80, suffix: '+', label: 'Clients', tag: 'Business' },
-  { value: 22000, suffix: '+', label: 'Followers', tag: 'Community' },
-  { value: 100, suffix: '+', label: 'Projects Delivered', tag: 'Projects' },
-  { value: 1000, suffix: '+', label: 'Newsletter Subscribers', tag: 'Newsletter' },
-]
+const STATS_FALLBACK = {
+  clientsServed: 75,
+  newsFollowers: 22000,
+  projectsCompleted: 78,
+  newsletterSubscribers: 1000,
+}
 
 function StatCard({ value, suffix, label, tag }) {
   const [ref, count] = useCountUp(value, { duration: 2500, threshold: 0.3 })
@@ -23,6 +24,15 @@ function StatCard({ value, suffix, label, tag }) {
 }
 
 export default function Stats() {
+  const { data: statsData } = useApiData('/stats', STATS_FALLBACK)
+
+  const stats = [
+    { value: statsData.clientsServed, suffix: '+', label: 'Clients', tag: 'Business' },
+    { value: statsData.newsFollowers, suffix: '+', label: 'Followers', tag: 'Community' },
+    { value: statsData.projectsCompleted, suffix: '+', label: 'Projects Delivered', tag: 'Projects' },
+    { value: statsData.newsletterSubscribers, suffix: '+', label: 'Newsletter Subscribers', tag: 'Newsletter' },
+  ]
+
   return (
     <section id="stats" className="bg-eje-dark/80 px-6 py-24 sm:px-12 lg:px-32">
       <div className="mx-auto max-w-6xl">

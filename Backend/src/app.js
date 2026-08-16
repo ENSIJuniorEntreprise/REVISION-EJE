@@ -10,6 +10,8 @@ const contactRoutes = require('./routes/contact.routes')
 const newsletterRoutes = require('./routes/newsletter.routes')
 const articleRoutes = require('./routes/article.routes')
 const magazineRoutes = require('./routes/magazine.routes')
+const uploadRoutes = require('./routes/upload.routes')
+const mountCmsRoutes = require('./routes/cms.routes')
 
 const app = express()
 
@@ -45,6 +47,8 @@ app.use('/api/contact', contactRoutes)
 app.use('/api/newsletter', newsletterRoutes)
 app.use('/api/articles', articleRoutes)
 app.use('/api/magazines', magazineRoutes)
+app.use('/api/uploads', uploadRoutes)
+mountCmsRoutes(app)
 
 app.use(notFound)
 app.use(errorHandler)

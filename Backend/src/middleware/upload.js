@@ -41,4 +41,27 @@ const magazineUpload = multer({
   },
 })
 
-module.exports = { articleUpload, magazineUpload }
+// Generic uploader for the CMS entities: `fields` is an array like
+// [{ name: 'photo', kind: 'image' }, { name: 'file', kind: 'pdf', maxCount: 3 }].
+// Returns Express middleware (multer's .fields()) ready to drop into a route.
+function makeUploader(subdir, fields) {
+  const kindByField = Object.fromEntries(fields.map((f) => [f.name, f.kind || 'image']))
+  const hasPdf = fields.some((f) => f.kind === 'pdf')
+  const instance = multer({
+    storage: storageFor(subdir),
+    limits: { fileSize: (hasPdf ? 25 : 5) * 1024 * 1024 },
+    fileFilter: (req, file, cb) => {
+      const kind = kindByField[file.fieldname] || 'image'
+      if (kind === 'image' && !IMAGE_TYPES.has(file.mimetype)) {
+        return cb(new ApiError(400, `${file.fieldname} must be JPEG, PNG, or WebP`))
+      }
+      if (kind === 'pdf' && file.mimetype !== PDF_TYPE) {
+        return cb(new ApiError(400, `${file.fieldname} must be a PDF`))
+      }
+      cb(null, true)
+    },
+  })
+  return instance.fields(fields.map(({ name, maxCount }) => ({ name, maxCount: maxCount || 1 })))
+}
+
+module.exports = { articleUpload, magazineUpload, makeUploader }
