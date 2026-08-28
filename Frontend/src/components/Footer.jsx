@@ -42,7 +42,18 @@ export default function Footer() {
         .footer__logo-row {
           display: flex; align-items: center; gap: 1rem; margin-bottom: 0.9rem; margin-top:0.1rem;
                 }
-        .footer__globe { width: 62px; height: 62px; flex-shrink: 0; object-fit: contain; }
+        .footer__globe {
+          width: 62px; height: 62px; flex-shrink: 0;
+          background-color: #e0ded2;
+          -webkit-mask-image: var(--footer-logo-url);
+          mask-image: var(--footer-logo-url);
+          -webkit-mask-size: contain;
+          mask-size: contain;
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-position: center;
+          mask-position: center;
+        }
         .footer__logo-name { font-family: 'Gilroy', sans-serif; font-size: 1.2rem; font-weight: 800; color: #e0ded2; letter-spacing: 0.01em; }
         .footer__tagline { font-size: 0.83rem; color: rgba(224,222,210,0.5); line-height: 1.65; max-width: 240px; margin-bottom: 1.8rem; }
         .footer__slogan { font-family: 'Photograph Signature', cursive; font-size: 1.7rem; color: #2ea3dd; letter-spacing: 0.02em; line-height: 1.3; }
@@ -98,7 +109,12 @@ export default function Footer() {
           {/* Column 1: Brand */}
           <div className="footer__brand">
             <div className="footer__logo-row">
-              <img src={resolveMediaUrl(settings.logoUrl)} alt="Logo ENSI Junior Entreprise" className='footer__globe' />
+              <div
+                className="footer__globe"
+                role="img"
+                aria-label="Logo ENSI Junior Entreprise"
+                style={{ '--footer-logo-url': `url(${resolveMediaUrl(settings.logoUrl)})` }}
+              />
               <span className="footer__logo-name">ENSI Junior Entreprise</span>
             </div>
             <p className="footer__tagline">

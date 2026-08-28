@@ -69,6 +69,10 @@ const VALIDATORS = {
     required: false,
     messages: {},
   },
+  socialMedia: {
+    required: false,
+    messages: {},
+  },
 };
 
 function validate(name, value) {
@@ -319,8 +323,8 @@ function ValidatedTextarea({ name, placeholder, value, touched, error, onChange,
 }
 
 /* ── CONTACT FORM ── */
-const INITIAL_VALUES = { nom: "", telephone: "", email: "", profession: "", demande: "", message: "" };
-const INITIAL_TOUCHED = { nom: false, telephone: false, email: false, profession: false, demande: false, message: false };
+const INITIAL_VALUES = { nom: "", telephone: "", email: "", profession: "", demande: "", message: "", socialMedia: "" };
+const INITIAL_TOUCHED = { nom: false, telephone: false, email: false, profession: false, demande: false, message: false, socialMedia: false };
 
 function ContactForm() {
   const [values, setValues] = useState(INITIAL_VALUES);
@@ -391,6 +395,10 @@ function ContactForm() {
       <ValidatedSelect name="demande" placeholder="Request Type *"
         options={["Web Development", "Graphic Design", "Digital Marketing", "Hosting", "Strategic Consulting", "Other"]}
         value={values.demande} touched={touched.demande} error={errors.demande}
+        onChange={handleChange} onBlur={handleBlur} />
+
+      <ValidatedInput name="socialMedia" placeholder="Social Media (optional)"
+        value={values.socialMedia} touched={touched.socialMedia} error={errors.socialMedia}
         onChange={handleChange} onBlur={handleBlur} />
 
       <ValidatedTextarea name="message" placeholder="Your message..."

@@ -19,6 +19,7 @@ const contactRequestSchema = new mongoose.Schema(
     profession: { type: String, required: true, enum: PROFESSIONS },
     demande: { type: String, required: true, enum: REQUEST_TYPES },
     message: { type: String, trim: true, maxlength: 2000, default: '' },
+    socialMedia: { type: String, trim: true, maxlength: 200, default: '' },
     status: {
       type: String,
       enum: ['new', 'read', 'handled'],

@@ -26,6 +26,7 @@ router.post(
     body('profession').isIn(PROFESSIONS).withMessage('Invalid profession'),
     body('demande').isIn(REQUEST_TYPES).withMessage('Invalid request type'),
     body('message').optional({ checkFalsy: true }).trim().isLength({ max: 2000 }),
+    body('socialMedia').optional({ checkFalsy: true }).trim().isLength({ max: 200 }),
   ],
   validate,
   createContactRequest,

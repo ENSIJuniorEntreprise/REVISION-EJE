@@ -1,4 +1,6 @@
 import { useState, useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 import PageHero, { Rise } from "../components/PageHero";
 import Seo from "../components/Seo";
 import useReveal from "../hooks/useReveal";
@@ -78,11 +80,12 @@ const globalStyles = `
 
   .hero-subtitle {
     font-size: 17px;
-    color: ${COLORS.cream};
+    color: ${COLORS.blue};
     letter-spacing: 0.12em;
     margin-bottom: 40px;
     font-family: 'Proxima Nova', sans-serif;
     font-weight: 500;
+    text-decoration: none;
   }
   .hero-subtitle span { color: ${COLORS.blue}; margin: 0 8px; }
 
@@ -132,7 +135,7 @@ const globalStyles = `
     font-family: 'Gilroy', sans-serif;
     font-weight: 900;
     font-size: clamp(30px, 4vw, 46px);
-    color: ${COLORS.white};
+    color: ${COLORS.blue};
     margin-bottom: 70px;
     letter-spacing: -0.01em;
   }
@@ -155,7 +158,7 @@ const globalStyles = `
     font-family: 'Gilroy', sans-serif;
     font-weight: 800;
     font-size: clamp(28px, 3vw, 38px);
-    color: ${COLORS.white};
+    color: ${COLORS.blue};
     margin-bottom: 26px;
     letter-spacing: -0.01em;
   }
@@ -225,13 +228,14 @@ const globalStyles = `
   .histoire-subtitle {
     text-align: center;
     font-size: 15px;
-    color: ${COLORS.cream};
-    opacity: 0.6;
+    color: ${COLORS.blue};
+    opacity: 1;
     margin-top: -52px;
     margin-bottom: 80px;
     font-family: 'Proxima Nova', sans-serif;
     font-weight: 500;
     letter-spacing: 0.04em;
+    text-decoration: none;
   }
   .timeline-wrapper {
     max-width: 1100px;
@@ -1098,6 +1102,11 @@ export default function Index() {
               </div>
             </div>
           </div>
+        </div>
+        <div className="section-links">
+          <Link to="/services" className="section-link-pill">
+            View more <ArrowRight className="h-4 w-4" />
+          </Link>
         </div>
       </section>
 

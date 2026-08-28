@@ -35,8 +35,18 @@ export default function Navbar() {
           font-family: 'Proxima Nova', sans-serif;
           font-weight:800;
         }
-        .navbar__logo { height: 48px; width: auto; flex-shrink: 0; }
-        .navbar__logo img { height: 100%; width: auto; object-fit: contain; }
+        .navbar__logo {
+          height: 48px; width: 48px; flex-shrink: 0;
+          background-color: #e0ded2;
+          -webkit-mask-image: var(--navbar-logo-url);
+          mask-image: var(--navbar-logo-url);
+          -webkit-mask-size: contain;
+          mask-size: contain;
+          -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+          -webkit-mask-position: center;
+          mask-position: center;
+        }
         .navbar__links {
           display: flex; gap: 3.25rem; list-style: none;
           flex-grow: 1; justify-content: center;
@@ -101,9 +111,12 @@ export default function Navbar() {
       `}</style>
 
       <nav className="navbar" aria-label="Main navigation">
-        <div className="navbar__logo">
-          <img src={resolveMediaUrl(settings.logoUrl)} alt="ENSI Junior Entreprise logo" />
-        </div>
+        <div
+          className="navbar__logo"
+          role="img"
+          aria-label="ENSI Junior Entreprise logo"
+          style={{ '--navbar-logo-url': `url(${resolveMediaUrl(settings.logoUrl)})` }}
+        />
         <ul className="navbar__links">
           <li><NavLink to="/" end onClick={scrollToTop}>Home</NavLink></li>
           <li><NavLink to="/a-propos" onClick={scrollToTop}>About</NavLink></li>

@@ -60,7 +60,6 @@ export default function Accueil() {
     { value: stats.projectsCompleted, prefix: '+', label: 'Projects Completed' },
     { value: stats.studentsMembers, prefix: '+', label: 'Students & Members' },
     { value: stats.formerCollaborators, prefix: '+', label: 'Former Collaborators' },
-    { value: stats.juniorEnterprisesCount, prefix: '', label: 'Junior Enterprises' },
     { value: stats.institutionalPartnersCount, prefix: '', label: 'Institutional Partners' },
   ]
 
@@ -108,7 +107,6 @@ export default function Accueil() {
       <section id="who-we-are" ref={whoWeAreRef} className="reveal section-shell px-6 py-24 sm:px-12 lg:px-32">
         <div className="container grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
           <div>
-            <p className="eyebrow !justify-start">Who we are</p>
             <h2 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-eje-beige sm:text-5xl">
               {home.whoWeAreTitle}
             </h2>
@@ -204,7 +202,7 @@ export default function Accueil() {
             <p className="eyebrow">Why ENSI Junior Entreprise</p>
             <h2 className="section-title">Our impact at a glance</h2>
           </div>
-          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 lg:grid-cols-5">
             {figures.map((f) => (
               <FigureStat key={f.label} {...f} />
             ))}

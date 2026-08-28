@@ -3,7 +3,7 @@ const ContactRequest = require('../models/ContactRequest')
 const { sendMail } = require('../utils/mailer')
 
 const createContactRequest = asyncHandler(async (req, res) => {
-  const { nom, telephone, email, profession, demande, message } = req.body
+  const { nom, telephone, email, profession, demande, message, socialMedia } = req.body
 
   const contactRequest = await ContactRequest.create({
     nom,
@@ -12,6 +12,7 @@ const createContactRequest = asyncHandler(async (req, res) => {
     profession,
     demande,
     message,
+    socialMedia,
   })
 
   const notifyTo = process.env.CONTACT_NOTIFY_EMAIL
@@ -25,6 +26,7 @@ const createContactRequest = asyncHandler(async (req, res) => {
         `Email: ${email}`,
         `Profession: ${profession}`,
         `Request type: ${demande}`,
+        socialMedia ? `Social media: ${socialMedia}` : '',
         '',
         message,
       ].join('\n'),

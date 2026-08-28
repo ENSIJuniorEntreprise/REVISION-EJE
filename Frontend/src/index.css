@@ -286,8 +286,8 @@
     position: fixed !important;
     top: 0;
     left: 0;
-    width: 320px;
-    height: 320px;
+    width: 180px;
+    height: 180px;
     border-radius: 50%;
     background: radial-gradient(circle, rgb(var(--eje-accent-rgb) / 0.13) 0%, rgb(var(--eje-accent-rgb) / 0) 60%);
     pointer-events: none;
