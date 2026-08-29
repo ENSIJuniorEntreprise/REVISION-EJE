@@ -32,11 +32,11 @@ const STATS_FALLBACK = {
   institutionalPartnersCount: 9,
 }
 
-function FigureStat({ value, label }) {
+function FigureStat({ value, label, prefix = '' }) {
   const [ref, count] = useCountUp(value)
   return (
     <div ref={ref} className="text-center">
-      <div className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">{count}</div>
+      <div className="font-heading text-4xl font-extrabold text-eje-accent sm:text-5xl">{prefix}{count}</div>
       <div className="mt-2 font-body text-xs uppercase tracking-wide text-eje-beige/60">{label}</div>
     </div>
   )
@@ -56,11 +56,11 @@ export default function Accueil() {
   const { data: partners } = useApiData('/partners', [], { list: true })
 
   const figures = [
-    { value: stats.clientsServed, prefix: '+', label: 'Clients Served' },
+    { value: home.yearsOfExperience, prefix: '', label: 'Years of Experience' },
+    { value: stats.formerCollaborators, prefix: '+', label: 'Partner Companies' },
+    { value: 10, prefix: '', label: 'Multinational Partners' },
     { value: stats.projectsCompleted, prefix: '+', label: 'Projects Completed' },
-    { value: stats.studentsMembers, prefix: '+', label: 'Students & Members' },
-    { value: stats.formerCollaborators, prefix: '+', label: 'Former Collaborators' },
-    { value: stats.institutionalPartnersCount, prefix: '', label: 'Institutional Partners' },
+    { value: stats.clientsServed, prefix: '+', label: 'Satisfied Clients' },
   ]
 
   return (

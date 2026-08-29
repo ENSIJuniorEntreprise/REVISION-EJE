@@ -1,4 +1,5 @@
 ﻿import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import PageHero, { Rise } from "../components/PageHero";
 import Seo from "../components/Seo";
 import { media } from "../assets/media";
@@ -920,14 +921,15 @@ function ProcessSection() {
           <span className="w-1.5 h-1.5 rounded-full bg-[#2ea3dd]/60" />
           <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#2ea3dd]/40" />
         </div>
-        <button
-          className="rounded-xl px-9 py-3.5 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5"
+        <Link
+          to="/contact"
+          className="inline-block rounded-xl px-9 py-3.5 text-sm font-bold tracking-wide transition-all duration-300 hover:-translate-y-0.5"
           style={{ background: "#2ea3dd", color: "#1f212d" }}
           onMouseEnter={e => { e.currentTarget.style.background = "#2ea3dd"; e.currentTarget.style.boxShadow = "0 8px 30px rgba(46,163,221,0.35)"; }}
           onMouseLeave={e => { e.currentTarget.style.background = "#2ea3dd"; e.currentTarget.style.boxShadow = "none"; }}
         >
           Start a Project
-        </button>
+        </Link>
       </div>
     </section>
   );
@@ -1009,7 +1011,7 @@ export default function Services() {
           {servicesContent.heroSubtitle}
         </Rise>
         <Rise delay={1.2} className="mt-10 flex flex-wrap justify-center gap-4">
-          <button className="btn btn-primary">Request a Quote</button>
+          <Link to="/contact" className="btn btn-primary">Request a Quote</Link>
           {servicesContent.portfolioFileUrl && (
             <a href={resolveMediaUrl(servicesContent.portfolioFileUrl)} target="_blank" rel="noopener noreferrer">
               <button className="btn btn-outline">Our Portfolio</button>
@@ -1262,9 +1264,9 @@ export default function Services() {
           Contact our experts today for a free analysis of your needs.
         </p>
 
-        <button className="rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#1f212d] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2ea3dd] hover:shadow-[0_8px_30px_rgba(46,163,221,0.35)]">
+        <Link to="/contact" className="inline-block rounded-lg bg-[#2ea3dd] px-8 py-3.5 text-sm font-bold text-[#1f212d] tracking-wide transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#2ea3dd] hover:shadow-[0_8px_30px_rgba(46,163,221,0.35)]">
           Request a Quote
-        </button>
+        </Link>
       </section>
     </div>
   );

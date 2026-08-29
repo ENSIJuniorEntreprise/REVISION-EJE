@@ -58,17 +58,6 @@ const globalStyles = `
     box-shadow: 0 0 12px rgba(46,163,221,0.6);
   }
 
-  .hero-label {
-    font-size: 14px;
-    color: ${COLORS.blue};
-    margin-bottom: 16px;
-    font-family: 'Gilroy', sans-serif;
-    font-weight: 600;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-  }
-  .hero-label::before, .hero-label::after { content: '—'; margin: 0 14px; opacity: 0.6; }
-
   .hero-title {
     font-family: 'Gilroy', sans-serif;
     font-weight: 900;
@@ -80,16 +69,17 @@ const globalStyles = `
 
   .hero-subtitle {
     font-size: 17px;
-    color: ${COLORS.blue};
+    color: ${COLORS.cream};
     letter-spacing: 0.12em;
     margin-bottom: 40px;
     font-family: 'Proxima Nova', sans-serif;
     font-weight: 500;
     text-decoration: none;
   }
-  .hero-subtitle span { color: ${COLORS.blue}; margin: 0 8px; }
+  .hero-subtitle span { color: ${COLORS.cream}; margin: 0 8px; }
 
   .btn-discover {
+    display: inline-block;
     background: ${COLORS.blue};
     color: ${COLORS.white};
     border: none;
@@ -99,6 +89,7 @@ const globalStyles = `
     font-weight: 700;
     cursor: pointer;
     font-family: 'Gilroy', sans-serif;
+    text-decoration: none;
     position: relative;
     overflow: hidden;
     box-shadow: 0 8px 28px rgba(46,163,221,0.4);
@@ -900,7 +891,6 @@ export default function Index() {
 
       {/* ── HERO ── */}
       <PageHero image={resolveMediaUrl(about.heroImage) || heroBg1} imageAlt="ENSI Junior Entreprise team" contentClassName="max-w-4xl" scrollTo="#apropos">
-        <Rise as="p" delay={0.4} className="hero-label">About</Rise>
         <Rise as="h1" delay={0.6} className="hero-title">
           {about.heroTitle}
         </Rise>
@@ -908,7 +898,7 @@ export default function Index() {
           {about.heroSubtitle}
         </Rise>
         <Rise delay={1.2}>
-          <button className="btn-discover" {...magnetic}>Discover</button>
+          <a href="#apropos" className="btn-discover" {...magnetic}>Discover</a>
         </Rise>
       </PageHero>
 
